@@ -1,4 +1,4 @@
-package metier;
+package ExportCSV;
 
 /**
  * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
@@ -18,18 +18,18 @@ public class GenerateurFichier
      *
      * @return le fichier CSV généré au format BufferedImage
      */
-    public BufferedImage creerFichier() 
+    public void creerFichier() 
     {
-        return null;
+    	
     }
 
     /**
      * Getter de l'attribut fichier
      * @return fichier de type BufferedImage
      */
-	public BufferedImage getFichier() 
+	public void getFichier() 
 	{
-		return null;
+		
 	}
 
     
