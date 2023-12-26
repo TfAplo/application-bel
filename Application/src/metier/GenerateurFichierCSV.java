@@ -1,15 +1,15 @@
-package ExportCSV;
+package metier;
 
 /**
  * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
  */
-public class GenerateurFichier 
+public class GenerateurFichierCSV 
 {
 
     /**
      * Constructeur du générateur de fichiers
      */
-    public GenerateurFichier() 
+    public GenerateurFichierCSV() 
     {
     }
 
