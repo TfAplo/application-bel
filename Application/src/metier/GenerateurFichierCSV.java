@@ -18,9 +18,9 @@ public class GenerateurFichierCSV
      *
      * @return le fichier CSV généré au format BufferedImage
      */
-    public void creerFichier() 
+    public int creerFichier() 
     {
-    	
+    	return 1;
     }
 
     /**
