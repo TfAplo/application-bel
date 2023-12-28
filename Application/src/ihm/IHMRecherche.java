@@ -27,16 +27,18 @@ public class IHMRecherche {
     		// liste non vide, on clear le container pour pouvoir mettre les nouveaux resultats correspondent 
     		afficherResultatContainer.getChildren().clear();
     		//parcourir la liste des images trouvé qui correspondent a la recherche.
-        	for (Image image : listeImages) {
+        	for(Image image : listeImages) {
+        		// creation de l'objet ImageRecherche qui contient l'objet image + un boolean sur la selection
+        		ImageRecherche imageRechercher = new ImageRecherche(image,false);
+        		
         		//pour chaque image on creer un Hyperlink fxml pour l'afficher et l'ajouter sur la fenetre
         		Hyperlink hyperlink = new Hyperlink(image.getNom());
         		hyperlink.setOnAction(e -> ouvrirImage(image.getUrl()));
         		
         		// Creer une checkbox pour pouvoir effectuer une selection d'image
         		CheckBox hyperlinkCheckBox = new CheckBox();
-        		hyperlinkCheckBox.setOnAction(e -> ImageRecherche.ajoutImageSelectionner(Image image));
+        		hyperlinkCheckBox.setOnAction(e -> ImageRecherche.ajoutImageSelectionner(image));
         		
-
         		//ajouter les elements au container
         		afficherResultatContainer.getChildren().add(hyperlink);
         		afficherResultatContainer.getChildren().add(hyperlinkCheckBox);
