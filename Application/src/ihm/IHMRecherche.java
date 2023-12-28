@@ -14,7 +14,8 @@ public class IHMRecherche {
      */
     public IHMRecherche() {
     }
-
+    
+    //Container : contient toutes images que l'on souhaite afficher 
     @FXML
     private Pane afficherResultatContainer;
     /**
@@ -31,8 +32,14 @@ public class IHMRecherche {
         		Hyperlink hyperlink = new Hyperlink(image.getNom());
         		hyperlink.setOnAction(e -> ouvrirImage(image.getUrl()));
         		
-        		//ajouter le lien au container
+        		// Creer une checkbox pour pouvoir effectuer une selection d'image
+        		CheckBox hyperlinkCheckBox = new CheckBox();
+        		hyperlinkCheckBox.setOnAction(e -> ImageRecherche.ajoutImageSelectionner(Image image))
+        		
+
+        		//ajouter les elements au container
         		afficherResultatContainer.getChildren().add(hyperlink);
+        		afficherResultatContainer.getChildren().add(hyperlinkCheckBox);
         	}
     	} else {
     		// ici la liste est donc vide on peux clear le container
