@@ -16,10 +16,10 @@ public class ImageRecherche {
     public boolean selection;
 
      //Default constructor
-    public ImageRecherche(Image image, String nom, String emplacement, boolean selection){
+    public ImageRecherche(Image image, boolean selection){
     	this.image = image;
-    	this.nom = nom;
-    	this.emplacement = emplacement;
+    	//this.nom = nom;
+    	//this.emplacement = emplacement;
     	this.selection = selection;
     }
     /**
