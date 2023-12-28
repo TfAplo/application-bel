@@ -56,7 +56,47 @@ public class Image {
     	this.url = url;
     }
     
-    public String getUrl() {
+    public int getIdImage() {
+		return idImage;
+	}
+
+	public void setIdImage(int idImage) {
+		this.idImage = idImage;
+	}
+
+	public int getLargeurPx() {
+		return largeurPx;
+	}
+
+	public void setLargeurPx(int largeurPx) {
+		this.largeurPx = largeurPx;
+	}
+
+	public int getHauteurPx() {
+		return hauteurPx;
+	}
+
+	public void setHauteurPx(int hauteurPx) {
+		this.hauteurPx = hauteurPx;
+	}
+
+	public int getGrossissement() {
+		return grossissement;
+	}
+
+	public void setGrossissement(int grossissement) {
+		this.grossissement = grossissement;
+	}
+
+	public double getLargeurImage() {
+		return largeurImage;
+	}
+
+	public void setLargeurImage(double largeurImage) {
+		this.largeurImage = largeurImage;
+	}
+
+	public String getUrl() {
 		return url;
 	}
 
