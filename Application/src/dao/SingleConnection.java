@@ -25,17 +25,10 @@ public class SingleConnection {
 
 		connect = mysqlDS.getConnection();
 	}
-	//M�thode qui cr�e/retourne l'instance unique avec MySQLDataSource
-	public static Connection getInstance(String serverName, String dbName, String login, String password) throws ClassNotFoundException, SQLException{
-		if(connect == null){  
-			new SingleConnection(serverName, dbName, login, password);
-		}
-		return connect;   
-	}
 	
 	public static Connection getInstance() throws ClassNotFoundException, SQLException{
 		if(connect == null){  
-			new SingleConnection("127.0.0.1", "absences", "root", "");
+			new SingleConnection("127.0.0.1", "belDB", "root", "");
 		}
 		return connect; 
 	}
