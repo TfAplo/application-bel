@@ -34,7 +34,7 @@ public class IHMRecherche {
         		
         		// Creer une checkbox pour pouvoir effectuer une selection d'image
         		CheckBox hyperlinkCheckBox = new CheckBox();
-        		hyperlinkCheckBox.setOnAction(e -> ImageRecherche.ajoutImageSelectionner(Image image))
+        		hyperlinkCheckBox.setOnAction(e -> ImageRecherche.ajoutImageSelectionner(Image image));
         		
 
         		//ajouter les elements au container
