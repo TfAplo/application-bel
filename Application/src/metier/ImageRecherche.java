@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * Cette classe est le résultat des images retournées en fonction de la recherche.
  */
-public class ImageRecherche {
+public class ImageRecherche extends Image {
 
     /**
      * Default constructor
