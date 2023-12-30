@@ -1,7 +1,11 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
-
+import dao.SingleConnection;
 import metier.Image;
 
 /**
@@ -9,6 +13,7 @@ import metier.Image;
  */
 public class ImageDAO extends DAO<Image>{
 
+	Connection cn=null;
     /**
      * Default constructor
      */
@@ -22,7 +27,32 @@ public class ImageDAO extends DAO<Image>{
      */
     @Override
     public Image creer(Image image) {
-        // TODO implement here
+    	
+        int idImage;
+        String nomFichier = image.getNomFichier();
+        int largeurPx = image.getLargeurPx();
+        int hauteurPx = image.getHauteurPx();
+        int grossissement = image.getGrossissement();
+        double largeurImage = image.getLargeurImage();
+        String url = image.getUrl();
+        
+        String sql = "INSERT INTO image (nomFichier, largeurPx, hauteurPx, grossissement, largeurImage, url) "
+        		+ "VALUES ("+ nomFichier +"," + largeurPx+"," + hauteurPx +"," +largeurImage +","+url + ")";
+        
+        // Execution de requetes
+ 		Statement st = null;
+ 		try {
+ 			st = cn.createStatement();
+ 			idImage = st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+ 			
+ 			//Creation de l'objet image
+ 			Image newImage = new Image(idImage, nomFichier, grossissement, grossissement, grossissement, largeurImage, url);
+ 			return newImage;
+ 		}
+ 		catch(SQLException e) {
+ 			System.err.println("Erreur requete SQL");
+ 			e.printStackTrace();
+ 		}
         return null;
     }
 
