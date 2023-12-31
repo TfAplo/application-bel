@@ -56,5 +56,9 @@ public class IHMRecherche {
     		afficherResultatContainer.getChildren().clear();
     	}
     }
+    
+    public void test(String text) {
+    	System.out.println(text);
+    }
  
 }

@@ -16,8 +16,8 @@ public class ControleRecherche {
     /**
      * @param nom, valeur de l'input de la recherche , censé contenir un potentiel nom d'image.
      */
-    public void recherche(String nom) {
-        // TODO implement here
+    public void recherche(String recherche) {
+        System.out.println(recherche);
     }
 
 }

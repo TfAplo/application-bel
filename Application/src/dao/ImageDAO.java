@@ -28,6 +28,7 @@ public class ImageDAO extends DAO<Image>{
     @Override
     public Image creer(Image image) {
     	
+    	//recuperation des attributs
         int idImage;
         String nomFichier = image.getNomFichier();
         int largeurPx = image.getLargeurPx();
@@ -36,14 +37,14 @@ public class ImageDAO extends DAO<Image>{
         double largeurImage = image.getLargeurImage();
         String url = image.getUrl();
         
+        //creation de la requete SQL
         String sql = "INSERT INTO image (nomFichier, largeurPx, hauteurPx, grossissement, largeurImage, url) "
-        		+ "VALUES ("+ nomFichier +"," + largeurPx+"," + hauteurPx +"," +largeurImage +","+url + ")";
+        		+ "VALUES ('"+ nomFichier +"'," + largeurPx+"," + hauteurPx +"," +largeurImage +",'"+url + "')";
         
-        // Execution de requetes
- 		Statement st = null;
+        // Execution de la requete
  		try {
- 			st = cn.createStatement();
- 			idImage = st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+ 			stmt = cn.createStatement();
+ 			idImage = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
  			
  			//Creation de l'objet image
  			Image newImage = new Image(idImage, nomFichier, grossissement, grossissement, grossissement, largeurImage, url);
@@ -63,7 +64,33 @@ public class ImageDAO extends DAO<Image>{
      */
 
     public Image lire(int idImage) {
-        // TODO implement here
+    	
+    	 //creation de la requete SQL
+    	String sql = "SELECT * FROM image WHERE idImage = " + idImage;
+    	
+
+ 		ResultSet rs = null;
+ 		try {
+ 			stmt = cn.createStatement();
+ 			rs = stmt.executeQuery(sql);
+
+ 			while(rs.next()) {
+ 		        String nomImage = rs.getString("nomFichier");
+ 		        int largeurPx = rs.getInt("largeurPx");
+ 		        int hauteurPx = rs.getInt("hauteurPx");
+ 		        int grossissement = rs.getInt("grossissement");
+ 		        double largeurImage = rs.getDouble("largeurImage");
+ 		        String url = rs.getString("url");
+ 		        
+ 		     //Creation de l'objet image
+			Image newImage = new Image(idImage, nomImage, grossissement, grossissement, grossissement, largeurImage, url);
+			return newImage;
+ 			}
+ 		}
+ 		catch(SQLException e) {
+ 			System.err.println("Erreur requete SQL");
+ 			e.printStackTrace();
+ 		}
         return null;
     }
 
@@ -74,8 +101,31 @@ public class ImageDAO extends DAO<Image>{
      */
     @Override
     public Image mettreAJour(Image image) {
-        // TODO implement here
-        return null;
+    	
+    	//recuperation des attributs
+    	int idImage = image.getIdImage();
+        String nomImage = image.getNomFichier();
+        int largeurPx = image.getLargeurPx();
+        int hauteurPx = image.getHauteurPx();
+        int grossissement = image.getGrossissement();
+        double largeurImage = image.getLargeurImage();
+        String url = image.getUrl();
+         
+        //creation de la requete SQL
+        String sql = "UPDATE image SET nomFichier = '" + nomImage+ "',";
+        sql += "largeurPx = '" + largeurPx  + "',";
+        sql += "hauteurPx = '" +hauteurPx +"',";
+        sql += "grossissement = '"+ grossissement + "',";
+        sql += "largeurImage = '"+ largeurImage + "',";
+        sql += "url= '" + url + "' WHERE idImage = " + idImage;
+         
+        //Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
+        return image;
     }
 
     /**
