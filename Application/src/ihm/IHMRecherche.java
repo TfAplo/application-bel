@@ -29,18 +29,18 @@ public class IHMRecherche {
     /**
      * affiche les images correspondent à la recherche qui sont presente dans la base de donnée.
      */
-    public void afficherResultat(ArrayList<Image> listeImages) {
+    public void afficherResultat(ArrayList<Image> listeImage) {
     	// On verifie que la liste ne soit pas vide 
-    	if(!listeImages.isEmpty()) {
+    	if(!listeImage.isEmpty()) {
     		// liste non vide, on clear le container pour pouvoir mettre les nouveaux resultats correspondent 
     		afficherResultatContainer.getChildren().clear();
     		//parcourir la liste des images trouvé qui correspondent a la recherche.
-        	for(Image image : listeImages) {
+        	for(Image image : listeImage) {
         		// creation de l'objet ImageRecherche qui contient l'objet image + un boolean sur la selection
         		ImageRecherche imageRechercher = new ImageRecherche(image,false);
         		
         		//pour chaque image on creer un Hyperlink fxml pour l'afficher et l'ajouter sur la fenetre
-        		Hyperlink hyperlink = new Hyperlink(image.getNomFichier());
+        		Hyperlink hyperlink = new Hyperlink(image.getNomImage());
         		//hyperlink.setOnAction(e -> ouvrirImage(image.getUrl()));
         		
         		// Creer une checkbox pour pouvoir effectuer une selection d'image
@@ -56,9 +56,5 @@ public class IHMRecherche {
     		afficherResultatContainer.getChildren().clear();
     	}
     }
-    
-    public void test(String text) {
-    	System.out.println(text);
-    }
- 
+   
 }
