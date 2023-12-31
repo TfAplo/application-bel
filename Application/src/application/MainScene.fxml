@@ -11,6 +11,7 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="rechercher" layoutX="14.0" layoutY="14.0" promptText="Rechercher" />
+                  <Pane fx:id="afficherResultatContainer" layoutX="14.0" layoutY="54.0" prefHeight="307.0" prefWidth="200.0" />
                </children></AnchorPane>
       </content>
     </Tab>

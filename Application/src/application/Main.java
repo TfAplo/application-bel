@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 // import des controleurs
 import controleurs.ControleAnalyse;
-import ihm.IHMRecherche;
+import controleurs.ControleDepot;
+import controleurs.ControleExport;
 import controleurs.ControleRecherche;
 
 //--module-path "C:\Program Files\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml
@@ -20,11 +21,14 @@ public class Main extends Application {
     	try {
     		// instancier les differents controleurs
     		ControleRecherche CtrlRecherche = new ControleRecherche();
+    		ControleAnalyse CtrlAnalyse = new ControleAnalyse();
+    		ControleDepot CtrlDepot = new ControleDepot();
+    		ControleExport CtrlExport = new ControleExport();
     		
     		FXMLLoader root = new FXMLLoader(getClass().getResource("MainScene.fxml"));
 
     		//Initialisere le controleur principale
-    		root.setController(new Controleur(CtrlRecherche));
+    		root.setController(new Controleur(CtrlRecherche, CtrlAnalyse, CtrlDepot, CtrlExport));
     		
             Scene scene = new Scene(root.load());
             
