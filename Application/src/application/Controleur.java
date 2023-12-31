@@ -3,7 +3,7 @@ package application;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
@@ -21,7 +21,7 @@ public class Controleur {
 	 @FXML
 	 private TextField rechercher;
 	 @FXML
-	 private Pane afficherResultatContainer;
+	 private VBox afficherResultatContainer;
 	 
 	 Controleur(ControleRecherche CtrlRecherche, ControleAnalyse CtrlAnalyse, ControleDepot CtrlDepot, ControleExport CtrlExport) {
 		 this.CtrlRecherche = CtrlRecherche;
@@ -34,8 +34,7 @@ public class Controleur {
 	 public void initialize() {
 		 //envoyer la recherche d'image au controleur
 		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer));
-		 
-		 
+		  
 	 }
 	
 }

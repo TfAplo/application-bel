@@ -1,72 +1,89 @@
 package controleurs;
 
 import java.util.*;
+
 import dao.ImageDAO;
-import ihm.IHMRecherche;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import metier.Image;
 import metier.ImageRecherche;
 /**
  * Cette classe controle les autres.
  */
-public class ControleRecherche {
+public class ControleRecherche{
 	
 	ImageDAO imageDao = new ImageDAO();
-	IHMRecherche IHMR = new IHMRecherche();
-	
+
+	/*
+	 * Liste d'image Selectionner
+	 */
+	private ArrayList<Image> listeImageSelectionner = new ArrayList<>();
 
     /**
      * Default constructor
      */
-    public ControleRecherche() {
+    public ControleRecherche(){
     }
 
-    /**
+	/**
      * @param nom, valeur de l'input de la recherche , censé contenir un potentiel nom d'image.
      */
-    public void recherche(String recherche, Pane afficherResultatContainer) {
+    public void recherche(String recherche, VBox afficherResultatContainer) {
     	
-        System.out.println(recherche);
-        
         //recuperer une liste d'image qui correspondent
         ArrayList<Image> listeImage = imageDao.lire(recherche);
-        // les afficher sur la fenetre
-        //IHMR.afficherResultat(listeImage);
         
-     // On verifie que la liste ne soit pas vide 
+        // les afficher sur la fenetre , On verifie que la liste ne soit pas vide 
     	if(!listeImage.isEmpty()) {
     		// liste non vide, on clear le container pour pouvoir mettre les nouveaux resultats correspondent 
     		afficherResultatContainer.getChildren().clear();
     		//parcourir la liste des images trouvé qui correspondent a la recherche.
-    		int i = 0;
         	for(Image image : listeImage) {
         		// creation de l'objet ImageRecherche qui contient l'objet image + un boolean sur la selection
         		ImageRecherche imageRechercher = new ImageRecherche(image,false);
         		
         		//pour chaque image on creer un Hyperlink fxml pour l'afficher et l'ajouter sur la fenetre
         		Hyperlink hyperlink = new Hyperlink(image.getNomImage());
-        		hyperlink.setLayoutY(50 * i);
-        		hyperlink.setLayoutX(5);
-        		//hyperlink.setOnAction(e -> ouvrirImage(image.getUrl()));
         		
         		// Creer une checkbox pour pouvoir effectuer une selection d'image
         		CheckBox hyperlinkCheckBox = new CheckBox();
-        		hyperlinkCheckBox.setLayoutY(50 * i);
-        		hyperlinkCheckBox.setLayoutX(80);
-        		hyperlinkCheckBox.setOnAction(e -> imageRechercher.ajoutImageSelectionner());
+        
+        		hyperlinkCheckBox.setOnAction(e -> ajoutImageSelectionner(image));
+        		
+        		//Creer un element qui contient le nom de l'image et la checkbox
+        		HBox hContainer = new HBox();
+        		hContainer.setId("hContainer");
+        		hContainer.getChildren().add(hyperlink);
+        		hContainer.getChildren().add(hyperlinkCheckBox);
         		
         		//ajouter les elements au container
-        		afficherResultatContainer.getChildren().add(hyperlink);
-        		afficherResultatContainer.getChildren().add(hyperlinkCheckBox);
+        		afficherResultatContainer.getChildren().add(hContainer);
         		
-        		i += 1;
         	}
     	} else {
     		// ici la liste est donc vide on peux clear le container
     		afficherResultatContainer.getChildren().clear();
     	}
     }
+    
+    /* ajoute l'image ou l'enleve en fonction de sa presence ou non dans la liste
+     * @param image, instance de Image
+     */
+    public void ajoutImageSelectionner(Image image) {
+    	if(listeImageSelectionner.contains(image)){
+    		listeImageSelectionner.remove(image);
+    	} else {
+    		listeImageSelectionner.add(image);
+    	}
+    }
+    
+    /*
+     * retourne la liste d'image selectionner
+     */
+    public ArrayList<Image> getListeImageSelectionner() {
+		return listeImageSelectionner;
+	}
             
 }

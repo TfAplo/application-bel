@@ -1,24 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <tabs>
-    <Tab text="Rechercher">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="35.0" prefWidth="1280.0" style="-fx-background-color: #2f3037;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" text="Deposer une image" />
+            <Button mnemonicParsing="false" text="Afficher les statistiques" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="658.0" prefWidth="299.0" style="-fx-background-color: #393a41;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="rechercher" promptText="Rechercher" />
+            <VBox fx:id="afficherResultatContainer" prefWidth="299.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox style="-fx-background-color: #4b4c52;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
                <children>
-                  <TextField fx:id="rechercher" layoutX="14.0" layoutY="14.0" promptText="Rechercher" />
-                  <Pane fx:id="afficherResultatContainer" layoutX="14.0" layoutY="54.0" prefHeight="307.0" prefWidth="200.0" />
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Untitled Tab 2">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
-  </tabs>
-</TabPane>
+                  <Pane prefHeight="395.0" prefWidth="416.0" style="-fx-background-color: #696969;">
+                     <children>
+                        <Label contentDisplay="CENTER" layoutX="91.0" layoutY="187.0" text="Glisser votre image dans cette zone" />
+                     </children>
+                  </Pane>
+                  <VBox prefHeight="395.0" prefWidth="566.0" style="-fx-background-color: #7a7a7a;">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label contentDisplay="CENTER" text="Opérateur :" />
+                              <TextField promptText="Opérateur" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label contentDisplay="CENTER" text="Grossissement :" />
+                              <TextField promptText="Grossissement" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label contentDisplay="CENTER" text="Largeur réelle :" />
+                              <TextField promptText="Largeur réelle" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="56.0" prefWidth="566.0">
+                           <children>
+                              <Label contentDisplay="CENTER" text="Nom du Produit :" />
+                              <TextField promptText="Nom du produit" />
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Selectionner une image" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Valider le dépôt" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

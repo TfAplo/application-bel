@@ -9,6 +9,7 @@ public class ImageRecherche{
     private boolean selection;
     
     private Image image;
+   
     
     public ImageRecherche(Image image, boolean selection) {
 		this.selection = selection;
@@ -30,5 +31,4 @@ public class ImageRecherche{
     		this.selection = true;
     	}
     }
-
 }
