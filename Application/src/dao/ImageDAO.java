@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,8 +11,6 @@ import metier.Image;
  * Classe servant a effectuer des operations entre l'objet Image et son equivalent, la table Image, dans la base de donnees.
  */
 public class ImageDAO extends DAO<Image>{
-
-	Connection cn = null;
     /**
      * Default constructor
      */
@@ -45,7 +42,6 @@ public class ImageDAO extends DAO<Image>{
         
         // Execution de la requete
  		try {
- 			stmt = cn.createStatement();
  			int idImage = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
  			
  			//Creation de l'objet image
@@ -73,7 +69,6 @@ public class ImageDAO extends DAO<Image>{
 
  		ResultSet rs = null;
  		try {
- 			stmt = cn.createStatement();
  			rs = stmt.executeQuery(sql);
 
  			while(rs.next()) {
@@ -173,7 +168,6 @@ public class ImageDAO extends DAO<Image>{
    	
 		ResultSet rs = null;
 		try {
-			stmt = cn.createStatement();
 			rs = stmt.executeQuery(sql);
 
 			while(rs.next()) {
@@ -214,7 +208,6 @@ public class ImageDAO extends DAO<Image>{
    	
 		ResultSet rs = null;
 		try {
-			stmt = cn.createStatement();
 			rs = stmt.executeQuery(sql);
 
 			while(rs.next()) {
