@@ -14,7 +14,12 @@ public class Image {
     /**
      * Nom du fichier de l'image.
      */
-    public String nomFichier;
+    public String nomImage;
+    
+    /*
+     * emplacement de stockage de l'image
+     */
+    private String url;
 
     /**
      * Largeur de l'image en pixel.
@@ -34,34 +39,56 @@ public class Image {
     /**
      * Largeur réelle de l'image.
      */
-    public double largeurImage;
+    public double largeurReel;
     
     /*
-     * emplacement de stockage de l'image
+     * id de l'operateur qui a stocker l'image
      */
-    private String url;
+    public int idOperateur;
     
-
+    /*
+     * id du produit auquel cette image est associée
+     */
+    public int idProduit;
 
 	/**
      * Default constructor
      */
-    public Image(int idImage, String nomFichier, int largeurPx, int hauteurPx, int grossissement, double largeurImage, String url) {
+    public Image(int idImage, String nomImage, String url, int largeurPx, int hauteurPx, int grossissement, double largeurReel, int idOperateur, int idProduit) {
     	this.idImage = idImage;
-    	this.nomFichier = nomFichier;
+    	this.nomImage = nomImage;
+    	this.url = url;
     	this.largeurPx = largeurPx;
     	this.hauteurPx = hauteurPx;
     	this.grossissement = grossissement;
-    	this.largeurImage = largeurImage;
-    	this.url = url;
+    	this.largeurReel = largeurReel;
+    	this.idOperateur = idOperateur;
+    	this.idProduit = idProduit;
+    	
     }
-    
-    public int getIdImage() {
+
+	public int getIdImage() {
 		return idImage;
 	}
 
 	public void setIdImage(int idImage) {
 		this.idImage = idImage;
+	}
+
+	public String getNomImage() {
+		return nomImage;
+	}
+
+	public void setNomImage(String nomImage) {
+		this.nomImage = nomImage;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public int getLargeurPx() {
@@ -88,30 +115,31 @@ public class Image {
 		this.grossissement = grossissement;
 	}
 
-	public double getLargeurImage() {
-		return largeurImage;
+	public double getLargeurReel() {
+		return largeurReel;
 	}
 
-	public void setLargeurImage(double largeurImage) {
-		this.largeurImage = largeurImage;
+	public void setLargeurReel(double largeurReel) {
+		this.largeurReel = largeurReel;
 	}
 
-	public String getUrl() {
-		return url;
+	public int getIdOperateur() {
+		return idOperateur;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setIdOperateur(int idOperateur) {
+		this.idOperateur = idOperateur;
 	}
 
-	public String getNomFichier() {
-		return nomFichier;
+	public int getIdProduit() {
+		return idProduit;
 	}
 
-	public void setNomFichier(String nomFichier) {
-		this.nomFichier = nomFichier;
+	public void setIdProduit(int idProduit) {
+		this.idProduit = idProduit;
 	}
-
+    
+   
 
 
 
