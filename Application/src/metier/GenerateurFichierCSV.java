@@ -1,10 +1,13 @@
 package metier;
 
+import java.util.ArrayList;
+
 /**
  * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
  */
 public class GenerateurFichierCSV 
 {
+	private ArrayList<Objet> listeOblet;
 
     /**
      * Constructeur du générateur de fichiers
@@ -16,11 +19,12 @@ public class GenerateurFichierCSV
     /**
      * Crée le fichier CSV à partir des données d'histogrammes
      *
-     * @return le fichier CSV généré au format BufferedImage
+     * @return un boolean qui est true si le fichier est bien créer ou false si il ne s'est pas créer
      */
-    public int creerFichier() 
+    public boolean creerFichier() 
     {
-    	return 1;
+    	
+    	return true;
     }
 
     /**
