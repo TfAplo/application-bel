@@ -30,7 +30,7 @@ public class Main extends Application {
     		FXMLLoader root = new FXMLLoader(getClass().getResource("MainScene.fxml"));
 
     		//Initialisere le controleur principale
-    		root.setController(new Controleur(CtrlRecherche, CtrlAnalyse, CtrlDepot, CtrlExport));
+    		root.setController(new Controleur(CtrlRecherche, CtrlAnalyse, CtrlDepot, CtrlExport, CtrlExportCSV));
     		
             Scene scene = new Scene(root.load());
             

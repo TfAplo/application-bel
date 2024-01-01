@@ -4,6 +4,8 @@ import java.util.*;
 
 import ihm.IHMExport;
 import metier.GenerateurFichier;
+import metier.GenerateurFichierCSV;
+import metier.HistogrammeDiametre;
 
 /**
  * La classe ControleExport gère le processus d'exportation des histogrammes au format CSV.
@@ -33,13 +35,15 @@ public class ControleExportCSV {
         this.generateurFichier = generateurFichier;
     }
     
-    public ControleExportCSV() {
+    public ControleExportCSV() 
+    {
     }
 
     /**
      * Gère l'action d'exportation statistiques.
      */
-    public void main() {
+    public void main() 
+    {
         // TODO implement here
     }
 
@@ -47,7 +51,8 @@ public class ControleExportCSV {
      * Getter de l'attribut FenetreExport
      * @return fenetreExport
      */
-    public IHMExport getFenetreExport() {
+    public IHMExport getFenetreExport() 
+    {
 		return fenetreExport;
 	}
     
@@ -59,5 +64,21 @@ public class ControleExportCSV {
 	{
 		return generateurFichier;
 	}
-
+	
+	public void export()
+	{
+		String[] listeNom = {"nom de l'image", "grossissement", "nombre de particules trouvées",
+							"ratio de surface couverte", "moyenne des aires", "moyenne diamètres équivalents",
+							"écart-type des aires", "écart-type des diamètres équivalents"};
+		
+		//récupération des statistiques
+		GenerateurFichierCSV generateur = new GenerateurFichierCSV(listeNom);
+		generateur.creerFichier();
+		System.out.println("hello");
+	}
+	
+	public void export(HistogrammeDiametre histo)
+	{
+		
+	}
 }

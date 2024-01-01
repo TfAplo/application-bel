@@ -1,5 +1,8 @@
 package metier;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -7,13 +10,15 @@ import java.util.ArrayList;
  */
 public class GenerateurFichierCSV 
 {
-	private ArrayList<Objet> listeOblet;
-
+	//private ArrayList<Objet> listeOblet;
+	private String[] nomColonnes;
+	
     /**
      * Constructeur du générateur de fichiers
      */
-    public GenerateurFichierCSV() 
+    public GenerateurFichierCSV(String[] nomCollones) 
     {
+    	this.nomColonnes = nomCollones;
     }
 
     /**
@@ -21,20 +26,25 @@ public class GenerateurFichierCSV
      *
      * @return un boolean qui est true si le fichier est bien créer ou false si il ne s'est pas créer
      */
-    public boolean creerFichier() 
+    public void creerFichier() 
     {
-    	
-    	return true;
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("fichierCSV.csv"))) {
+            // En-têtes du fichier CSV
+    		for(int i = 0; i < this.nomColonnes.length; i++) {
+    			writer.write(nomColonnes[i] + ";");
+    		}
+            writer.write("\n");
+            String[] noms = {"Doe", "Smith", "Johnson"};
+            String[] prenoms = {"John", "Jane", "Bob"};
+
+            // Écrire les données dans le fichier CSV
+            for (int i = 0; i < noms.length; i++) {
+                writer.write(noms[i] + ";" + prenoms[i] + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    	System.out.println("Fichier CSV créé avec succès: fichierCSV.csv");
     }
-
-    /**
-     * Getter de l'attribut fichier
-     * @return fichier de type BufferedImage
-     */
-	public void getFichier() 
-	{
-		
-	}
-
     
 }
