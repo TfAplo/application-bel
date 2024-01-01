@@ -1,62 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox prefHeight="35.0" prefWidth="1280.0" style="-fx-background-color: #2f3037;" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="AnchorPaneLeft" layoutY="-2.0" prefHeight="294.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="35.0">
          <children>
-            <Button mnemonicParsing="false" text="Deposer une image" />
-            <Button mnemonicParsing="false" text="Afficher les statistiques" />
+            <TextField fx:id="rechercher" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="218.0" promptText="Rechercher" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <VBox fx:id="afficherResultatContainer" layoutX="25.0" layoutY="105.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
          </children>
-      </HBox>
-   </top>
-   <left>
-      <VBox prefHeight="658.0" prefWidth="299.0" style="-fx-background-color: #393a41;" BorderPane.alignment="CENTER">
+      </AnchorPane>
+      <AnchorPane fx:id="mainContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
          <children>
-            <TextField fx:id="rechercher" promptText="Rechercher" />
-            <VBox fx:id="afficherResultatContainer" prefWidth="299.0" />
-         </children>
-      </VBox>
-   </left>
-   <center>
-      <VBox style="-fx-background-color: #4b4c52;" BorderPane.alignment="CENTER">
-         <children>
-            <HBox>
+            <HBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Pane prefHeight="395.0" prefWidth="416.0" style="-fx-background-color: #696969;">
+                  <AnchorPane fx:id="glisserDeposer" nodeOrientation="LEFT_TO_RIGHT">
                      <children>
-                        <Label contentDisplay="CENTER" layoutX="91.0" layoutY="187.0" text="Glisser votre image dans cette zone" />
+                        <Label contentDisplay="CENTER" text="Glisser votre image ici" textAlignment="JUSTIFY" />
                      </children>
-                  </Pane>
-                  <VBox prefHeight="395.0" prefWidth="566.0" style="-fx-background-color: #7a7a7a;">
+                  </AnchorPane>
+                  <VBox>
                      <children>
                         <HBox>
                            <children>
-                              <Label contentDisplay="CENTER" text="Opérateur :" />
-                              <TextField promptText="Opérateur" />
+                              <Label text="Opérateur :" />
+                              <TextField promptText="Opérateur " />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <Label contentDisplay="CENTER" text="Grossissement :" />
-                              <TextField promptText="Grossissement" />
+                              <Label text="Grossissement :" />
+                              <TextField promptText="Grossissement " />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <Label contentDisplay="CENTER" text="Largeur réelle :" />
-                              <TextField promptText="Largeur réelle" />
+                              <Label text="Largeur réelle :" />
+                              <TextField promptText="Largeur réelle " />
                            </children>
                         </HBox>
-                        <HBox prefHeight="56.0" prefWidth="566.0">
+                        <HBox>
                            <children>
-                              <Label contentDisplay="CENTER" text="Nom du Produit :" />
-                              <TextField promptText="Nom du produit" />
+                              <Label text="Nom du Produit :" />
+                              <TextField promptText="Nom du Produit " />
                            </children>
                         </HBox>
                         <Button mnemonicParsing="false" text="Selectionner une image" />
@@ -64,8 +52,14 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Valider le dépôt" />
+            <Button layoutX="463.0" layoutY="587.0" mnemonicParsing="false" text="Valider le dépôt" />
          </children>
-      </VBox>
-   </center>
-</BorderPane>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPaneTop" prefHeight="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="DeposerImage" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" text="Déposer une image" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="3.0" />
+            <Button fx:id="afficherStats" layoutX="169.0" layoutY="2.0" mnemonicParsing="false" text="Afficher les statistiques" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="3.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
