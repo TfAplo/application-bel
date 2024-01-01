@@ -21,56 +21,37 @@ public class Statistique {
     /**
      * 
      */
-    private double surfaceParticulePx;
+    private int nbParticulesTrouvees;
 
     /**
      * 
      */
-    private double coCointHautGaucheX;
+    private double ratioSurfaceCouverte;
 
     /**
      * 
      */
-    private double coCointHautGaucheY;
+    private double moyenneAires;
 
     /**
      * 
      */
-    private double coCointHautDroitX;
+    private double moyenneDiametresEquivalents;
 
     /**
      * 
      */
-    private double coCointHautDroitY;
+    private double ecartTypeAires;
 
     /**
      * 
      */
-    private double coCentreX;
+    private double ecartTypeDiametreEquivalent;
 
     /**
      * 
      */
-    private double coCentreY;
+    private int idImage;
 
-    /**
-     * 
-     */
-    private double orientation;
-
-    /**
-     * 
-     */
-    private double longueurAxeMajeurPx;
-
-    /**
-     * 
-     */
-    private double longueurAxeMineurPx;
-
-    /**
-     * 
-     */
-    private double diametreEquivalentPx;
-
+    
 }
