@@ -7,6 +7,13 @@ import java.util.*;
  */
 public class Operateur {
 	
+    /**
+     * Default constructor
+     */
+    public Operateur(String nomOperateur) {
+    	this.nomOperateur = nomOperateur;
+    }
+	
 	/**
      * ID de l'operateur dans la base de donnees.
      */
@@ -16,13 +23,6 @@ public class Operateur {
      * Nom de la personne deposant l'image.
      */
     public String nomOperateur;
-
-    /**
-     * Default constructor
-     */
-    public Operateur(String nomOperateur) {
-    	this.nomOperateur = nomOperateur;
-    }
 
 	public int getIdOperateur() {
 		return idOperateur;
