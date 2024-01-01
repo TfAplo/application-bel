@@ -22,8 +22,10 @@ public class ImageDAO extends DAO<Image>{
      */
     @Override
     public Image creer(Image image) {
-        // TODO implement here
-        return null;
+    	// si url deja dans la bdd
+    	// alors on ne depose rien
+    	// sinon on depose
+    	return null;
     }
 
     /**

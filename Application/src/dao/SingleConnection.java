@@ -35,7 +35,7 @@ public class SingleConnection {
 	
 	public static Connection getInstance() throws ClassNotFoundException, SQLException{
 		if(connect == null){  
-			new SingleConnection("127.0.0.1", "absences", "root", "");
+			new SingleConnection("127.0.0.1", "belDB", "root", "");
 		}
 		return connect; 
 	}

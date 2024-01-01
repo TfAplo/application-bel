@@ -22,7 +22,9 @@ public class OperateurDAO extends DAO<Image> {
      * @return Instance de la classe Operateur ayant ete inseree dans la base de donnees.
      */
     public Operateur creer(Operateur operateur) {
-        // TODO implement here
+    	// si nomOperateur deja dans la bdd
+		// alors on ne le cree pas
+		// sinon on cree
         return null;
     }
 

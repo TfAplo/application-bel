@@ -32,7 +32,9 @@ public class ControleDepot {
      * @return Booleen qui indique si l'image a ete deposee dans la base de donnees ou non.
      */
     public Boolean deposerImage(String nomOperateur, String nomFichier, int largeurPx, int hauteurPx, int grossissement, double largeurImage, String nomProduit) {
-        // TODO implement here
+    	// on cree un objet Operateur et OperateurDAO
+    	// on cree un objet Produit et ProduitDAO
+        // on cree un objet Image et ImageDAO
         return null;
     }
 

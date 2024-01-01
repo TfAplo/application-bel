@@ -22,7 +22,9 @@ public class ProduitDAO extends DAO<Image>{
      * @return Instance de la classe Produit ayant ete inseree dans la base de donnees.
      */
     public Produit creer(Produit produit) {
-        // TODO implement here
+    	// si nomProduit deja dans la bdd
+		// alors on ne le cree pas
+		// sinon on cree
         return null;
     }
 
