@@ -45,7 +45,11 @@ public class Main extends Application {
             
             //dimension de la fenetre
             primaryStage.setWidth(600);
-            primaryStage.setHeight(400);
+            primaryStage.setHeight(435);
+            
+            //dimension minimale de la fenetre
+            primaryStage.setMinWidth(600);
+            primaryStage.setMinHeight(435);
             
             //affichage de la fenetre
             primaryStage.show();
