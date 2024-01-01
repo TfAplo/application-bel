@@ -32,6 +32,9 @@ public class ControleExportCSV {
         this.fenetreExport = fenetreExport;
         this.generateurFichier = generateurFichier;
     }
+    
+    public ControleExportCSV() {
+    }
 
     /**
      * Gère l'action d'exportation statistiques.

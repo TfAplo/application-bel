@@ -33,6 +33,8 @@ public class ControleExport {
         this.generateurFichier = generateurFichier;
     }
 
+    public ControleExport() {
+    }
     /**
      * Gère l'action d'exportation des images.
      */
