@@ -45,7 +45,8 @@ public class ImageDAO extends DAO<Image>{
  			int idImage = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
  			
  			//Creation de l'objet image
- 			Image newImage = new Image(idImage, nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+ 			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+ 			newImage.setIdImage(idImage);
  			return newImage;
  		}
  		catch(SQLException e) {
@@ -83,7 +84,8 @@ public class ImageDAO extends DAO<Image>{
 		        int idProduit = rs.getInt("idProduit");
  		        
  		     //Creation de l'objet image
- 		      Image newImage = new Image(idImage, nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+ 		      Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+ 		      newImage.setIdImage(idImage);
 			return newImage;
  			}
  		}
@@ -184,7 +186,8 @@ public class ImageDAO extends DAO<Image>{
 		        
 		        
 		     //Creation de l'objet image
-			Image newImage = new Image(idImage, nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			newImage.setIdImage(idImage);
 			//ajout a la liste
 			listeImage.add(newImage);
 			}
@@ -224,7 +227,8 @@ public class ImageDAO extends DAO<Image>{
 		        
 		        
 		     //Creation de l'objet image
-			Image newImage = new Image(idImage, nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			newImage.setIdImage(idImage);
 			//ajout a la liste
 			listeImage.add(newImage);
 			}
