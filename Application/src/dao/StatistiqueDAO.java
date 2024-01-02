@@ -29,5 +29,15 @@ public class StatistiqueDAO extends DAO<Statistique> {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * lis les stats à partir d'un idImage
+	 * @param idImage
+	 * @return
+	 */
+	public Statistique lire(int idImage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

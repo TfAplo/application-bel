@@ -18,6 +18,7 @@ public class Particule {
     private double longueurAxeMajeur;
     private double longueurAxeMineur;
     private double diametreEquivalent;
+    private int idImage;
     
     /**
      * Default constructor
@@ -46,6 +47,109 @@ public class Particule {
 				+ ", diametreEquivalent=" + diametreEquivalent + "]";
 	}
 
-	
+
+    public int getIdParticule() {
+		return idParticule;
+	}
+
+	public void setIdParticule(int idParticule) {
+		this.idParticule = idParticule;
+	}
+
+	public double getSurfaceParticulePx() {
+		return surfaceParticulePx;
+	}
+
+	public void setSurfaceParticulePx(double surfaceParticulePx) {
+		this.surfaceParticulePx = surfaceParticulePx;
+	}
+
+	public double getCoCointHautGaucheX() {
+		return coCointHautGaucheX;
+	}
+
+	public void setCoCointHautGaucheX(double coCointHautGaucheX) {
+		this.coCointHautGaucheX = coCointHautGaucheX;
+	}
+
+	public double getCoCointHautGaucheY() {
+		return coCointHautGaucheY;
+	}
+
+	public void setCoCointHautGaucheY(double coCointHautGaucheY) {
+		this.coCointHautGaucheY = coCointHautGaucheY;
+	}
+
+	public double getCoCointHautDroitX() {
+		return coCointHautDroitX;
+	}
+
+	public void setCoCointHautDroitX(double coCointHautDroitX) {
+		this.coCointHautDroitX = coCointHautDroitX;
+	}
+
+	public double getCoCointHautDroitY() {
+		return coCointHautDroitY;
+	}
+
+	public void setCoCointHautDroitY(double coCointHautDroitY) {
+		this.coCointHautDroitY = coCointHautDroitY;
+	}
+
+	public double getCoCentreX() {
+		return coCentreX;
+	}
+
+	public void setCoCentreX(double coCentreX) {
+		this.coCentreX = coCentreX;
+	}
+
+	public double getCoCentreY() {
+		return coCentreY;
+	}
+
+	public void setCoCentreY(double coCentreY) {
+		this.coCentreY = coCentreY;
+	}
+
+	public double getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(double orientation) {
+		this.orientation = orientation;
+	}
+
+	public double getLongueurAxeMajeur() {
+		return longueurAxeMajeur;
+	}
+
+	public void setLongueurAxeMajeur(double longueurAxeMajeur) {
+		this.longueurAxeMajeur = longueurAxeMajeur;
+	}
+
+	public double getLongueurAxeMineur() {
+		return longueurAxeMineur;
+	}
+
+	public void setLongueurAxeMineur(double longueurAxeMineur) {
+		this.longueurAxeMineur = longueurAxeMineur;
+	}
+
+	public double getDiametreEquivalent() {
+		return diametreEquivalent;
+	}
+
+	public void setDiametreEquivalent(double diametreEquivalent) {
+		this.diametreEquivalent = diametreEquivalent;
+	}
+
+	public int getIdImage() {
+		return idImage;
+	}
+
+	public void setIdImage(int idImage) {
+		this.idImage = idImage;
+	}
 
 }

@@ -3,25 +3,45 @@ package ihm;
 import java.util.*;
 
 import metier.Diagramme;
+import metier.HistogrammeDiametre;
+import metier.HistogrammeSurface;
+import metier.Statistique;
+import metier.Tableau;
 
 /**
  * Vue permettant l'affichage des différents diagrammes souhaités pour afficher les statistiques, Propose aussi les différents boutons utiles à l'utilisateur
  */
 public class IHMStatistiques {
-
-
-    public IHMStatistiques() {
-    }
-
-    private ArrayList<Diagramme> listeDiagrammes;
+	private ArrayList<Diagramme> listeDiagrammes;
     private int nbIntervalles;
     private ArrayList<String> listeAffichagesVoulus;
+    private Tableau tab;
+    private HistogrammeDiametre histoDiam;
+    private HistogrammeSurface histoSurf;
 
-    /**
+    
+
+    public IHMStatistiques() {
+		this.listeDiagrammes = new ArrayList<Diagramme>();
+		this.listeAffichagesVoulus = new ArrayList<String>();
+		this.tab = new Tableau();
+		this.histoDiam = new HistogrammeDiametre();
+		this.histoSurf = new HistogrammeSurface();
+	}
+
+	/**
      * Permet d'afficher les différents diagrammes de statistiques qui sont dans la liste listeDiagrammes
      */
     public void afficherDiagrammes() {
         // TODO implement here
+    }
+    
+    /**
+     * ajoute les statistiques d'une image à mettre dans le tableau
+     * @param stat
+     */
+    public void alimenterTableau(Statistique stat) {
+    	//to do
     }
 
     /**
@@ -69,5 +89,62 @@ public class IHMStatistiques {
      */
     public void boutonExport() {
     }
+    
+    public boolean histoPresent() {
+    	for (Diagramme diag : listeDiagrammes) {
+			if ( (diag instanceof HistogrammeDiametre) || (diag instanceof HistogrammeSurface)) {
+				return true;
+			}
+		}return false;
+    }
+
+	public ArrayList<Diagramme> getListeDiagrammes() {
+		return listeDiagrammes;
+	}
+
+	public void setListeDiagrammes(ArrayList<Diagramme> listeDiagrammes) {
+		this.listeDiagrammes = listeDiagrammes;
+	}
+
+	public int getNbIntervalles() {
+		return nbIntervalles;
+	}
+
+	public void setNbIntervalles(int nbIntervalles) {
+		this.nbIntervalles = nbIntervalles;
+	}
+
+	public ArrayList<String> getListeAffichagesVoulus() {
+		return listeAffichagesVoulus;
+	}
+
+	public void setListeAffichagesVoulus(ArrayList<String> listeAffichagesVoulus) {
+		this.listeAffichagesVoulus = listeAffichagesVoulus;
+	}
+	
+	public Tableau getTab() {
+		return tab;
+	}
+
+	public void setTab(Tableau tab) {
+		this.tab = tab;
+	}
+
+	public HistogrammeDiametre getHistoDiam() {
+		return histoDiam;
+	}
+
+	public void setHistoDiam(HistogrammeDiametre histoDiam) {
+		this.histoDiam = histoDiam;
+	}
+
+	public HistogrammeSurface getHistoSurf() {
+		return histoSurf;
+	}
+
+	public void setHistoSurf(HistogrammeSurface histoSurf) {
+		this.histoSurf = histoSurf;
+	}
+
 
 }

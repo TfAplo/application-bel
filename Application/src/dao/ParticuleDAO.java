@@ -58,9 +58,10 @@ public class ParticuleDAO extends DAO<Particule>{
     /**
      * creer dans la base de données les Particules d'une image
      * @param ens
+     * @return ensemble crééer
      */
-    public void creer(int idImage,EnsembleParticules ens) {
-    	
+    public EnsembleParticules creer(int idImage,EnsembleParticules ens) {
+    	return null;
     }
 
 	@Override
