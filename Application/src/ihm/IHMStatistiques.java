@@ -5,6 +5,7 @@ import java.util.*;
 import metier.Diagramme;
 import metier.HistogrammeDiametre;
 import metier.HistogrammeSurface;
+import metier.Image;
 import metier.Statistique;
 import metier.Tableau;
 
@@ -39,8 +40,9 @@ public class IHMStatistiques {
     /**
      * ajoute les statistiques d'une image à mettre dans le tableau
      * @param stat
+     * @param image 
      */
-    public void alimenterTableau(Statistique stat) {
+    public void alimenterTableau(Statistique stat, Image image) {
     	//to do
     }
 

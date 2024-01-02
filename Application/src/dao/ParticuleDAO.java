@@ -1,5 +1,8 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 import metier.EnsembleParticules;
@@ -9,6 +12,7 @@ import metier.Particule;
  * Permet les échanges avec la table Particules de la base de donnée
  */
 public class ParticuleDAO extends DAO<Particule>{
+	private ResultSet rs;
 
     /**
      * Default constructor
@@ -22,8 +26,24 @@ public class ParticuleDAO extends DAO<Particule>{
      * @return retourne un EnsembleParticules
      */
     public EnsembleParticules lire(int idImage) {
-        // TODO implement here
-        return null;
+    	EnsembleParticules ens = new EnsembleParticules();
+		String requete = "SELECT * FROM particule WHERE idImage = " + idImage;
+		try{
+			rs = stmt.executeQuery(requete);
+			while(rs.next()) {
+				Particule p = new Particule(rs.getInt(1),rs.getDouble(2),rs.getDouble(3),
+						rs.getDouble(4),rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),
+						rs.getDouble(8),rs.getDouble(9),rs.getDouble(10),rs.getDouble(11),
+						rs.getDouble(12),rs.getInt(13));
+				ens.ajouterParticule(p);
+			}
+			
+			rs.close();
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return ens;
     }
 
     /**
@@ -61,7 +81,33 @@ public class ParticuleDAO extends DAO<Particule>{
      * @return ensemble crééer
      */
     public EnsembleParticules creer(int idImage,EnsembleParticules ens) {
-    	return null;
+    	ArrayList<Particule> l = ens.getListeParticules();
+    	String requete = "INSERT INTO particule (surfaceParticulePx, coCointHautGaucheX,"
+    			+ "coCointHautGaucheY,coCointHautDroitX,"
+    			+ "coCointHautDroitY,coCentreX,coCentreY,orientation,"
+    			+ "longueurAxeMajeur,longueurAxeMineur,diametreEquivalent,idImage) VALUES ";
+    	for (Particule p : l) {
+			requete += "(" + p.getSurfaceParticulePx() + "," + p.getCoCointHautGaucheX() + ","
+			+ p.getCoCointHautGaucheY()+ "," + p.getCoCointHautGaucheX()+ "," 
+			+p.getCoCointHautDroitY()+ ","+ p.getCoCentreX()+ ","
+			+ p.getCoCentreY()+ ","+ p.getOrientation()+ ","+
+			p.getLongueurAxeMajeur()+ "," + p.getLongueurAxeMineur()+ "," + p.getDiametreEquivalent()+ "," + idImage +"),";
+		}
+    	requete.substring(0, requete.length() - 1);
+		try {
+			stmt.executeUpdate(requete,Statement.RETURN_GENERATED_KEYS);
+			//Les cles auto-générées sont retournées sous forme de ResultSet
+			ResultSet cles = stmt.getGeneratedKeys();
+			cles.next();
+			for (Particule p : l) {
+				p.setIdParticule(cles.getInt(1));
+				cles.next();
+			}
+			ens.setListeParticules(l);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ens;
     }
 
 	@Override

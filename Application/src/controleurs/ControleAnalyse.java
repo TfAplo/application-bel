@@ -44,16 +44,18 @@ public class ControleAnalyse {
     	AnalyseImage analyseure = new AnalyseImage();
         for (Image image : images) {
         	//check si l'image à des particules et donc des stats
-        	Statistique stat;
+        	Statistique stat = new Statistique();
         	ParticuleDAO DBpart = new ParticuleDAO();
         	StatistiqueDAO DBstat = new StatistiqueDAO();
-        	ensembleTemporaire = DBpart.lire(image.idImage);//
+        	ensembleTemporaire = DBpart.lire(image.idImage);
 			if (ensembleTemporaire.estVide()) {
 				//analyse les images et les ajoutes à la base de donnée
 				try {
 					analyseure.executerScripts(image.nomFichier);
 					lecteurCSV();
 					ensembleTemporaire = DBpart.creer(image.idImage, ensembleTemporaire);
+					//générer les stats de ensemble temporaire et les ajouter à la base
+					stat = DBstat.creer(new Statistique(ensembleTemporaire));
 					
 				} catch (IOException e) {
 					System.out.println("l'analyse de l'image: " + image + "a échoué");
@@ -62,11 +64,8 @@ public class ControleAnalyse {
 			}else {
 				stat = DBstat.lire(image.idImage);
 			}
-			//générer les stats de ensemble temporaire et les ajouter à la base
-			stat = new Statistique(ensembleTemporaire);
-			stat = DBstat.creer(stat);
-			ihm.alimenterTableau(stat);
-			//alimente ensemble avec les particules de ensembleTemporaire
+			ihm.alimenterTableau(stat, image);//
+			//alimente l'ensemble général avec les particules de ensembleTemporaire
 			ensemble.ajouterParticules(ensembleTemporaire);
 		}
         //affichage des diagrammes

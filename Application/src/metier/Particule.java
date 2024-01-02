@@ -36,6 +36,29 @@ public class Particule {
     	longueurAxeMineur = Double.parseDouble(attributs[9]);
     	diametreEquivalent = Double.parseDouble(attributs[10]);
     }
+    
+    
+
+	public Particule(int idParticule, double surfaceParticulePx, double coCointHautGaucheX, double coCointHautGaucheY,
+			double coCointHautDroitX, double coCointHautDroitY, double coCentreX, double coCentreY, double orientation,
+			double longueurAxeMajeur, double longueurAxeMineur, double diametreEquivalent, int idImage) {
+		super();
+		this.idParticule = idParticule;
+		this.surfaceParticulePx = surfaceParticulePx;
+		this.coCointHautGaucheX = coCointHautGaucheX;
+		this.coCointHautGaucheY = coCointHautGaucheY;
+		this.coCointHautDroitX = coCointHautDroitX;
+		this.coCointHautDroitY = coCointHautDroitY;
+		this.coCentreX = coCentreX;
+		this.coCentreY = coCentreY;
+		this.orientation = orientation;
+		this.longueurAxeMajeur = longueurAxeMajeur;
+		this.longueurAxeMineur = longueurAxeMineur;
+		this.diametreEquivalent = diametreEquivalent;
+		this.idImage = idImage;
+	}
+
+
 
 	@Override
 	public String toString() {
