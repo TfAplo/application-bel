@@ -28,9 +28,9 @@ public class ImageDAO extends DAO<Image>{
     	//recuperation des attributs
         String nomImage = image.getNomImage();
         String url = image.getUrl();
-        int largeurPx = image.getLargeurPx();
-        int hauteurPx = image.getHauteurPx();
-        int grossissement = image.getGrossissement();
+        double largeurPx = image.getLargeurPx();
+        double hauteurPx = image.getHauteurPx();
+        double grossissement = image.getGrossissement();
         double largeurReel = image.getLargeurReel();
         int idOperateur = image.getIdOperateur();
         int idProduit = image.getIdProduit();
@@ -38,16 +38,19 @@ public class ImageDAO extends DAO<Image>{
         
         //creation de la requete SQL
         String sql = "INSERT INTO image (nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit) "
-        		+ "VALUES ('"+ nomImage +"','"+ url + "'," + largeurPx+"," + hauteurPx +"," + largeurReel +","+idOperateur + "," + idProduit + ")";
+        		+ "VALUES ('"+ nomImage +"', '"+ url + "', " + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReel +", "+idOperateur + ", " + idProduit + ");";
         
         // Execution de la requete
  		try {
- 			int idImage = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+ 			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+ 			ResultSet res = stmt.getGeneratedKeys();
  			
- 			//Creation de l'objet image
- 			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
- 			newImage.setIdImage(idImage);
- 			return newImage;
+ 			if(res.next()) {
+ 				//ajout de l'id a  image
+ 				int idImage = res.getInt(1);
+ 	 			image.setIdImage(idImage);
+ 			}
+ 			return image;
  		}
  		catch(SQLException e) {
  			System.err.println("Erreur requete SQL");
@@ -76,9 +79,9 @@ public class ImageDAO extends DAO<Image>{
  				
 		        String nomImage = rs.getString("nomImage");
 		        String url = rs.getString("url");
-		        int largeurPx = rs.getInt("largeurPx");
-		        int hauteurPx = rs.getInt("hauteurPx");
-		        int grossissement = rs.getInt("grossissement");
+		        double largeurPx = rs.getInt("largeurPx");
+		        double hauteurPx = rs.getInt("hauteurPx");
+		        double grossissement = rs.getInt("grossissement");
 		        double largeurReel = rs.getDouble("largeurReel");
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
@@ -108,9 +111,9 @@ public class ImageDAO extends DAO<Image>{
     	int idImage = image.getIdImage();
         String nomImage = image.getNomImage();
         String url = image.getUrl();
-        int largeurPx = image.getLargeurPx();
-        int hauteurPx = image.getHauteurPx();
-        int grossissement = image.getGrossissement();
+        double largeurPx = image.getLargeurPx();
+        double hauteurPx = image.getHauteurPx();
+        double grossissement = image.getGrossissement();
         double largeurReel = image.getLargeurReel();
         int idOperateur = image.getIdOperateur();
         int idProduit = image.getIdProduit();
