@@ -9,12 +9,12 @@ public class Image {
     /**
      * ID de l'image dans la base de donnees.
      */
-    public int idImage;
+    private int idImage;
 
     /**
      * Nom du fichier de l'image.
      */
-    public String nomImage;
+    private String nomImage;
     
     /*
      * emplacement de stockage de l'image
@@ -24,37 +24,37 @@ public class Image {
     /**
      * Largeur de l'image en pixel.
      */
-    public int largeurPx;
+    private double largeurPx;
 
     /**
      * Hauteur de l'image en pixel.
      */
-    public int hauteurPx;
+    private double hauteurPx;
 
     /**
      * Grossissement du microscope lors de la prise de l'image.
      */
-    public int grossissement;
+    private double grossissement;
 
     /**
      * Largeur réelle de l'image.
      */
-    public double largeurReel;
+    private double largeurReel;
     
     /*
      * id de l'operateur qui a stocker l'image
      */
-    public int idOperateur;
+    private int idOperateur;
     
     /*
      * id du produit auquel cette image est associée
      */
-    public int idProduit;
+    private int idProduit;
 
 	/**
      * Default constructor
      */
-    public Image(String nomImage, String url, int largeurPx, int hauteurPx, int grossissement, double largeurReel, int idOperateur, int idProduit) {
+    public Image(String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReel, int idOperateur, int idProduit) {
     	this.nomImage = nomImage;
     	this.url = url;
     	this.largeurPx = largeurPx;
@@ -65,6 +65,13 @@ public class Image {
     	this.idProduit = idProduit;
     	
     }
+
+	@Override
+	public String toString() {
+		return "Image [idImage=" + idImage + ", nomImage=" + nomImage + ", url=" + url + ", largeurPx=" + largeurPx
+				+ ", hauteurPx=" + hauteurPx + ", grossissement=" + grossissement + ", largeurReel=" + largeurReel
+				+ ", idOperateur=" + idOperateur + ", idProduit=" + idProduit + "]";
+	}
 
 	public int getIdImage() {
 		return idImage;
@@ -90,7 +97,7 @@ public class Image {
 		this.url = url;
 	}
 
-	public int getLargeurPx() {
+	public double getLargeurPx() {
 		return largeurPx;
 	}
 
@@ -98,7 +105,7 @@ public class Image {
 		this.largeurPx = largeurPx;
 	}
 
-	public int getHauteurPx() {
+	public double getHauteurPx() {
 		return hauteurPx;
 	}
 
@@ -106,7 +113,7 @@ public class Image {
 		this.hauteurPx = hauteurPx;
 	}
 
-	public int getGrossissement() {
+	public double getGrossissement() {
 		return grossissement;
 	}
 
