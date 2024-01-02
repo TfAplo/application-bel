@@ -54,8 +54,7 @@ public class Image {
 	/**
      * Default constructor
      */
-    public Image(int idImage, String nomImage, String url, int largeurPx, int hauteurPx, int grossissement, double largeurReel, int idOperateur, int idProduit) {
-    	this.idImage = idImage;
+    public Image(String nomImage, String url, int largeurPx, int hauteurPx, int grossissement, double largeurReel, int idOperateur, int idProduit) {
     	this.nomImage = nomImage;
     	this.url = url;
     	this.largeurPx = largeurPx;
