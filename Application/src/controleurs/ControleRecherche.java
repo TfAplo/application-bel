@@ -21,6 +21,7 @@ public class ControleRecherche{
 	 */
 	private ArrayList<Image> listeImageSelectionner = new ArrayList<>();
 
+
     /**
      * Default constructor
      */
@@ -51,6 +52,15 @@ public class ControleRecherche{
         		CheckBox hyperlinkCheckBox = new CheckBox();
         
         		hyperlinkCheckBox.setOnAction(e -> ajoutImageSelectionner(image));
+        		//verifier que l'image est dans la liste ou non (pb lorsqu'on recherche des images deja dans la liste la checkbox est reinitialiser
+        		// et donc cela ne correspond plus a son etat dans la liste
+        		ArrayList<Image> liste = getListeImageSelectionner();
+        		
+        		for(Image imageSelect: liste) {
+        			if(isEqual(imageSelect, image)) {
+        				hyperlinkCheckBox.setSelected(true);
+        			}
+        		}    		
         		
         		//Creer un element qui contient le nom de l'image et la checkbox
         		HBox hContainer = new HBox();
@@ -71,12 +81,25 @@ public class ControleRecherche{
     /* ajoute l'image ou l'enleve en fonction de sa presence ou non dans la liste
      * @param image, instance de Image
      */
-    public void ajoutImageSelectionner(Image image) {
-    	if(listeImageSelectionner.contains(image)){
-    		listeImageSelectionner.remove(image);
-    	} else {
+    public void ajoutImageSelectionner(Image image) 
+    {
+    	boolean isRemoved = false;
+    	Iterator<Image> iterator = getListeImageSelectionner().iterator();
+    	
+    	while(iterator.hasNext()) 
+    	{
+    		Image imageSelect = iterator.next();
+    		if(isEqual(imageSelect, image)) 
+    		{
+    			isRemoved = true;
+    			iterator.remove();
+    		}
+    	}
+    	if(!isRemoved) 
+    	{
     		listeImageSelectionner.add(image);
     	}
+    	System.out.println(listeImageSelectionner);
     }
     
     /*
@@ -85,5 +108,18 @@ public class ControleRecherche{
     public ArrayList<Image> getListeImageSelectionner() {
 		return listeImageSelectionner;
 	}
-            
+    
+    /*
+     * Compare si deux image sont eguale (avec leurs id qui est unique)
+     */
+    public static boolean isEqual(Image image1, Image image2) {
+        if (image1 == image2) {
+            return true;
+        }
+        if (image1.getIdImage() == image2.getIdImage()) {
+            return true;
+        }
+        return false;
+    }
+              
 }
