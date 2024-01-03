@@ -32,8 +32,16 @@ public class ControleExport {
         this.fenetreExport = fenetreExport;
         this.generateurFichier = generateurFichier;
     }
+    
+    
 
-    /**
+    public ControleExport() {
+	
+    }
+
+
+
+	/**
      * Gère l'action d'exportation des images.
      */
     public void main() {
