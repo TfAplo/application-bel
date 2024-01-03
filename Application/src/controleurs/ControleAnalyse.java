@@ -36,11 +36,6 @@ public class ControleAnalyse {
      * @param images liste des images choisis pour afficher leurs particules
      */
     public void afficher(ArrayList<Image> images) {
-    	//demande quel affichage est souhaité
-    	ihm.afficherFormAffichages();
-    	if (ihm.histoPresent()) {
-    		ihm.afficherFormNbIntervalles();
-    	}
     	AnalyseImage analyseure = new AnalyseImage();
         for (Image image : images) {
         	//check si l'image à des particules et donc des stats

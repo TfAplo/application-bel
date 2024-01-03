@@ -69,7 +69,13 @@ public class EnsembleParticules {
      * @return
      */
     public double getRatioSurfaceCouverte() {
-    	return 0;
+    	double sommeAireP = 0;
+    	double sommeAireBb = 0;
+    	for (Particule p : listeParticules) {
+			sommeAireP += p.getSurfaceParticulePx();
+			sommeAireBb += Math.abs((p.getCoCointHautDroitX() - p.getCoCointHautGaucheX())*(p.getCoCointHautDroitY()-p.getCoCointHautGaucheY()));
+		}
+    	return sommeAireP / sommeAireBb;
     }
     
     /**
