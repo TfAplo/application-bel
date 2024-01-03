@@ -8,6 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
@@ -126,6 +129,8 @@ public class Controleur {
 	 public void mainContainerAfficher() {
 		// clear le container
 		mainContainer.getChildren().clear();
+		CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+		
 	 }
 }
 

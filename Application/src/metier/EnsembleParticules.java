@@ -129,6 +129,54 @@ public class EnsembleParticules {
 		}
     	return Math.sqrt(somme/listeParticules.size());
     }
+    
+    /**
+     * permet de trouver le minimum des surfaces
+     * @return 
+     */
+    public double getMinSurface() {
+    	double min = Double.POSITIVE_INFINITY;
+    	for (Particule particule : listeParticules) {
+			if(particule.getSurfaceParticulePx() < min) min = particule.getSurfaceParticulePx();
+		}
+    	return min;
+    }
+    
+    /**
+     * permet de trouver le minimum des diamètres
+     * @return 
+     */
+    public double getMinDiametre() {
+    	double min = Double.POSITIVE_INFINITY;
+    	for (Particule particule : listeParticules) {
+			if(particule.getDiametreEquivalent() < min) min = particule.getDiametreEquivalent();
+		}
+    	return min;
+    }
+    
+    /**
+     * permet de trouver le maximum des surfaces
+     * @return 
+     */
+    public double getMaxSurface() {
+    	double max = Double.NEGATIVE_INFINITY;
+    	for (Particule particule : listeParticules) {
+			if(particule.getSurfaceParticulePx() > max) max = particule.getSurfaceParticulePx();
+		}
+    	return max;
+    }
+    
+    /**
+     * permet de trouver le maximum des diamètres
+     * @return 
+     */
+    public double getMaxDiametre() {
+    	double max = Double.NEGATIVE_INFINITY;
+    	for (Particule particule : listeParticules) {
+			if(particule.getDiametreEquivalent() > max) max = particule.getDiametreEquivalent();
+		}
+    	return max;
+    }
 
 	@Override
 	public String toString() {

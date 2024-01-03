@@ -1,36 +1,89 @@
 package metier;
 
+import java.text.DecimalFormat;
 import java.util.*;
+
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 
 /**
  * Permet l'affichage d'un histogrammes de surface et d'un histogramme de surface cumulatif
  */
 public class HistogrammeSurface extends Diagramme {
+	private BarChart<String,Number> bc;
+	private CategoryAxis xAxis;
+	private NumberAxis yAxis;
 
-    /**
-     * Default constructor
-     */
     public HistogrammeSurface() {
+		xAxis = new CategoryAxis();
+        yAxis = new NumberAxis();
+        bc = new BarChart<String,Number>(xAxis,yAxis);
+        bc.setTitle("Histogramme de surface");
+        xAxis.setLabel("surface");       
+        yAxis.setLabel("Pourcentage de particules");
     }
 
     /**
-     * Permet l'affichage d'un histogramme de surface
+     * Permet l'alimentation d'un histogramme de surface
      * @param particules EnsembleParticules à afficher
-     * @param surfaceMin double définissant la surface minimum parmi toutes les particules
-     * @param surfaceMax double définissant la surface maximum parmi toutes les particules
+     * @param nbIntervalles int representant le nombre d'intervalles voulues
      */
-    public void afficherHistoSurface(EnsembleParticules particules, double surfaceMin, double surfaceMax) {
+    public void alimenterHistoSurface(EnsembleParticules particules, int nbIntervalles) {
+    	double min = particules.getMinSurface(); double max = particules.getMaxSurface();
+    	double ecart = max-min;
+    	double intervalle = ecart/nbIntervalles;
+    	double[] tabIntervalles = new double[nbIntervalles];
+    	double ints = 0;
+    	int i =0;
+    	while(i < nbIntervalles-1) {
+    		ints += intervalle;
+			tabIntervalles[i] = ints;
+			i++;
+    	}
+    	tabIntervalles[i] = max;
+    	ArrayList<Pair<String, Double>> l = new ArrayList<Pair<String, Double>>();
+    	//permet d'arrondir la valeure pour faciliter la lecture du diagramme
+    	DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    	l.add(new Pair<String, Double>("0-"+Double.parseDouble(decimalFormat.format(tabIntervalles[0])), 0.0));
+    	for (int j = 1; j < nbIntervalles; j++) {
+    		l.add(new Pair<String, Double>(Double.parseDouble(decimalFormat.format(tabIntervalles[j-1]))+"-"+decimalFormat.format(tabIntervalles[j]), 0.0));
+		}
+    	ArrayList<Particule> parts = particules.getListeParticules();
+    	for (Particule p : parts) {
+			for (int j = 0; j < nbIntervalles; j++) {
+				if(p.getSurfaceParticulePx() <= tabIntervalles[j]) {
+					l.set(j, new Pair<String, Double>(l.get(j).getKey(), l.get(j).getValue()+ 1));
+					break;
+				}
+			}
+		}
+    	XYChart.Series series1 = new XYChart.Series();
+    	series1.setName("pourcentage de particules dans l'intervalle de surface");
+    	for (Pair<String, Double> p : l) {
+    		series1.getData().add(new XYChart.Data(p.getKey(),p.getValue() *100/particules.getNombreParticules()));
+		}
+    	bc.getData().add(series1);
+    }
+
+    /**
+     * Permet l'alimentation d'un histogramme de surface cumulatif
+     * @param particules EnsembleParticules à afficher
+     */
+    public void alimenterHistoSurfaceCumu(EnsembleParticules particules) {
         // TODO implement here
     }
 
     /**
-     * Permet l'affichage d'un histogramme de surface cumulatif
-     * @param particules EnsembleParticules à afficher
-     * @param surfaceMin double définissant la surface minimum parmi toutes les particules
-     * @param surfaceMax double définissant la surface maximum parmi toutes les particules
+     * permet l'affichage des histogrammes de surface
      */
-    public void afficherHistoSurfaceCumu(EnsembleParticules particules, double surfaceMin, double surfaceMax) {
-        // TODO implement here
-    }
+	@Override
+	public void afficher(AnchorPane mainContainer) {
+		mainContainer.getChildren().add(bc);
+		
+	}
 
 }

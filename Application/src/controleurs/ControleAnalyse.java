@@ -10,6 +10,7 @@ import dao.StatistiqueDAO;
 import ihm.IHMStatistiques;
 import metier.AnalyseImage;
 import metier.EnsembleParticules;
+import metier.HistogrammeSurface;
 import metier.Image;
 import metier.ImageRecherche;
 import metier.Particule;
@@ -28,6 +29,7 @@ public class ControleAnalyse {
      */
     public ControleAnalyse() {
     	ensemble = new EnsembleParticules();
+    	ensembleTemporaire = new EnsembleParticules();
     	ihm = new IHMStatistiques();
     }
 
@@ -46,7 +48,7 @@ public class ControleAnalyse {
 			if (ensembleTemporaire.estVide()) {
 				//analyse les images et les ajoutes à la base de donnée
 				try {
-					analyseure.executerScripts(image.nomFichier);
+					analyseure.executerScripts(image.nomImage);
 					lecteurCSV();
 					ensembleTemporaire = DBpart.creer(image.idImage, ensembleTemporaire);
 					//générer les stats de ensemble temporaire et les ajouter à la base
@@ -63,8 +65,8 @@ public class ControleAnalyse {
 			//alimente l'ensemble général avec les particules de ensembleTemporaire
 			ensemble.ajouterParticules(ensembleTemporaire);
 		}
-        //affichage des diagrammes
-    	ihm.afficherDiagrammes();
+        if (ihm.histoDPresent()) ihm.alimenterHistoD(ensemble);
+        if (ihm.histoSPresent()) ihm.alimenterHistoS(ensemble);
     }
     
     /**
@@ -84,9 +86,31 @@ public class ControleAnalyse {
 			this.ensembleTemporaire.ajouterParticule(part);
 		}
     }
+
+	public EnsembleParticules getEnsemble() {
+		return ensemble;
+	}
+
+	public void setEnsemble(EnsembleParticules ensemble) {
+		this.ensemble = ensemble;
+	}
+
+	public EnsembleParticules getEnsembleTemporaire() {
+		return ensembleTemporaire;
+	}
+
+	public void setEnsembleTemporaire(EnsembleParticules ensembleTemporaire) {
+		this.ensembleTemporaire = ensembleTemporaire;
+	}
+
+	public IHMStatistiques getIhm() {
+		return ihm;
+	}
+
+	public void setIhm(IHMStatistiques ihm) {
+		this.ihm = ihm;
+	}
     
-    public static void main(String[] args) {
-    	
-    }
+    
 
 }

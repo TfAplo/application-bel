@@ -2,7 +2,9 @@ package ihm;
 
 import java.util.*;
 
+import javafx.scene.layout.AnchorPane;
 import metier.Diagramme;
+import metier.EnsembleParticules;
 import metier.HistogrammeDiametre;
 import metier.HistogrammeSurface;
 import metier.Image;
@@ -32,9 +34,13 @@ public class IHMStatistiques {
 
 	/**
      * Permet d'afficher les différents diagrammes de statistiques qui sont dans la liste listeDiagrammes
+	 * @param mainContainer 
      */
-    public void afficherDiagrammes() {
+    public void afficherDiagrammes(AnchorPane mainContainer) {
         // TODO implement here
+    	for (Diagramme diag : listeDiagrammes) {
+			diag.afficher(mainContainer);
+		}
     }
     
     /**
@@ -44,6 +50,24 @@ public class IHMStatistiques {
      */
     public void alimenterTableau(Statistique stat, Image image) {
     	//to do
+    	tab.alimenter(stat, image);
+    }
+    
+    /**
+     * permet l'alimentation des histogrammes de surface
+     * @param ens
+     */
+    public void alimenterHistoS(EnsembleParticules ens) {
+    	histoSurf.alimenterHistoSurface(ens, nbIntervalles);
+    	
+    }
+    
+    /**
+     * permet l'alimentation des histogrammes de diamètres équivalents
+     * @param ens
+     */
+    public void alimenterHistoD(EnsembleParticules ens) {
+    	histoDiam.alimenterHistoDiametre(ens, 20);
     }
 
     /**
@@ -92,9 +116,17 @@ public class IHMStatistiques {
     public void boutonExport() {
     }
     
-    public boolean histoPresent() {
+    public boolean histoSPresent() {
     	for (Diagramme diag : listeDiagrammes) {
-			if ( (diag instanceof HistogrammeDiametre) || (diag instanceof HistogrammeSurface)) {
+			if (diag instanceof HistogrammeSurface) {
+				return true;
+			}
+		}return false;
+    }
+    
+    public boolean histoDPresent() {
+    	for (Diagramme diag : listeDiagrammes) {
+			if (diag instanceof HistogrammeDiametre) {
 				return true;
 			}
 		}return false;
