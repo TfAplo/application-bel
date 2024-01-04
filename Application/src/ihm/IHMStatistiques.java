@@ -2,6 +2,13 @@ package ihm;
 
 import java.util.*;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import metier.Diagramme;
 import metier.EnsembleParticules;
@@ -21,7 +28,26 @@ public class IHMStatistiques {
     private Tableau tab;
     private HistogrammeDiametre histoDiam;
     private HistogrammeSurface histoSurf;
-
+    private boolean slideDisHS;
+    private boolean slideDisHD;
+    private boolean tabCheck;
+    private boolean afficher;
+	 @FXML
+	 private Button idAfficherButton;
+	 @FXML
+	 private CheckBox idHScheck;
+	 @FXML
+	 private Slider idSliderHS;
+	 @FXML
+	 private Label idLabelHS;
+	 @FXML
+	 private CheckBox idHDcheck;
+	 @FXML
+	 private Slider idSliderHD;
+	 @FXML
+	 private Label idLabelHD;
+	 @FXML
+	 private CheckBox idTABcheck;
     
 
     public IHMStatistiques() {
@@ -30,6 +56,10 @@ public class IHMStatistiques {
 		this.tab = new Tableau();
 		this.histoDiam = new HistogrammeDiametre();
 		this.histoSurf = new HistogrammeSurface();
+		slideDisHS = true;
+	    slideDisHD = true;
+	    tabCheck = true;
+	    afficher = false;
 	}
 
 	/**
@@ -49,7 +79,6 @@ public class IHMStatistiques {
      * @param image 
      */
     public void alimenterTableau(Statistique stat, Image image) {
-    	//to do
     	tab.alimenter(stat, image);
     }
     
@@ -76,21 +105,7 @@ public class IHMStatistiques {
      * @param diag Diagram à ajouter
      */
     public void ajouter(Diagramme diag) {
-        // TODO implement here
-    }
-
-    /**
-     * Permet d'afficher un formulaire demandant à l'utilisateur les diagrammes qu'il souhaite voir
-     */
-    public void afficherFormAffichages() {
-        // TODO implement here
-    }
-
-    /**
-     * Permet d'afficher un formulaire demandant à l'utilisateur le nombre d'intervalles qu'il souhaite voir dans les diagrammes
-     */
-    public void afficherFormNbIntervalles() {
-        // TODO implement here
+        listeDiagrammes.add(diag);
     }
 
     /**
@@ -180,6 +195,42 @@ public class IHMStatistiques {
 	public void setHistoSurf(HistogrammeSurface histoSurf) {
 		this.histoSurf = histoSurf;
 	}
+	
+	public boolean isAfficher() {
+		return afficher;
+	}
 
+	@FXML
+	 public void initialize() {
+		//permet de choisir le nombre d'intervalles
+		idHScheck.setOnAction(e -> {
+			if (slideDisHS) {idSliderHS.setDisable(false);slideDisHS=false;}
+			else {idSliderHS.setDisable(true);slideDisHS=true;}
+		});
+		//permet d'actualiser le label avec la valeure du Slider
+		idSliderHS.valueProperty().addListener(new ChangeListener<Number>() {
+	         public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+	             idLabelHS.setText(String.valueOf(Math.round(newValue.floatValue())));
+	         }
+		});
+		//permet de choisir le nombre d'intervalles
+		idHDcheck.setOnAction(e -> {
+			if (slideDisHD) {idSliderHD.setDisable(false);slideDisHD=false;}
+			else {idSliderHD.setDisable(true);slideDisHD=true;}
+		});
+		//permet d'actualiser le label avec la valeure du Slider
+		idSliderHD.valueProperty().addListener(new ChangeListener<Number>() {
+			public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+				idLabelHD.setText(String.valueOf(Math.round(newValue.floatValue())));
+			}
+		});
+		//permet de demander l'affichage du tableau
+		idTABcheck.setOnAction(e -> {
+			if (tabCheck) tabCheck=false;
+			else tabCheck=true;
+		});
+		//lance l'analyse et l'affichage
+		idAfficherButton.setOnAction(e -> System.out.println(tabCheck));
+	}
 
 }

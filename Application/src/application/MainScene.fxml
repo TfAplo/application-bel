@@ -11,6 +11,7 @@
             <TextField fx:id="rechercher" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="218.0" promptText="Rechercher" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
             <VBox fx:id="afficherResultatContainer" layoutX="25.0" layoutY="105.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
          </children>
+         <Button fx:id="idAnalyser" mnemonicParsing="false" text="Analyser les images" />
       </AnchorPane>
       <AnchorPane fx:id="mainContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
          <children>

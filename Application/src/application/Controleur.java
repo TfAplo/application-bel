@@ -2,12 +2,16 @@ package application;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -35,6 +39,8 @@ public class Controleur {
 	 private Button DeposerImage;
 	 @FXML
 	 private Button afficherStats;
+	 @FXML
+	 private Button idAnalyser;
 	 
 	 Controleur(ControleRecherche CtrlRecherche, ControleAnalyse CtrlAnalyse, ControleDepot CtrlDepot, ControleExport CtrlExport) {
 		 this.CtrlRecherche = CtrlRecherche;
@@ -48,13 +54,14 @@ public class Controleur {
 		 //Changer l'affichage du mainContainer quand on appuis sur les boutons
 		 DeposerImage.setOnAction(e -> mainContainerDeposer());
 		 afficherStats.setOnAction(e -> mainContainerAfficher());
+		 idAnalyser.setOnAction(e -> afficherFormulaireAnalyse());
 		 
 		 //envoyer la recherche d'image au controleur
 		 //rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer));
 		  
 	 }
-	
-	 public void mainContainerDeposer() {
+
+	public void mainContainerDeposer() {
 		 // clear le container
 		 mainContainer.getChildren().clear();
 		 //hbox princiale
@@ -129,19 +136,28 @@ public class Controleur {
 	 public void mainContainerAfficher() {
 		// clear le container
 		mainContainer.getChildren().clear();
-		//CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+		CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+	 }
+	 
+	 private void afficherFormulaireAnalyse() {
 		try {
-			CtrlAnalyse.lecteurCSV();
-			CtrlAnalyse.getIhm().alimenterHistoS(CtrlAnalyse.getEnsembleTemporaire());
-			CtrlAnalyse.getIhm().alimenterHistoD(CtrlAnalyse.getEnsembleTemporaire());
-			CtrlAnalyse.getIhm().getHistoSurf().afficher(mainContainer);
-			CtrlAnalyse.getIhm().getHistoDiam().afficher(mainContainer);
-			
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
+			fxmlLoader.setController(CtrlAnalyse.getIhm());
+			Parent root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root1));
+			stage.show();
+			stage.setOnCloseRequest(e-> {
+				if (CtrlAnalyse.getIhm().isAfficher()) {
+					CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
+					CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+				}
+			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 }
+	}
 }
 
 
