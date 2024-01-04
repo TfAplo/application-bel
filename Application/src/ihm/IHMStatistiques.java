@@ -58,8 +58,8 @@ public class IHMStatistiques {
      * @param ens
      */
     public void alimenterHistoS(EnsembleParticules ens) {
-    	histoSurf.alimenterHistoSurface(ens, nbIntervalles);
-    	
+    	histoSurf.alimenterHistoSurface(ens, 20);
+    	histoSurf.alimenterHistoSurfaceCumu(ens);
     }
     
     /**
@@ -68,6 +68,7 @@ public class IHMStatistiques {
      */
     public void alimenterHistoD(EnsembleParticules ens) {
     	histoDiam.alimenterHistoDiametre(ens, 20);
+    	histoDiam.alimenterHistoDiametreCumu(ens);
     }
 
     /**

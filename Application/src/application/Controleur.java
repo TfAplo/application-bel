@@ -129,8 +129,18 @@ public class Controleur {
 	 public void mainContainerAfficher() {
 		// clear le container
 		mainContainer.getChildren().clear();
-		CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
-		
+		//CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+		try {
+			CtrlAnalyse.lecteurCSV();
+			CtrlAnalyse.getIhm().alimenterHistoS(CtrlAnalyse.getEnsembleTemporaire());
+			CtrlAnalyse.getIhm().alimenterHistoD(CtrlAnalyse.getEnsembleTemporaire());
+			CtrlAnalyse.getIhm().getHistoSurf().afficher(mainContainer);
+			CtrlAnalyse.getIhm().getHistoDiam().afficher(mainContainer);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	 }
 }
 

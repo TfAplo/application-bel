@@ -14,17 +14,32 @@ import javafx.util.Pair;
  * Permet l'affichage d'un histogrammes de surface et d'un histogramme de surface cumulatif
  */
 public class HistogrammeSurface extends Diagramme {
+	private ArrayList<Pair<String, Double>> l;
 	private BarChart<String,Number> bc;
 	private CategoryAxis xAxis;
 	private NumberAxis yAxis;
+	
+	private ArrayList<Pair<String, Double>> lc;
+	private BarChart<String,Number> bcc;
+	private CategoryAxis xAxisc;
+	private NumberAxis yAxisc;
 
     public HistogrammeSurface() {
+    	//initialisation de l'histogramme basic
 		xAxis = new CategoryAxis();
         yAxis = new NumberAxis();
         bc = new BarChart<String,Number>(xAxis,yAxis);
         bc.setTitle("Histogramme de surface");
-        xAxis.setLabel("surface");       
+        xAxis.setLabel("intervalles de surfaces");       
         yAxis.setLabel("Pourcentage de particules");
+        
+      //initialisation de l'histogramme cumulatif
+        xAxisc = new CategoryAxis();
+        yAxisc = new NumberAxis();
+        bcc = new BarChart<String,Number>(xAxisc,yAxisc);
+        bcc.setTitle("Histogramme des diamètres équivalents cumulatif");
+        xAxisc.setLabel("intervalles de surfaces");       
+        yAxisc.setLabel("Pourcentage cumulatif de particules");
     }
 
     /**
@@ -45,7 +60,8 @@ public class HistogrammeSurface extends Diagramme {
 			i++;
     	}
     	tabIntervalles[i] = max;
-    	ArrayList<Pair<String, Double>> l = new ArrayList<Pair<String, Double>>();
+    	//on initialise une liste de paires de la forme (intervalle, occurence)
+    	this.l = new ArrayList<Pair<String, Double>>();
     	//permet d'arrondir la valeure pour faciliter la lecture du diagramme
     	DecimalFormat decimalFormat = new DecimalFormat("#.##");
     	l.add(new Pair<String, Double>("0-"+Double.parseDouble(decimalFormat.format(tabIntervalles[0])), 0.0));
@@ -53,6 +69,7 @@ public class HistogrammeSurface extends Diagramme {
     		l.add(new Pair<String, Double>(Double.parseDouble(decimalFormat.format(tabIntervalles[j-1]))+"-"+decimalFormat.format(tabIntervalles[j]), 0.0));
 		}
     	ArrayList<Particule> parts = particules.getListeParticules();
+    	//on compte le nombre d'occurence pour chaques intervalles
     	for (Particule p : parts) {
 			for (int j = 0; j < nbIntervalles; j++) {
 				if(p.getSurfaceParticulePx() <= tabIntervalles[j]) {
@@ -74,7 +91,20 @@ public class HistogrammeSurface extends Diagramme {
      * @param particules EnsembleParticules à afficher
      */
     public void alimenterHistoSurfaceCumu(EnsembleParticules particules) {
-        // TODO implement here
+    	lc = new ArrayList<Pair<String,Double>>();
+    	double pourcentageCumu = 0;
+    	int i = 0;
+    	while (i < l.size()) {
+    		pourcentageCumu += l.get(i).getValue();
+    		lc.add(new Pair<String, Double>(l.get(i).getKey(), pourcentageCumu));
+    		i++;
+		}
+    	XYChart.Series series2 = new XYChart.Series();
+    	series2.setName("pourcentage de particules dans l'intervalle de surfaces");
+    	for (Pair<String, Double> pair : lc) {
+    		series2.getData().add(new XYChart.Data(pair.getKey(),pair.getValue() *100/particules.getNombreParticules()));
+		}
+    	bcc.getData().add(series2);
     }
 
     /**
@@ -83,7 +113,7 @@ public class HistogrammeSurface extends Diagramme {
 	@Override
 	public void afficher(AnchorPane mainContainer) {
 		mainContainer.getChildren().add(bc);
-		
+		mainContainer.getChildren().add(bcc);
 	}
 
 }
