@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class GenerateurFichierCSV 
 {
 	//private ArrayList<Objet> listeOblet;
-	private String[] nomColonnes;
+	private final String[] nomColonnes = {"nom de l'image", "grossissement", "nombre de particules trouvees",
+			"ratio de surface couverte", "moyenne des aires", "moyenne diametres equivalents",
+			"ecart-type des aires", "ecart-type des diametres equivalents"};
 	
     /**
      * Constructeur du générateur de fichiers
      */
-    public GenerateurFichierCSV(String[] nomCollones) 
-    {
-    	this.nomColonnes = nomCollones;
+    public GenerateurFichierCSV() {
     }
 
     /**
