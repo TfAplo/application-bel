@@ -1,15 +1,25 @@
 package ihm;
 
+import java.util.ArrayList;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import metier.GenerateurFichierCSV;
 
 public class IHMExportCSV {
 	@FXML
 	 private Button export;
 	@FXML
-	private CheckBox statistiques;
+	private AnchorPane anchorMain;
+	
+	private Node statistiques;
+
+	private VBox vbox;
 	
 	private boolean cocheStatistiques;
 	
@@ -22,8 +32,8 @@ public class IHMExportCSV {
 		 
 		 //envoyer la recherche d'image au controleur
 		 export.setOnAction(e -> export());
-		 
-		 statistiques.setOnAction(e -> coche());
+		 statistiques.addEventHandler(null, null);
+		 //statistiques.setOnAction(e -> coche());
 	 }
 	
 	public void export() {
@@ -34,5 +44,22 @@ public class IHMExportCSV {
 	
 	public void coche() {
 		this.cocheStatistiques = !this.cocheStatistiques;
+	}
+	
+	public void setVbox(VBox vbox) {
+		this.vbox = vbox;
+	}
+	
+	public void alimenterFenetre() {
+		anchorMain.getChildren().add(vbox);
+	}
+	
+	public void alimenterCheckBox() {
+		ObservableList<Node> list = vbox.getChildren();
+		for (Node node : list) {
+			if(node.getId() == "statistiques") {
+				this.statistiques = node;
+			}
+		}
 	}
 }

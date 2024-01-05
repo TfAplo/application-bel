@@ -23,8 +23,8 @@ public class ControleExportCSV {
 		return IHM;
 	}
 
-	public void setIHM(IHMExportCSV iHM) {
-		IHM = iHM;
+	public void setIHM(IHMExportCSV IHM) {
+		this.IHM = IHM;
 	}
 	
 	public void export(HistogrammeDiametre histo) {

@@ -6,11 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 //import des controleurs
 import controleurs.ControleRecherche;
+import ihm.IHMStatistiques;
 
 import java.io.IOException;
 
@@ -58,13 +61,34 @@ public class Controleur {
 			Stage stage = new Stage();
 	        stage.setTitle("Export au format CSV");
 	        stage.setScene(new Scene(root1));
+	        IHMStatistiques IHM = CtrlAnalyse.getIhm();
+	        VBox vbox = new VBox();
+	        if(IHM.histoSPresent()) {
+				CheckBox ch1 = new CheckBox();
+				CheckBox ch2 = new CheckBox();
+				vbox.getChildren().addAll(ch1, ch2);
+			}
+			if(IHM.histoDPresent()) {
+				CheckBox ch3 = new CheckBox();
+				CheckBox ch4 = new CheckBox();
+				vbox.getChildren().addAll(ch3, ch4);
+			}
+			if(IHM.tabPresent()) {
+				CheckBox ch5 = new CheckBox();
+				ch5.setId("statistiques");
+				vbox.getChildren().add(ch5);
+			}
+			CheckBox ch1 = new CheckBox();
+			ch1.setId("statistiques");
+			ch1.setText("Statistiques");
+			vbox.getChildren().add(ch1);
+			CtrlExportCSV.getIHM().setVbox(vbox);
+			CtrlExportCSV.getIHM().alimenterFenetre();
+			CtrlExportCSV.getIHM().alimenterCheckBox();
 	        stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-         
 	 }
-	
-	 
 }
