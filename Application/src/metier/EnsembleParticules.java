@@ -73,7 +73,7 @@ public class EnsembleParticules {
     	double sommeAireBb = 0;
     	for (Particule p : listeParticules) {
 			sommeAireP += p.getSurfaceParticulePx();
-			sommeAireBb += Math.abs((p.getCoCointHautDroitX() - p.getCoCointHautGaucheX())*(p.getCoCointHautDroitY()-p.getCoCointHautGaucheY()));
+			sommeAireBb += Math.abs((p.getcoCoinHautDroitX() - p.getcoCoinHautGaucheX())*(p.getcoCoinHautDroitY()-p.getcoCoinHautGaucheY()));
 		}
     	return sommeAireP / sommeAireBb;
     }

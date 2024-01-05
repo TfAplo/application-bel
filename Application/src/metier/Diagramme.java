@@ -2,6 +2,8 @@ package metier;
 
 import java.util.*;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -15,6 +17,6 @@ public abstract class Diagramme {
     public Diagramme() {
     }
     
-    public abstract void afficher(AnchorPane mainContainer);
+    public abstract void afficher(ObservableList<Node> container);
 
 }

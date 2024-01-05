@@ -1,25 +1,32 @@
 package application;
 
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import metier.Image;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
 //import des controleurs
 import controleurs.ControleRecherche;
+import ihm.IHMStatistiques;
 
 
 public class Controleur {
@@ -136,21 +143,44 @@ public class Controleur {
 	 public void mainContainerAfficher() {
 		// clear le container
 		mainContainer.getChildren().clear();
-		CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+		ScrollPane sp = new ScrollPane();
+		VBox main = new VBox();
+		sp.setContent(main);
+		sp.setMaxSize(mainContainer.getWidth(), mainContainer.getHeight());
+		sp.setPannable(true);
+		sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		ObservableList<Node> container = main.getChildren();
+		CtrlAnalyse.getIhm().afficherDiagrammes(container);
+		mainContainer.getChildren().add(sp);
 	 }
 	 
 	 private void afficherFormulaireAnalyse() {
+		 //affiche la popup
 		try {
+			CtrlAnalyse.setIhm(new IHMStatistiques());
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
 			fxmlLoader.setController(CtrlAnalyse.getIhm());
 			Parent root1 = (Parent) fxmlLoader.load();
 			Stage stage = new Stage();
+			stage.setTitle("Sélection des affichages souhaités");
 			stage.setScene(new Scene(root1));
 			stage.show();
 			stage.setOnCloseRequest(e-> {
 				if (CtrlAnalyse.getIhm().isAfficher()) {
-					CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
-					CtrlAnalyse.getIhm().afficherDiagrammes(mainContainer);
+					ArrayList<Image> l = new ArrayList<Image>();
+					l.add(new Image(2, "113.tif", 50,50,10,20));
+					l.add(new Image(3, "751.tif", 50,50,10,20));
+					CtrlAnalyse.afficher(l);//CtrlRecherche.getListeImageSelectionner()
+					mainContainer.getChildren().clear();
+					ScrollPane sp = new ScrollPane();
+					VBox main = new VBox();
+					sp.setContent(main);
+					sp.setMaxSize(mainContainer.getWidth(), mainContainer.getHeight());
+					sp.setPannable(true);
+					sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+					ObservableList<Node> container = main.getChildren();
+					CtrlAnalyse.getIhm().afficherDiagrammes(container);
+					mainContainer.getChildren().add(sp);
 				}
 			});
 		} catch (IOException e) {

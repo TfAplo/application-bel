@@ -2,14 +2,21 @@ package ihm;
 
 import java.util.*;
 
+import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import metier.Diagramme;
 import metier.EnsembleParticules;
 import metier.HistogrammeDiametre;
@@ -23,8 +30,8 @@ import metier.Tableau;
  */
 public class IHMStatistiques {
 	private ArrayList<Diagramme> listeDiagrammes;
-    private int nbIntervalles;
-    private ArrayList<String> listeAffichagesVoulus;
+    private int nbIntervallesHS;
+    private int nbIntervallesHD;
     private Tableau tab;
     private HistogrammeDiametre histoDiam;
     private HistogrammeSurface histoSurf;
@@ -52,7 +59,6 @@ public class IHMStatistiques {
 
     public IHMStatistiques() {
 		this.listeDiagrammes = new ArrayList<Diagramme>();
-		this.listeAffichagesVoulus = new ArrayList<String>();
 		this.tab = new Tableau();
 		this.histoDiam = new HistogrammeDiametre();
 		this.histoSurf = new HistogrammeSurface();
@@ -64,12 +70,12 @@ public class IHMStatistiques {
 
 	/**
      * Permet d'afficher les différents diagrammes de statistiques qui sont dans la liste listeDiagrammes
-	 * @param mainContainer 
+	 * @param container 
      */
-    public void afficherDiagrammes(AnchorPane mainContainer) {
+    public void afficherDiagrammes(ObservableList<Node> container) {
         // TODO implement here
     	for (Diagramme diag : listeDiagrammes) {
-			diag.afficher(mainContainer);
+			diag.afficher(container);
 		}
     }
     
@@ -87,7 +93,7 @@ public class IHMStatistiques {
      * @param ens
      */
     public void alimenterHistoS(EnsembleParticules ens) {
-    	histoSurf.alimenterHistoSurface(ens, 20);
+    	histoSurf.alimenterHistoSurface(ens, nbIntervallesHS);
     	histoSurf.alimenterHistoSurfaceCumu(ens);
     }
     
@@ -96,7 +102,7 @@ public class IHMStatistiques {
      * @param ens
      */
     public void alimenterHistoD(EnsembleParticules ens) {
-    	histoDiam.alimenterHistoDiametre(ens, 20);
+    	histoDiam.alimenterHistoDiametre(ens, nbIntervallesHD);
     	histoDiam.alimenterHistoDiametreCumu(ens);
     }
 
@@ -107,29 +113,19 @@ public class IHMStatistiques {
     public void ajouter(Diagramme diag) {
         listeDiagrammes.add(diag);
     }
-
-    /**
-     * Définit le nombre d'intervalles que comporteront les diagrammes
-     * @return entier nombre souhaité
-     */
-    public int setNbIntervalles() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * Définit les différents diagrammes que l'on souhaitera afficher par la suite
-     * @return liste des noms des diagrammes
-     */
-    public ArrayList<String> setAffichages() {
-        // TODO implement here
-        return null;
-    }
     
     /**
      * Gère l'événement de clic sur le bouton d'export
      */
     public void boutonExport() {
+    }
+    
+    public boolean tabPresent() {
+    	for (Diagramme diag : listeDiagrammes) {
+			if (diag instanceof Tableau) {
+				return true;
+			}
+		}return false;
     }
     
     public boolean histoSPresent() {
@@ -155,23 +151,23 @@ public class IHMStatistiques {
 	public void setListeDiagrammes(ArrayList<Diagramme> listeDiagrammes) {
 		this.listeDiagrammes = listeDiagrammes;
 	}
-
-	public int getNbIntervalles() {
-		return nbIntervalles;
-	}
-
-	public void setNbIntervalles(int nbIntervalles) {
-		this.nbIntervalles = nbIntervalles;
-	}
-
-	public ArrayList<String> getListeAffichagesVoulus() {
-		return listeAffichagesVoulus;
-	}
-
-	public void setListeAffichagesVoulus(ArrayList<String> listeAffichagesVoulus) {
-		this.listeAffichagesVoulus = listeAffichagesVoulus;
-	}
 	
+	public int getNbIntervallesHS() {
+		return nbIntervallesHS;
+	}
+
+	public void setNbIntervallesHS(int nbIntervallesHS) {
+		this.nbIntervallesHS = nbIntervallesHS;
+	}
+
+	public int getNbIntervallesHD() {
+		return nbIntervallesHD;
+	}
+
+	public void setNbIntervallesHD(int nbIntervallesHD) {
+		this.nbIntervallesHD = nbIntervallesHD;
+	}
+
 	public Tableau getTab() {
 		return tab;
 	}
@@ -230,7 +226,27 @@ public class IHMStatistiques {
 			else tabCheck=true;
 		});
 		//lance l'analyse et l'affichage
-		idAfficherButton.setOnAction(e -> System.out.println(tabCheck));
+		idAfficherButton.setOnAction(e -> {
+			//ajoute les diagrammes dans la liste
+			if (!slideDisHS) {
+				nbIntervallesHS = Integer.valueOf(idLabelHS.getText());
+				if (!histoSPresent())listeDiagrammes.add(histoSurf);
+				}
+			if (!slideDisHD) {
+				nbIntervallesHD = Integer.valueOf(idLabelHD.getText());
+				if (!histoDPresent())listeDiagrammes.add(histoDiam);
+				}
+			if (!tabCheck && !tabPresent())listeDiagrammes.add(tab);
+			
+			afficher = true;
+			Stage stage = (Stage) idAfficherButton.getScene().getWindow();
+			EventHandler<WindowEvent> closeRequestHandler = stage.getOnCloseRequest();
+			//simule la fermeture de la fenetre pour declencher le setOnCloseRequest() du Controleur principale
+	        if (closeRequestHandler != null) {
+	            closeRequestHandler.handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+	        }
+	        stage.close();
+		});
 	}
 
 }

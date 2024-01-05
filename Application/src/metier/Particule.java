@@ -8,10 +8,10 @@ import java.util.*;
 public class Particule {
     private int idParticule;
     private double surfaceParticulePx;
-    private double coCointHautGaucheX;
-    private double coCointHautGaucheY;
-    private double coCointHautDroitX;
-    private double coCointHautDroitY;
+    private double coCoinHautGaucheX;
+    private double coCoinHautGaucheY;
+    private double coCoinHautDroitX;
+    private double coCoinHautDroitY;
     private double coCentreX;
     private double coCentreY;
     private double orientation;
@@ -25,10 +25,10 @@ public class Particule {
      */
     public Particule(String[] attributs) {
     	surfaceParticulePx = Double.parseDouble(attributs[0]);
-    	coCointHautGaucheX = Double.parseDouble(attributs[1]);
-    	coCointHautGaucheY = Double.parseDouble(attributs[2]);
-    	coCointHautDroitX = Double.parseDouble(attributs[3]);
-    	coCointHautDroitY = Double.parseDouble(attributs[4]);
+    	coCoinHautGaucheX = Double.parseDouble(attributs[1]);
+    	coCoinHautGaucheY = Double.parseDouble(attributs[2]);
+    	coCoinHautDroitX = Double.parseDouble(attributs[3]);
+    	coCoinHautDroitY = Double.parseDouble(attributs[4]);
     	coCentreX = Double.parseDouble(attributs[5]);
     	coCentreY = Double.parseDouble(attributs[6]);
     	orientation = Double.parseDouble(attributs[7]);
@@ -39,16 +39,15 @@ public class Particule {
     
     
 
-	public Particule(int idParticule, double surfaceParticulePx, double coCointHautGaucheX, double coCointHautGaucheY,
-			double coCointHautDroitX, double coCointHautDroitY, double coCentreX, double coCentreY, double orientation,
+	public Particule(int idParticule, double surfaceParticulePx, double coCoinHautGaucheX, double coCoinHautGaucheY,
+			double coCoinHautDroitX, double coCoinHautDroitY, double coCentreX, double coCentreY, double orientation,
 			double longueurAxeMajeur, double longueurAxeMineur, double diametreEquivalent, int idImage) {
-		super();
 		this.idParticule = idParticule;
 		this.surfaceParticulePx = surfaceParticulePx;
-		this.coCointHautGaucheX = coCointHautGaucheX;
-		this.coCointHautGaucheY = coCointHautGaucheY;
-		this.coCointHautDroitX = coCointHautDroitX;
-		this.coCointHautDroitY = coCointHautDroitY;
+		this.coCoinHautGaucheX = coCoinHautGaucheX;
+		this.coCoinHautGaucheY = coCoinHautGaucheY;
+		this.coCoinHautDroitX = coCoinHautDroitX;
+		this.coCoinHautDroitY = coCoinHautDroitY;
 		this.coCentreX = coCentreX;
 		this.coCentreY = coCentreY;
 		this.orientation = orientation;
@@ -63,8 +62,8 @@ public class Particule {
 	@Override
 	public String toString() {
 		return "Particule [idParticule=" + idParticule + ", surfaceParticulePx=" + surfaceParticulePx
-				+ ", coCointHautGaucheX=" + coCointHautGaucheX + ", coCointHautGaucheY=" + coCointHautGaucheY
-				+ ", coCointHautDroitX=" + coCointHautDroitX + ", coCointHautDroitY=" + coCointHautDroitY
+				+ ", coCoinHautGaucheX=" + coCoinHautGaucheX + ", coCoinHautGaucheY=" + coCoinHautGaucheY
+				+ ", coCoinHautDroitX=" + coCoinHautDroitX + ", coCoinHautDroitY=" + coCoinHautDroitY
 				+ ", coCentreX=" + coCentreX + ", coCentreY=" + coCentreY + ", orientation=" + orientation
 				+ ", longueurAxeMajeur=" + longueurAxeMajeur + ", longueurAxeMineur=" + longueurAxeMineur
 				+ ", diametreEquivalent=" + diametreEquivalent + "]";
@@ -87,36 +86,36 @@ public class Particule {
 		this.surfaceParticulePx = surfaceParticulePx;
 	}
 
-	public double getCoCointHautGaucheX() {
-		return coCointHautGaucheX;
+	public double getcoCoinHautGaucheX() {
+		return coCoinHautGaucheX;
 	}
 
-	public void setCoCointHautGaucheX(double coCointHautGaucheX) {
-		this.coCointHautGaucheX = coCointHautGaucheX;
+	public void setcoCoinHautGaucheX(double coCoinHautGaucheX) {
+		this.coCoinHautGaucheX = coCoinHautGaucheX;
 	}
 
-	public double getCoCointHautGaucheY() {
-		return coCointHautGaucheY;
+	public double getcoCoinHautGaucheY() {
+		return coCoinHautGaucheY;
 	}
 
-	public void setCoCointHautGaucheY(double coCointHautGaucheY) {
-		this.coCointHautGaucheY = coCointHautGaucheY;
+	public void setcoCoinHautGaucheY(double coCoinHautGaucheY) {
+		this.coCoinHautGaucheY = coCoinHautGaucheY;
 	}
 
-	public double getCoCointHautDroitX() {
-		return coCointHautDroitX;
+	public double getcoCoinHautDroitX() {
+		return coCoinHautDroitX;
 	}
 
-	public void setCoCointHautDroitX(double coCointHautDroitX) {
-		this.coCointHautDroitX = coCointHautDroitX;
+	public void setcoCoinHautDroitX(double coCoinHautDroitX) {
+		this.coCoinHautDroitX = coCoinHautDroitX;
 	}
 
-	public double getCoCointHautDroitY() {
-		return coCointHautDroitY;
+	public double getcoCoinHautDroitY() {
+		return coCoinHautDroitY;
 	}
 
-	public void setCoCointHautDroitY(double coCointHautDroitY) {
-		this.coCointHautDroitY = coCointHautDroitY;
+	public void setcoCoinHautDroitY(double coCoinHautDroitY) {
+		this.coCoinHautDroitY = coCoinHautDroitY;
 	}
 
 	public double getCoCentreX() {

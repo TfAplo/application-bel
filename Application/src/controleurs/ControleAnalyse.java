@@ -10,9 +10,7 @@ import dao.StatistiqueDAO;
 import ihm.IHMStatistiques;
 import metier.AnalyseImage;
 import metier.EnsembleParticules;
-import metier.HistogrammeSurface;
 import metier.Image;
-import metier.ImageRecherche;
 import metier.Particule;
 import metier.Statistique;
 

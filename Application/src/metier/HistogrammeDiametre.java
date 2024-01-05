@@ -3,6 +3,8 @@ package metier;
 import java.text.DecimalFormat;
 import java.util.*;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -111,9 +113,9 @@ public class HistogrammeDiametre extends Diagramme {
      * permet l'affichage des histogrammes de diamètres
      */
 	@Override
-	public void afficher(AnchorPane mainContainer) {
-		mainContainer.getChildren().add(bc);
-		mainContainer.getChildren().add(bcc);
+	public void afficher(ObservableList<Node> container) {
+		container.add(bc);
+		container.add(bcc);
 	}
 
 }

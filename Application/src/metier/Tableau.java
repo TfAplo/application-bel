@@ -2,6 +2,8 @@ package metier;
 
 import java.util.*;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,9 +52,8 @@ public class Tableau extends Diagramme {
      * affiche le tableau sur la fenetre principale
      */
 	@Override
-	public void afficher(AnchorPane mainContainer) {
-		// TODO Auto-generated method stub
-		mainContainer.getChildren().add(tab);
+	public void afficher(ObservableList<Node> container) {
+		container.add(tab);
 		
 	}
 	

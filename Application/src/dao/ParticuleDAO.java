@@ -1,10 +1,12 @@
 package dao;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import controleurs.ControleAnalyse;
 import metier.EnsembleParticules;
 import metier.Particule;
 
@@ -47,17 +49,6 @@ public class ParticuleDAO extends DAO<Particule>{
     }
 
     /**
-     * Ajoute des Particules dans la base de donnée à partir d'une chaine JSON
-     * @param idImage identifiant de l'image à laquelle correspond les Particules
-     * @param ParticulesJSON chaine contenant les Particules à ajoutées
-     * @return retourne un Ensemble créé à partir des Particules
-     */
-    public EnsembleParticules creer(int idImage, String ParticulesJSON) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
      * Met à jour une Particule
      * @param part instance de Particule qui contient les éléments à changer
      * @return 
@@ -82,24 +73,25 @@ public class ParticuleDAO extends DAO<Particule>{
      */
     public EnsembleParticules creer(int idImage,EnsembleParticules ens) {
     	ArrayList<Particule> l = ens.getListeParticules();
-    	String requete = "INSERT INTO particule (surfaceParticulePx, coCointHautGaucheX,"
-    			+ "coCointHautGaucheY,coCointHautDroitX,"
-    			+ "coCointHautDroitY,coCentreX,coCentreY,orientation,"
+    	String requete = "INSERT INTO particule (surfaceParticulePx, coCoinHautGaucheX,"
+    			+ "coCoinHautGaucheY,coCoinHautDroitX,"
+    			+ "coCoinHautDroitY,coCentreX,coCentreY,orientation,"
     			+ "longueurAxeMajeur,longueurAxeMineur,diametreEquivalent,idImage) VALUES ";
     	for (Particule p : l) {
-			requete += "(" + p.getSurfaceParticulePx() + "," + p.getCoCointHautGaucheX() + ","
-			+ p.getCoCointHautGaucheY()+ "," + p.getCoCointHautGaucheX()+ "," 
-			+p.getCoCointHautDroitY()+ ","+ p.getCoCentreX()+ ","
+			requete += "(" + p.getSurfaceParticulePx() + "," + p.getcoCoinHautGaucheX() + ","
+			+ p.getcoCoinHautGaucheY()+ "," + p.getcoCoinHautGaucheX()+ "," 
+			+p.getcoCoinHautDroitY()+ ","+ p.getCoCentreX()+ ","
 			+ p.getCoCentreY()+ ","+ p.getOrientation()+ ","+
 			p.getLongueurAxeMajeur()+ "," + p.getLongueurAxeMineur()+ "," + p.getDiametreEquivalent()+ "," + idImage +"),";
 		}
-    	requete.substring(0, requete.length() - 1);
+    	requete = requete.substring(0, requete.length() - 1);
 		try {
 			stmt.executeUpdate(requete,Statement.RETURN_GENERATED_KEYS);
 			//Les cles auto-générées sont retournées sous forme de ResultSet
 			ResultSet cles = stmt.getGeneratedKeys();
 			cles.next();
 			for (Particule p : l) {
+				p.setIdImage(idImage);
 				p.setIdParticule(cles.getInt(1));
 				cles.next();
 			}

@@ -31,7 +31,7 @@
                <children>
                   <Label text="Nombre d'intervalles souhaitées" />
                   <Slider fx:id="idSliderHS" disable="true" min="5.0" value="20.0" />
-                  <Label fx:id="idLabelHS" text="5" />
+                  <Label fx:id="idLabelHS" text="20" />
                </children>
                <padding>
                   <Insets left="5.0" right="5.0" />
@@ -49,7 +49,7 @@
                <children>
                   <Label text="Nombre d'intervalles souhaitées" />
                   <Slider fx:id="idSliderHD" disable="true" min="5.0" value="20.0" />
-                  <Label fx:id="idLabelHD" text="5" />
+                  <Label fx:id="idLabelHD" text="20" />
                </children>
                <padding>
                   <Insets left="5.0" right="5.0" />

@@ -11,6 +11,7 @@ public abstract class DAO<T> {
 	protected Statement stmt;
 	
 	public DAO() {
+		open();
 	}
 	
 	public void open() {

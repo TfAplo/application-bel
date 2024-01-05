@@ -21,6 +21,7 @@ public class Statistique {
 		moyenneDiametresEquivalents = ens.getMoyenneDiametresEquivalents();
 		ecartTypeAires = ens.getEcartTypeAires();
 		ecartTypeDiametreEquivalent = ens.getEcartTypeDiametresEquivalents();
+		idImage = ens.getPremiereIdImage();
 	}
 
 	public Statistique(int idStatistique, int nbParticulesTrouvees, double ratioSurfaceCouverte, double moyenneAires,
