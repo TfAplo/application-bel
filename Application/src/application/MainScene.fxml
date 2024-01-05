@@ -69,7 +69,7 @@
          <children>
             <Button fx:id="DeposerImage" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" text="Déposer une image" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="3.0" />
             <Button fx:id="afficherStats" layoutX="169.0" layoutY="2.0" mnemonicParsing="false" text="Afficher les statistiques" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="3.0" />
-            <Button fx:id="export" layoutX="321.0" layoutY="6.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="formulaireExportCSV" layoutX="346.0" layoutY="3.0" mnemonicParsing="false" text="ExportCSV" />
          </children>
       </AnchorPane>
    </children>

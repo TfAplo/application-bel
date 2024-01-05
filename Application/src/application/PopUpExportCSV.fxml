@@ -7,20 +7,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <AnchorPane prefHeight="40.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
-         <children>
-            <Text layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exporter au format CSV" textAlignment="CENTER" wrappingWidth="600.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </AnchorPane>
-   </top>
    <center>
       <VBox prefHeight="191.0" prefWidth="198.0" BorderPane.alignment="CENTER">
          <children>
