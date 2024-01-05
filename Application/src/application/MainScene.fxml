@@ -1,91 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <AnchorPane prefHeight="40.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="AnchorPaneLeft" layoutY="-2.0" prefHeight="294.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="35.0">
          <children>
-            <Text layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exporter au format CSV" textAlignment="CENTER" wrappingWidth="600.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </AnchorPane>
-   </top>
-   <center>
-      <VBox prefHeight="191.0" prefWidth="198.0" BorderPane.alignment="CENTER">
-         <children>
-            <AnchorPane prefHeight="25.0" prefWidth="398.0" />
-            <AnchorPane prefHeight="233.0" prefWidth="398.0" style="-fx-border-color: black;">
+            <TextField fx:id="rechercher" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="218.0" promptText="Rechercher" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <VBox layoutX="14.0" layoutY="64.0" prefHeight="616.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                <children>
-                  <HBox prefHeight="230.0" prefWidth="396.0">
+                  <VBox fx:id="afficherResultatContainer" prefHeight="348.0" prefWidth="250.0" />
+                  <AnchorPane prefHeight="294.0" prefWidth="250.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CheckBox">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </CheckBox>
-                              <CheckBox layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CheckBox">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </CheckBox>
-                              <CheckBox layoutX="10.0" layoutY="47.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CheckBox">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </CheckBox>
-                              <CheckBox layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CheckBox">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </CheckBox>
-                           </children>
-                        </VBox>
+                        <Label layoutX="18.0" layoutY="14.0" text="Images selectionnées :" />
+                        <VBox fx:id="imageSelected" layoutX="3.0" layoutY="43.0" prefHeight="200.0" prefWidth="129.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                      </children>
-                  </HBox>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
+            </VBox>
          </children>
-      </VBox>
-   </center>
-   <left>
-      <AnchorPane prefHeight="288.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <AnchorPane prefHeight="288.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </right>
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      </AnchorPane>
+      <AnchorPane fx:id="mainContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
          <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="1000.0" text="Retour">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="40.0" right="50.0" top="20.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="export" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="1000.0" text="Export">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="50.0" right="40.0" top="20.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
+            <HBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <AnchorPane fx:id="glisserDeposer" nodeOrientation="LEFT_TO_RIGHT">
+                     <children>
+                        <Label contentDisplay="CENTER" text="Glisser votre image ici" textAlignment="JUSTIFY" />
+                     </children>
+                  </AnchorPane>
+                  <VBox>
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label text="Opérateur :" />
+                              <TextField promptText="Opérateur " />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Grossissement :" />
+                              <TextField promptText="Grossissement " />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Largeur réelle :" />
+                              <TextField promptText="Largeur réelle " />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Nom du Produit :" />
+                              <TextField promptText="Nom du Produit " />
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Selectionner une image" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button layoutX="463.0" layoutY="587.0" mnemonicParsing="false" text="Valider le dépôt" />
          </children>
-      </HBox>
-   </bottom>
-</BorderPane>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPaneTop" prefHeight="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="DeposerImage" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" text="Déposer une image" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="3.0" />
+            <Button fx:id="afficherStats" layoutX="169.0" layoutY="2.0" mnemonicParsing="false" text="Afficher les statistiques" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="3.0" />
+            <Button fx:id="export" layoutX="321.0" layoutY="6.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
