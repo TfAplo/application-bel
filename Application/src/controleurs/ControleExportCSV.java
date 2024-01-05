@@ -67,9 +67,9 @@ public class ControleExportCSV {
 	
 	public void export()
 	{
-		String[] listeNom = {"nom de l'image", "grossissement", "nombre de particules trouvées",
-							"ratio de surface couverte", "moyenne des aires", "moyenne diamètres équivalents",
-							"écart-type des aires", "écart-type des diamètres équivalents"};
+		String[] listeNom = {"nom de l'image", "grossissement", "nombre de particules trouvees",
+							"ratio de surface couverte", "moyenne des aires", "moyenne diametres equivalents",
+							"ecart-type des aires", "ecart-type des diametres equivalents"};
 		
 		//récupération des statistiques
 		GenerateurFichierCSV generateur = new GenerateurFichierCSV(listeNom);
