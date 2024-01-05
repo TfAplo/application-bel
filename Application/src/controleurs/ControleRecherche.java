@@ -14,6 +14,9 @@ public class ControleRecherche {
 
 	ImageDAO imageDao = new ImageDAO();
 	
+	/*
+	 * liste d'image qui contiendra les images qui correspondent a la recherche
+	 */
 	private ArrayList<Image> listeImage = new ArrayList<>();
 	
 	/*
@@ -21,8 +24,13 @@ public class ControleRecherche {
 	 */
 	private ArrayList<Image> listeImageSelectionner = new ArrayList<>();
 	
-	
-	public void recherche(String recherche, VBox afficherResultatContainer, VBox imageSelected) 
+	/*
+	 * Fonction de recherche 
+	 * @param recherche, String : valeur de la barre de recherche
+	 * @param2 afficherResultatContainer, VBox ,section d'affichage des resultats de la recherche
+	 * @param3 imageSelectionner, VBox ,section d'affichage des resultats de la selection
+	 */
+	public void recherche(String recherche, VBox afficherResultatContainer, VBox imageSelectionner) 
 	{
 		// recuperer une liste d'image qui correspondent dans la bdd
 		listeImage= imageDao.lire(recherche);
@@ -30,12 +38,18 @@ public class ControleRecherche {
 		//Si la liste n'est pas vide alors on affiche les resultats, sinon la liste est vide donc on vide le container
 		if(!listeImage.isEmpty())
 		{
-			affichageRecherche(listeImage, afficherResultatContainer,imageSelected);
+			affichageRecherche(listeImage, afficherResultatContainer,imageSelectionner);
 		} else 
 		{
 			afficherResultatContainer.getChildren().clear();
 		}
 	}
+	/*
+	 * Gere l'affichage de la section de Recherche des images
+	 * @param image, Objet image
+	 * @param2 container, afficherResultatRecherche
+	 * @param3 container2, imageSelected
+	 */
 	public void affichageRecherche(ArrayList<Image> listeImage, VBox container, VBox container2)
 	{
 		container.getChildren().clear();
@@ -49,6 +63,12 @@ public class ControleRecherche {
 		}
 		
 	}
+	/*
+	 * Gere l'affichage de la section de Selection des images
+	 *@param image, Objet image
+	 *@param2 container, afficherResultatRecherche
+	 *@param3 container2, imageSelected
+	 */
 	public void affichageSelection(ArrayList<Image> listeImage, VBox container, VBox container2)
 	{
 		container2.getChildren().clear();
@@ -84,7 +104,6 @@ public class ControleRecherche {
 				CheckBox.setSelected(true);
 			}
 		}
-		
 		// ajouter les elements au container
 		elementImage.getChildren().add(nomImage);
 		elementImage.getChildren().add(CheckBox);
@@ -94,7 +113,12 @@ public class ControleRecherche {
 		
 		return elementImage;
 	}
-	
+	/*
+	 * Actualise l'affichage des section de recherche et de selection des images
+	 * @param image, Objet image
+	 * @param2 container, afficherResultatRecherche
+	 * @param3 container2, imageSelected
+	 */
 	public void actualiserSelection(Image image, VBox container, VBox container2)
 	{
 		boolean isRemoved = false;
@@ -114,25 +138,23 @@ public class ControleRecherche {
     	if(!isRemoved) 
     	{
     		listeImageSelectionner.add(image);
-    		//container.getChildren().add(creerElement(image,container,container2));
-    		System.out.println("add");
-    		
     	}
    		// Mettre à jour les deux containers après la suppression ou l'ajout
         affichageSelection(listeImageSelectionner, container, container2);
         affichageRecherche(listeImage, container, container2);
-        System.out.println(isRemoved ? "remove" : "add");
-        System.out.println(listeImageSelectionner);
 	}
 	
     /*
      * Compare si deux image sont eguale (avec leurs id qui est unique)
      */
-    public static boolean isEqual(Image image1, Image image2) {
-        if (image1 == image2) {
+    public static boolean isEqual(Image image1, Image image2) 
+    {
+        if (image1 == image2) 
+        {
             return true;
         }
-        if (image1.getIdImage() == image2.getIdImage()) {
+        if (image1.getIdImage() == image2.getIdImage()) 
+        {
             return true;
         }
         return false;
@@ -141,7 +163,8 @@ public class ControleRecherche {
 	/*
      * retourne la liste d'image selectionner
      */
-    public ArrayList<Image> getListeImageSelectionner() {
+    public ArrayList<Image> getListeImageSelectionner() 
+    {
 		return listeImageSelectionner;
 	}
     
