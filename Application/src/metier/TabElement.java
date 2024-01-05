@@ -1,54 +1,42 @@
 package metier;
 
-public class Statistique {
-	private int idStatistique;
+public class TabElement {
+	public String nomImage;
+	public int grossissement;
 	private int nbParticulesTrouvees;
 	private double ratioSurfaceCouverte;
 	private double moyenneAires;
 	private double moyenneDiametresEquivalents;
 	private double ecartTypeAires;
 	private double ecartTypeDiametreEquivalent;
-	private int idImage;
 	
-	/**
-	 * Constructeur permettant de calculer directement à partir d'un ensemble de particules
-	 * @param ens Ensemble dans lequel il y a les particules d'une seule image
-	 */
-	public Statistique(EnsembleParticules ens) {
-		nbParticulesTrouvees = ens.getNombreParticules();
-		ratioSurfaceCouverte = ens.getRatioSurfaceCouverte();
-		moyenneAires = ens.getMoyenneAires();
-		moyenneDiametresEquivalents = ens.getMoyenneDiametresEquivalents();
-		ecartTypeAires = ens.getEcartTypeAires();
-		ecartTypeDiametreEquivalent = ens.getEcartTypeDiametresEquivalents();
-		idImage = ens.getPremiereIdImage();
-	}
-
-	public Statistique(int idStatistique, int nbParticulesTrouvees, double ratioSurfaceCouverte, double moyenneAires,
-			double moyenneDiametresEquivalents, double ecartTypeAires, double ecartTypeDiametreEquivalent,
-			int idImage) {
-		this.idStatistique = idStatistique;
+	public TabElement(String nomImage, int grossissement, int nbParticulesTrouvees, double ratioSurfaceCouverte,
+			double moyenneAires, double moyenneDiametresEquivalents, double ecartTypeAires,
+			double ecartTypeDiametreEquivalent) {
+		this.nomImage = nomImage;
+		this.grossissement = grossissement;
 		this.nbParticulesTrouvees = nbParticulesTrouvees;
 		this.ratioSurfaceCouverte = ratioSurfaceCouverte;
 		this.moyenneAires = moyenneAires;
 		this.moyenneDiametresEquivalents = moyenneDiametresEquivalents;
 		this.ecartTypeAires = ecartTypeAires;
 		this.ecartTypeDiametreEquivalent = ecartTypeDiametreEquivalent;
-		this.idImage = idImage;
-	}
-	
-	public Statistique() {
-		
 	}
 
-
-
-	public int getIdStatistique() {
-		return idStatistique;
+	public String getNomImage() {
+		return nomImage;
 	}
 
-	public void setIdStatistique(int idStatistique) {
-		this.idStatistique = idStatistique;
+	public void setNomImage(String nomImage) {
+		this.nomImage = nomImage;
+	}
+
+	public int getGrossissement() {
+		return grossissement;
+	}
+
+	public void setGrossissement(int grossissement) {
+		this.grossissement = grossissement;
 	}
 
 	public int getNbParticulesTrouvees() {
@@ -98,13 +86,8 @@ public class Statistique {
 	public void setEcartTypeDiametreEquivalent(double ecartTypeDiametreEquivalent) {
 		this.ecartTypeDiametreEquivalent = ecartTypeDiametreEquivalent;
 	}
-
-	public int getIdImage() {
-		return idImage;
-	}
-
-	public void setIdImage(int idImage) {
-		this.idImage = idImage;
-	}
+	
+	
+	
 	
 }
