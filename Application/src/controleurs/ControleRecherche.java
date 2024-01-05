@@ -30,23 +30,35 @@ public class ControleRecherche {
 		//Si la liste n'est pas vide alors on affiche les resultats, sinon la liste est vide donc on vide le container
 		if(!listeImage.isEmpty())
 		{
-			affichage(listeImage, afficherResultatContainer,imageSelected);
+			affichageRecherche(listeImage, afficherResultatContainer,imageSelected);
 		} else 
 		{
 			afficherResultatContainer.getChildren().clear();
 		}
 	}
-	
-	public void affichage(ArrayList<Image> listeImage, VBox container, VBox container2)
+	public void affichageRecherche(ArrayList<Image> listeImage, VBox container, VBox container2)
 	{
 		container.getChildren().clear();
 		//parcourir les elements
 		for (Image image: listeImage)
 		{
 			// creer l'element hbox contenant le nom et une checkbox pour le selection
-			HBox elementImage = creerElement(image, container2);
+			HBox elementImage = creerElement(image, container,container2);
 			//ajouter l'element au container 
 			container.getChildren().add(elementImage);
+		}
+		
+	}
+	public void affichageSelection(ArrayList<Image> listeImage, VBox container, VBox container2)
+	{
+		container2.getChildren().clear();
+		//parcourir les elements
+		for (Image image: listeImage)
+		{
+			// creer l'element hbox contenant le nom et une checkbox pour le selection
+			HBox elementImage = creerElement(image, container,container2);
+			//ajouter l'element au container 
+			container2.getChildren().add(elementImage);
 		}
 		
 	}
@@ -54,7 +66,7 @@ public class ControleRecherche {
 	 * @param image, objet Image
 	 * @return HBox
 	 */
-	public HBox creerElement(Image image, VBox container)
+	public HBox creerElement(Image image, VBox container,VBox container2)
 	{
 		HBox elementImage = new HBox();
 		//creer un Label fxml pour l'afficher le nom de l'image
@@ -62,7 +74,7 @@ public class ControleRecherche {
 		// Creer une checkbox pour pouvoir effectuer une selection d'image
 		CheckBox CheckBox = new CheckBox();
 		
-		CheckBox.setOnAction(e -> actualiserSelection(image, container));
+		CheckBox.setOnAction(e -> actualiserSelection(image, container, container2));
 		
 		//check si l'image est deja dans la liste (et si on doit "check" la box)
 		for (Image imageSelectionner: listeImageSelectionner)
@@ -83,7 +95,7 @@ public class ControleRecherche {
 		return elementImage;
 	}
 	
-	public void actualiserSelection(Image image, VBox container)
+	public void actualiserSelection(Image image, VBox container, VBox container2)
 	{
 		boolean isRemoved = false;
     	Iterator<Image> iterator = listeImageSelectionner.iterator();
@@ -96,23 +108,21 @@ public class ControleRecherche {
     		{
     			isRemoved = true;
     			iterator.remove();
-    			affichage(listeImageSelectionner, container, null);
-    			//actualiser les checkborecherches
-    			
-    			//affichage(listeImage, container2, null);
-    			
-    			
-    			System.out.println("remove");
+    			break;
     		}
     	}
     	if(!isRemoved) 
     	{
     		listeImageSelectionner.add(image);
-    		container.getChildren().add(creerElement(image,container));
+    		//container.getChildren().add(creerElement(image,container,container2));
     		System.out.println("add");
     		
     	}
-    	System.out.println(listeImageSelectionner);
+   		// Mettre à jour les deux containers après la suppression ou l'ajout
+        affichageSelection(listeImageSelectionner, container, container2);
+        affichageRecherche(listeImage, container, container2);
+        System.out.println(isRemoved ? "remove" : "add");
+        System.out.println(listeImageSelectionner);
 	}
 	
     /*
