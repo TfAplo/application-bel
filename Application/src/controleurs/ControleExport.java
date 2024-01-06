@@ -60,6 +60,7 @@ public class ControleExport extends Application{
     private int compteurExport=0;
     private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
     private static GenerateurFichier generateurFichier;
+    private static IHMExport ihmExport;
 
 	
 	/**
@@ -70,6 +71,7 @@ public class ControleExport extends Application{
 	public ControleExport(IHMStatistiques ihmStat, List<BarChart<String, Number>> listeHistogrammes) {
 		this.ihmStatistiques = ihmStat;
 		this.listeHistogrammes = listeHistogrammes;
+		this.ihmExport = new IHMExport(this);
 	}
 	
 	/**
@@ -84,7 +86,7 @@ public class ControleExport extends Application{
 	/**
 	 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
 	 */
-	public void boutonExport(){
+	/*public void boutonExport(){
 	    
 		try {
 	
@@ -97,25 +99,25 @@ public class ControleExport extends Application{
 		   	nouvelleScene = new Scene(nouvelleSceneParent);
 		   	popupStage.setScene(nouvelleScene);
 		   	controleur.initialiser(listeHistogrammes);
-		   	ControleExport controleurExport = ihmStatistiques.getControleurExport();  	   		
-		   	fenetreExport.setControleurExport(controleurExport);
+		   	//ControleExport controleurExport = ihmStatistiques.getControleurExport();  	   		
+		   	//fenetreExport.setControleurExport(controleurExport);
 		    popupStage.showAndWait();
 	     } catch (Exception e) {
 	       e.printStackTrace();
 	     }
 	  }
-	
+	*/
 	
 	
 	/**
 	 * methode d'initialisation de la fenetre d'exportation
 	 * @param histogrammes : liste des histogrammes
 	 */
-	public void initialiser(List<BarChart<String, Number>> histogrammes) {
-	    fenetreExport= new IHMExport(this);
-	    fenetreExport.creerCheckBox(listeHistogrammes,checkBoxContainer);
-	    boutonValider.setOnAction(event -> fenetreExport.exporterHistogrammesEnPNG(event,checkBoxContainer,popupStage));
-	        
+	public void initialiser(List<BarChart<String, Number>> histogrammes,Stage popup) {
+	    //fenetreExport= new IHMExport(this);
+	    ihmExport.creerCheckBox(histogrammes,checkBoxContainer);
+	    boutonValider.setOnAction(event -> ihmExport.exporterHistogrammesEnPNG(event,checkBoxContainer,popup));
+	        System.out.println("test");
 	  }
 		
 	
@@ -173,6 +175,14 @@ public class ControleExport extends Application{
 	 public IHMExport getFenetreExport() {
 		 return fenetreExport;
 	 }
+	 
+	    /**
+	     * Getter de l'attribut FenetreExport
+	     * @return fenetreExport
+	     */
+		 public IHMExport getIhmExport() {
+			 return ihmExport;
+		 }
     
 	/**
 	 * Getter de l'attribut generateurFichier

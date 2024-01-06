@@ -67,7 +67,7 @@ public class IHMStatistiques extends Application {
     /**
      * Gère l'événement de clic sur le bouton d'export
      */
-    @FXML
+  /*  @FXML
     public void  boutonExport() {
     	listeHistogrammes.clear();
 	    listeHistogrammes.add(histo1);
@@ -76,7 +76,7 @@ public class IHMStatistiques extends Application {
 	    listeHistogrammes.add(histo3);
 	    listeHistogrammes.add(histo4);
     	controleurExport.boutonExport();
-    }
+    }*/
 
 
 
@@ -133,6 +133,19 @@ public class IHMStatistiques extends Application {
         return null;
     }
     
+    
+   /* public ArrayList<BarChart<String,Number>> getGraphiques(){
+		if(histoDPresent()) {
+			listeGraphiques.add(histoDiam.getBc());
+			listeGraphiques.add(histoDiam.getBcc());
+		}
+		if(histoSPresent()) {
+			listeGraphiques.add(histoSurf.getBc());
+			listeGraphiques.add(histoSurf.getBcc());
+		}
+		return listeGraphiques;
+	}*/
+
 
 
 

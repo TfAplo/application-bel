@@ -2,15 +2,27 @@ package application;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 //import des controleurs
 import controleurs.ControleRecherche;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
@@ -36,6 +48,14 @@ public class Controleur {
 	 @FXML
 	 public VBox imageSelected;
 	 
+	 @FXML 
+	 private static Stage popupStage;
+	 @FXML 
+	 private Scene nouvelleScene;
+	 @FXML
+	 private Button boutonExportPNG;
+	 
+	 
 	 Controleur(ControleRecherche CtrlRecherche, ControleAnalyse CtrlAnalyse, ControleDepot CtrlDepot, ControleExport CtrlExport) {
 		 this.CtrlRecherche = CtrlRecherche;
 		 this.CtrlAnalyse = CtrlAnalyse;
@@ -50,8 +70,10 @@ public class Controleur {
 		 afficherStats.setOnAction(e -> mainContainerAfficher());
 		 
 		 //envoyer la recherche d'image au controleur
-		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
-		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
+		// CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
+		 //rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
+		 
+		 boutonExportPNG.setOnAction(e -> boutonExport());
 		  
 	 }
 	
@@ -131,5 +153,41 @@ public class Controleur {
 		// clear le container
 		mainContainer.getChildren().clear();
 	 }
+	 
+	public void boutonExport(){
+		    
+		try {
+			//ligne du dessous test
+			List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();	
+			CategoryAxis xAxis = new CategoryAxis();
+			NumberAxis yAxis = new NumberAxis();
+			BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+			xAxis.setLabel("Catégorie");
+			yAxis.setLabel("Valeur");
+			barChart.setTitle("Titre de l'histogramme");
+			XYChart.Series<String, Number> series = new XYChart.Series<>();
+			series.getData().add(new XYChart.Data<>("Catégorie1", 50));
+			series.getData().add(new XYChart.Data<>("Catégorie2", 80));
+			barChart.getData().add(series);
+			listeHistogrammes.add(barChart);
+			//fin test
+			
+			
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
+	        Parent nouvelleSceneParent = loader.load();
+	        ControleExport controleur = loader.getController();	   	         
+		   	popupStage = new Stage();
+		   	popupStage.initModality(Modality.APPLICATION_MODAL);
+		   	popupStage.setTitle("Export d'Histogrammes");
+		   	nouvelleScene = new Scene(nouvelleSceneParent);
+		   	popupStage.setScene(nouvelleScene);
+		    controleur.initialiser(listeHistogrammes,popupStage); //CtrlAnalyse.getIhm().getGraphiques() à mettre entre les parenthese
+		   	CtrlExport = CtrlAnalyse.getIhm().getControleurExport();  	   		
+		   	CtrlExport.getIhmExport().setControleurExport(CtrlExport);
+		    popupStage.showAndWait();
+	     } catch (Exception e) {
+	       e.printStackTrace();
+	     }
+	  }
 }
 

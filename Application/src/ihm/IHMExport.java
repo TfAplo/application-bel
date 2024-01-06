@@ -69,11 +69,12 @@ public class IHMExport
     public void creerCheckBox(List<BarChart<String, Number>> listeHistogrammes,VBox checkBoxContainer) {
     	checkBoxContainer.getChildren().clear();
         int countCheckBoxes = 0; 
-
+        // parcourt la liste des histogrammes
         for (int i = 0; i < listeHistogrammes.size(); i++) {
             BarChart<String, Number> histogramme = listeHistogrammes.get(i);
             CheckBox checkBox = new CheckBox(histogramme.getTitle());
             checkBox.setUserData(histogramme);
+            // ajoute la checkbox correspondant à l'histogramme au checkBoxContainer
             checkBoxContainer.getChildren().add(checkBox); 
             countCheckBoxes++;
             checkBox.setMinWidth(150); 
@@ -91,6 +92,7 @@ public class IHMExport
      */
     public void exporterHistogrammesEnPNG(ActionEvent event,VBox checkBoxContainer,Stage popup) {
     	compteurCheckBox=0;
+    	// booléen renvoyant true si au moins une checkbox est sélectionnée
     	boolean isSelected = checkBoxContainer.getChildren().stream()
     	        .filter(node -> node instanceof CheckBox)
     	        .map(node -> (CheckBox) node)
@@ -185,7 +187,6 @@ public class IHMExport
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
             Parent root = loader.load();
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
