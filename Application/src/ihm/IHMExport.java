@@ -94,10 +94,8 @@ public class IHMExport
 	            if (node instanceof CheckBox) {
 	                CheckBox checkBox = (CheckBox) node;
 	                if (checkBox.isSelected()) {
-	                	System.out.println("instance");
 	                	compteurCheckBox++;
 	                    BarChart<?, ?> histogramme = (BarChart<?, ?>) checkBox.getUserData();
-
 	                    String cheminFichier = selectedDirectory.getAbsolutePath()  + checkBox.getText() + ".png";
 	                    compteurExport=controleurExport.exporterHistogramme(histogramme,cheminFichier,this);
 	                    popup.close();
@@ -114,8 +112,7 @@ public class IHMExport
     
     public void afficheFenetreValide() {
     	if (compteurExport==compteurCheckBox && compteurCheckBox != 0) {
-    		FenetreValideExport();
-    		
+    		FenetreValideExport(); 		
     	}
     }
     
@@ -125,7 +122,6 @@ public class IHMExport
         fileChooser.setTitle("Choisir un dossier de destination");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setInitialFileName("histogrammes_");
-
         return fileChooser.showSaveDialog(null); 
     }
 
@@ -138,12 +134,10 @@ public class IHMExport
         alert.setContentText("Veuillez sélectionner au moins un histogramme à exporter.");
         alert.showAndWait();
     }
+    
     @FXML
     public void FenetreValideExport() {
-    	System.out.println("valide");
-    	openFXMLWindow("../controleurs/IHMValideExport.fxml");
-    	
-      
+    	openFXMLWindow("../controleurs/IHMValideExport.fxml");  
     }
     
     @FXML
@@ -169,8 +163,7 @@ public class IHMExport
 		return boutonValider;
 	}
 
-	
-	
+
 	
    public void setControleurExport(ControleExport controleurExport) {
         this.controleurExport = controleurExport;

@@ -56,20 +56,13 @@ public class ControleExport extends Application{
 	private static Stage popupStage;
   	@FXML
     private VBox checkBoxContainer;
-  	
-
-  	
-  	
 	@FXML 
 	private Button okExport;
-
     @FXML
     private Button boutonValider;
-    private static IHMStatistiques ihmStatistiques;// = new IHMStatistiques();
+    private static IHMStatistiques ihmStatistiques;
     private int compteurExport=0;
     private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
-	
-
 
 	/**
      * Attribut privé de type GenerateurFichier
@@ -80,7 +73,6 @@ public class ControleExport extends Application{
     public ControleExport(IHMStatistiques ihmStat, List<BarChart<String, Number>> listeHistogrammes) {
     	this.ihmStatistiques = ihmStat;
     	this.listeHistogrammes = listeHistogrammes;
-    	//System.out.println("constructeur"+this.listeHistogrammes);
     }
     
     public ControleExport() {
@@ -185,19 +177,19 @@ public class ControleExport extends Application{
 		  stage.close();
 		  checkBoxContainer.getChildren().clear(); 
 		  listeHistogrammes.clear();
-	}
+	  }
 	  
-	   public int exporterHistogramme(BarChart<?, ?> histogramme, String cheminFichier,IHMExport ihmExport) {
-	    	boolean res =generateurFichier.enregistrerHistogrammeEnPNG(histogramme, cheminFichier);
+	  public int exporterHistogramme(BarChart<?, ?> histogramme, String cheminFichier,IHMExport ihmExport) {
+		  boolean res =generateurFichier.enregistrerHistogrammeEnPNG(histogramme, cheminFichier);
 	    	
-	        if (res) {
-	        	compteurExport++;
-	        } else {
-	            ihmExport.FenetreErreurExport();
-	            return 0;
-	        }
-	        return compteurExport;
-	    }  
+	       if (res) {
+	    	   compteurExport++;
+	       } else {
+	           ihmExport.FenetreErreurExport();
+	           return 0;
+	       }
+	       return compteurExport;
+	   }  
 	    
     	
 		@Override

@@ -25,12 +25,8 @@ public class GenerateurFichier
 	private Button boutonExport;
 	@FXML
 	private BarChart histo1;
-	//private static IHMExport ihmExport;
 	private static ControleExport controleExport;
 
-    /**
-     * Atttibut privé correspondant à l'image du fichier généré au format BuferedImage
-     */
 
     /**
      * Constructeur du générateur de fichiers
@@ -40,8 +36,7 @@ public class GenerateurFichier
     	this.controleExport=controle;
     	
     }
-    
-    
+
 
     /**
      * Crée le fichier PNG à partir des données d'histogrammes
