@@ -31,13 +31,12 @@ public class GenerateurFichier
     /**
      * Atttibut privé correspondant à l'image du fichier généré au format BuferedImage
      */
-    private BufferedImage fichier;
 
     /**
      * Constructeur du générateur de fichiers
      */
-    public GenerateurFichier(/*IHMExport ihmExport*/ControleExport controle) {
-    	//this.ihmExport=ihmExport;
+    public GenerateurFichier(ControleExport controle) {
+
     	this.controleExport=controle;
     	
     }
@@ -65,37 +64,7 @@ public class GenerateurFichier
 	    
     }
 
-    /*  public void creerFichier() {
-    
-	  WritableImage image = histo1.snapshot(new SnapshotParameters(), null);
 
-    // Créer un objet FileChooser si vous voulez que l'utilisateur choisisse l'emplacement
-    // Pour cet exemple, je vais sauvegarder directement dans un dossier nommé "export"
-    File dossierExport = new File("export");
-    if (!dossierExport.exists()) {
-        dossierExport.mkdir();
-    }
-
-    // Créer un fichier pour sauvegarder l'image
-    File file = new File("export/histogramme.png");
-
-    // Utiliser ImageIO pour écrire l'image dans le fichier PNG
-    try {
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-        System.out.println("Histogramme exporté en tant que PNG avec succès ! hehe");
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}*/
-
-
-    /**
-     * Getter de l'attribut fichier
-     * @return fichier de type BufferedImage
-     */
-	public BufferedImage getFichier() {
-		return fichier;
-	}
 
     
     

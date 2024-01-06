@@ -44,17 +44,14 @@ public class IHMExport
 	private Button retour;
 	@FXML 
 	private Button okExport;
-	 @FXML
+	@FXML
 	private Button boutonValider;
 	private int compteurCheckBox;
 	private int compteurExport;
-
 	private List<BarChart<String, Number>> listeHistogrammes; 
 
-	 // Listes de CheckBox et de BarChart (à remplir avec vos données)
     private List<CheckBox> listeCheckBox = new ArrayList<>();
-    // Map pour associer les CheckBox aux BarChart
-    private Map<CheckBox, BarChart<?, ?>> checkBoxToChartMap = new HashMap<>();
+
     
     
     public IHMExport(ControleExport controleur) {
@@ -64,21 +61,18 @@ public class IHMExport
     public void creerCheckBox(List<BarChart<String, Number>> listeHistogrammes,VBox checkBoxContainer) {
     	checkBoxContainer.getChildren().clear();
     	
-        int countCheckBoxes = 0; // Compteur pour les CheckBox créées
+        int countCheckBoxes = 0; 
 
         for (int i = 0; i < listeHistogrammes.size(); i++) {
             BarChart<String, Number> histogramme = listeHistogrammes.get(i);
             CheckBox checkBox = new CheckBox(histogramme.getTitle());
-            checkBox.setUserData(histogramme); // Associe l'histogramme à la CheckBox
-            checkBoxContainer.getChildren().add(checkBox); // Ajoute la CheckBox au conteneur
+            checkBox.setUserData(histogramme);
+            checkBoxContainer.getChildren().add(checkBox); 
             countCheckBoxes++;
-            checkBox.setMinWidth(150); // Réglage de la largeur minimum de la CheckBox
+            checkBox.setMinWidth(150); 
         }
 
-        // Vérification optionnelle pour s'assurer que toutes les CheckBox sont ajoutées
-        if (countCheckBoxes != checkBoxContainer.getChildren().size()) {
-            System.out.println("Problème dans la génération dynamique des CheckBox.");
-        }
+
     }
     
     public void exporterHistogrammesEnPNG(ActionEvent event,VBox checkBoxContainer,Stage popup) {
@@ -126,13 +120,13 @@ public class IHMExport
     }
     
     private File choisirDossierDeDestination() {
-    	 // Utilisation d'un FileChooser pour choisir un dossier de destination
+    	
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir un dossier de destination");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setInitialFileName("histogrammes_");
 
-        return fileChooser.showSaveDialog(null); // Remplacez par votre logique de sélection de dossier
+        return fileChooser.showSaveDialog(null); 
     }
 
 

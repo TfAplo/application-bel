@@ -30,7 +30,6 @@ public class IHMStatistiques extends Application {
     private ArrayList<String> listeAffichagesVoulus;
     private static ControleExport controleurExport;
     private IHMExport ihmExport;
-    
 	@FXML
 	private BarChart histo1;
 	@FXML
@@ -39,11 +38,11 @@ public class IHMStatistiques extends Application {
 	private BarChart histo3;
 	@FXML
 	private BarChart histo4;
-	 private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
+	private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
 	 
 	 
-	   public IHMStatistiques() {
-	    }
+	public IHMStatistiques() {
+	}
 	 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -65,27 +64,25 @@ public class IHMStatistiques extends Application {
 		
     }
     
-    // ---------------------TEST----------------
+    /**
+     * Gère l'événement de clic sur le bouton d'export
+     */
     @FXML
     public void  boutonExport() {
     	controleurExport.boutonExport();
     }
     
     public void initialize() {
-    		
-    		
-    		listeHistogrammes.clear();
-	         listeHistogrammes.add(histo1);
+
+    	listeHistogrammes.clear();
+	    listeHistogrammes.add(histo1);
 	         
-	         listeHistogrammes.add(histo2);
-	         listeHistogrammes.add(histo3);
-	         listeHistogrammes.add(histo4);
+	    listeHistogrammes.add(histo2);
+	    listeHistogrammes.add(histo3);
+	    listeHistogrammes.add(histo4);
 
     }
     
-    
-    // --------------------- FIN TEST----------------
-
 
 
     public ControleExport getControleurExport() {
@@ -141,15 +138,7 @@ public class IHMStatistiques extends Application {
         return null;
     }
     
-    /**
-     * Gère l'événement de clic sur le bouton d'export
-     */
-  /*  @FXML
-    public void boutonExport(ActionEvent e) throws IOException{
-    	System.out.println("export");
-    	AnchorPane pane =  FXMLLoader.load(getClass().getResource("../ihm/IHMExport.fxml"));
-    	rootPane.getChildren().setAll(pane);
-    }*/
+
 
 
 

@@ -76,17 +76,6 @@ public class ControleExport extends Application{
      */
     private static GenerateurFichier generateurFichier;
 
-
-  /**
-     * Constructeur prenant en paramètre la fenêtre d'exportation et le générateur de fichiers.
-     *
-     * @param fenetreExport     la fenêtre d'exportation
-     * @param generateurFichier le générateur de fichiers
-     */
-   /* public ControleExport(IHMExport fenetreExport, GenerateurFichier generateurFichier) {
-        this.fenetreExport = fenetreExport;
-        this.generateurFichier = generateurFichier;
-    }*/
     
     public ControleExport(IHMStatistiques ihmStat, List<BarChart<String, Number>> listeHistogrammes) {
     	this.ihmStatistiques = ihmStat;
@@ -132,65 +121,38 @@ public class ControleExport extends Application{
     
     public void boutonExport(){
         
-            try {
+    	try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../controleurs/IHMExport.fxml"));
-                Parent nouvelleSceneParent = loader.load();
-                ControleExport controleur = loader.getController();
-
-	   	         
-	   	         popupStage = new Stage();
-	   	         popupStage.initModality(Modality.APPLICATION_MODAL);
-	   	         popupStage.setTitle("Export d'Histogrammes");
-	   	
-	   	         // Créer une scène pour la nouvelle fenêtre
-	   	         nouvelleScene = new Scene(nouvelleSceneParent);
-	   	
-	   	         // Mettre la nouvelle scène dans la fenêtre modale
-	   	         popupStage.setScene(nouvelleScene);
-	   	         CategoryAxis xAxis = new CategoryAxis();
-	   	         NumberAxis yAxis = new NumberAxis();
-	 
-	   	         controleur.initialiser(listeHistogrammes);
-    
-	   	         ControleExport controleurExport = ihmStatistiques.getControleurExport();  
-	   		
-	   		     fenetreExport.setControleurExport(controleurExport);
-	   	
-	   	         // Afficher la fenêtre modale
-	   	         popupStage.showAndWait();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../controleurs/IHMExport.fxml"));
+	        Parent nouvelleSceneParent = loader.load();
+	        ControleExport controleur = loader.getController();
+	
+		   	         
+		   	popupStage = new Stage();
+		   	popupStage.initModality(Modality.APPLICATION_MODAL);
+		   	popupStage.setTitle("Export d'Histogrammes");
+		   	nouvelleScene = new Scene(nouvelleSceneParent);
+		   	popupStage.setScene(nouvelleScene);
+		   	controleur.initialiser(listeHistogrammes);
+		   	ControleExport controleurExport = ihmStatistiques.getControleurExport();  	   		
+		   fenetreExport.setControleurExport(controleurExport);
+		   popupStage.showAndWait();
+	     } catch (Exception e) {
+	       e.printStackTrace();
+	     }
+	  }
     
 	public void clearCheckBoxes() {
 	    checkBoxContainer.getChildren().clear();
 	}
 	
-	private void verifierCheckBox() {
-	    for (Node node : checkBoxContainer.getChildren()) {
-	        if (node instanceof CheckBox) {
-	            CheckBox checkBox = (CheckBox) node;
-	            BarChart<String, Number> histogramme = (BarChart<String, Number>) checkBox.getUserData();
 
-	            // Affichage des données associées à chaque checkbox
-	            System.out.println("Texte de la checkbox : " + checkBox.getText());
-	            System.out.println("Données de l'histogramme associé : " + histogramme);
-	        }
-	    }
-	}
-	
-	
-	
-	
 	public void resetController() {
 	    checkBoxContainer.getChildren().clear();
 	    listeHistogrammes.clear();
 	 
 	}
 	
-
 
 	public void initialiser(List<BarChart<String, Number>> histogrammes) {
 	    fenetreExport= new IHMExport(this);
@@ -200,7 +162,6 @@ public class ControleExport extends Application{
 	  }
 		
 	  private File choisirDossierDeDestination() {
-	   // Utilisation d'un FileChooser pour choisir un dossier de destination
 		  FileChooser fileChooser = new FileChooser();
 	      fileChooser.setTitle("Choisir un dossier de destination");
 	      fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -210,9 +171,7 @@ public class ControleExport extends Application{
 	  }
 	  
 	  @FXML
-	  public void boutonValide() {
-		 // boutonValider.setOnAction(event -> fenetreExport.exporterHistogrammesEnPNG(event,checkBoxContainer,popupStage));
-		  
+	  public void boutonValide() {		  
 	  }
 		
 	  @FXML
@@ -224,7 +183,7 @@ public class ControleExport extends Application{
 	  public void boutonRetour() {
 		  Stage stage = (Stage) retour.getScene().getWindow();
 		  stage.close();
-		  checkBoxContainer.getChildren().clear(); // Efface tous les éléments actuels
+		  checkBoxContainer.getChildren().clear(); 
 		  listeHistogrammes.clear();
 	}
 	  
@@ -233,8 +192,6 @@ public class ControleExport extends Application{
 	    	
 	        if (res) {
 	        	compteurExport++;
-	            System.out.println("Histogramme exporté en tant que PNG avec succès !");
-	           // FenetreValideExport();
 	        } else {
 	            ihmExport.FenetreErreurExport();
 	            return 0;
