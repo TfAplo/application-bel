@@ -30,17 +30,14 @@ public class ControleRecherche {
 	 * @param2 afficherResultatContainer, VBox ,section d'affichage des resultats de la recherche
 	 * @param3 imageSelectionner, VBox ,section d'affichage des resultats de la selection
 	 */
-	public void recherche(String recherche, VBox afficherResultatContainer, VBox imageSelectionner) 
-	{
+	public void recherche(String recherche, VBox afficherResultatContainer, VBox imageSelectionner) {
 		// recuperer une liste d'image qui correspondent dans la bdd
 		listeImage= imageDao.lire(recherche);
 		
 		//Si la liste n'est pas vide alors on affiche les resultats, sinon la liste est vide donc on vide le container
-		if(!listeImage.isEmpty())
-		{
+		if(!listeImage.isEmpty()){
 			affichageRecherche(listeImage, afficherResultatContainer,imageSelectionner);
-		} else 
-		{
+		} else {
 			afficherResultatContainer.getChildren().clear();
 		}
 	}
@@ -50,12 +47,10 @@ public class ControleRecherche {
 	 * @param2 container, afficherResultatRecherche
 	 * @param3 container2, imageSelected
 	 */
-	public void affichageRecherche(ArrayList<Image> listeImage, VBox container, VBox container2)
-	{
+	public void affichageRecherche(ArrayList<Image> listeImage, VBox container, VBox container2){
 		container.getChildren().clear();
 		//parcourir les elements
-		for (Image image: listeImage)
-		{
+		for (Image image: listeImage){
 			// creer l'element hbox contenant le nom et une checkbox pour le selection
 			HBox elementImage = creerElement(image, container,container2);
 			//ajouter l'element au container 
@@ -69,12 +64,10 @@ public class ControleRecherche {
 	 *@param2 container, afficherResultatRecherche
 	 *@param3 container2, imageSelected
 	 */
-	public void affichageSelection(ArrayList<Image> listeImage, VBox container, VBox container2)
-	{
+	public void affichageSelection(ArrayList<Image> listeImage, VBox container, VBox container2){
 		container2.getChildren().clear();
 		//parcourir les elements
-		for (Image image: listeImage)
-		{
+		for (Image image: listeImage){
 			// creer l'element hbox contenant le nom et une checkbox pour le selection
 			HBox elementImage = creerElement(image, container,container2);
 			//ajouter l'element au container 
@@ -86,8 +79,7 @@ public class ControleRecherche {
 	 * @param image, objet Image
 	 * @return HBox
 	 */
-	public HBox creerElement(Image image, VBox container,VBox container2)
-	{
+	public HBox creerElement(Image image, VBox container,VBox container2){
 		HBox elementImage = new HBox();
 		//creer un Label fxml pour l'afficher le nom de l'image
 		Label nomImage = new Label(image.getNomImage());
@@ -97,10 +89,8 @@ public class ControleRecherche {
 		CheckBox.setOnAction(e -> actualiserSelection(image, container, container2));
 		
 		//check si l'image est deja dans la liste (et si on doit "check" la box)
-		for (Image imageSelectionner: listeImageSelectionner)
-		{
-			if(isEqual(imageSelectionner, image)) 
-			{
+		for (Image imageSelectionner: listeImageSelectionner){
+			if(isEqual(imageSelectionner, image)) {
 				CheckBox.setSelected(true);
 			}
 		}
@@ -119,24 +109,20 @@ public class ControleRecherche {
 	 * @param2 container, afficherResultatRecherche
 	 * @param3 container2, imageSelected
 	 */
-	public void actualiserSelection(Image image, VBox container, VBox container2)
-	{
+	public void actualiserSelection(Image image, VBox container, VBox container2){
 		boolean isRemoved = false;
     	Iterator<Image> iterator = listeImageSelectionner.iterator();
     	
     	//si l'image est deja dans la liste alors on la retire sinon on l'ajoute
-    	while(iterator.hasNext()) 
-    	{
+    	while(iterator.hasNext()) {
     		Image imageSelect = iterator.next();
-    		if(isEqual(imageSelect, image)) 
-    		{
+    		if(isEqual(imageSelect, image)) {
     			isRemoved = true;
     			iterator.remove();
     			break;
     		}
     	}
-    	if(!isRemoved) 
-    	{
+    	if(!isRemoved) {
     		listeImageSelectionner.add(image);
     	}
    		// Mettre à jour les deux containers après la suppression ou l'ajout
@@ -147,14 +133,11 @@ public class ControleRecherche {
     /*
      * Compare si deux image sont eguale (avec leurs id qui est unique)
      */
-    public static boolean isEqual(Image image1, Image image2) 
-    {
-        if (image1 == image2) 
-        {
+    public static boolean isEqual(Image image1, Image image2) {
+        if (image1 == image2) {
             return true;
         }
-        if (image1.getIdImage() == image2.getIdImage()) 
-        {
+        if (image1.getIdImage() == image2.getIdImage()) {
             return true;
         }
         return false;
@@ -163,8 +146,7 @@ public class ControleRecherche {
 	/*
      * retourne la liste d'image selectionner
      */
-    public ArrayList<Image> getListeImageSelectionner() 
-    {
+    public ArrayList<Image> getListeImageSelectionner() {
 		return listeImageSelectionner;
 	}
     
