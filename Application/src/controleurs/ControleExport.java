@@ -31,7 +31,7 @@ public class ControleExport {
     public ControleExport() {
     }
 
-    /**
+	/**
      * Gère l'action d'exportation des images.
      */
     public void main() {

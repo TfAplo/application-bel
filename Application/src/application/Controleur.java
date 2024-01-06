@@ -2,9 +2,16 @@ package application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -15,11 +22,14 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import metier.Image;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -27,6 +37,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 //import des controleurs
 import controleurs.ControleRecherche;
+import ihm.IHMStatistiques;
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
@@ -73,6 +84,8 @@ public class Controleur {
 	 private Rectangle RectangleStatutDepot;
 	 @FXML
 	 private AnchorPane glisserDeposer;
+	 @FXML
+	 private Button idAnalyser;
 	 
 	// Variable servant a plusieurs methodes
 	private String nomImage;
@@ -93,6 +106,7 @@ public class Controleur {
 		 //Changer l'affichage du mainContainer quand on appuis sur les boutons
 		 DeposerImage.setOnAction(e -> mainContainerDeposer());
 		 afficherStats.setOnAction(e -> mainContainerAfficher());
+		 idAnalyser.setOnAction(e -> afficherFormulaireAnalyse());
 		 
 		 //envoyer la recherche d'image au controleur
 		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
@@ -181,9 +195,18 @@ public class Controleur {
 	 }
 	 
 	 public void mainContainerAfficher() {
-		// clear le container
-		mainContainer.getChildren().clear();
-	 }
+			// clear le container
+			mainContainer.getChildren().clear();
+			ScrollPane sp = new ScrollPane();
+			VBox main = new VBox();
+			sp.setContent(main);
+			sp.setMaxSize(mainContainer.getWidth(), mainContainer.getHeight());
+			sp.setPannable(true);
+			sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+			ObservableList<Node> container = main.getChildren();
+			CtrlAnalyse.getIhm().afficherDiagrammes(container);
+			mainContainer.getChildren().add(sp);
+		 }
 	 
 	 public void afficherEtDisparaitreStatutDepot() {
 		 LabelStatutDepot.setVisible(true);
@@ -319,6 +342,46 @@ public class Controleur {
              e.printStackTrace();
          }
 	 }
+	 
+	 private void afficherFormulaireAnalyse() {
+		 //affiche la popup
+		try {
+			CtrlAnalyse.setIhm(new IHMStatistiques());
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
+			fxmlLoader.setController(CtrlAnalyse.getIhm());
+			Parent root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setTitle("Sélection des affichages souhaités");
+			stage.setScene(new Scene(root1));
+			stage.show();
+			stage.setOnCloseRequest(e-> {
+				if (CtrlAnalyse.getIhm().isAfficher()) {
+					ArrayList<Image> l = new ArrayList<Image>();
+					Image i1 = new Image("113.tif ","url", 50 ,50,50,50,10,20);
+					i1.setIdImage(2);
+					l.add(i1);
+					i1.setIdImage(2);
+					Image i2 =new Image("751.tif","url", 50,50,50,50,10,20);
+					i2.setIdImage(3);
+					l.add(i2);
+					CtrlAnalyse.afficher(l);//CtrlRecherche.getListeImageSelectionner()
+					mainContainer.getChildren().clear();
+					ScrollPane sp = new ScrollPane();
+					VBox main = new VBox();
+					sp.setContent(main);
+					sp.setMaxSize(mainContainer.getWidth(), mainContainer.getHeight());
+					sp.setPannable(true);
+					sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+					ObservableList<Node> container = main.getChildren();
+					CtrlAnalyse.getIhm().afficherDiagrammes(container);
+					mainContainer.getChildren().add(sp);
+				}
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
 

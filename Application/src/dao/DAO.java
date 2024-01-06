@@ -10,8 +10,8 @@ public abstract class DAO<T> {
 	
 	protected Connection connect;
 	protected Statement stmt;
-
-	public DAO (){
+	
+	public DAO() {
 		open();
 	}
 

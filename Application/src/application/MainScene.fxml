@@ -20,6 +20,7 @@
                         <Label layoutX="18.0" layoutY="14.0" text="Images selectionnées :" />
                         <VBox fx:id="imageSelected" layoutX="3.0" layoutY="43.0" prefHeight="200.0" prefWidth="129.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                      </children>
+                     <Button fx:id="idAnalyser" mnemonicParsing="false" text="Analyser les images" />
                   </AnchorPane>
                </children>
             </VBox>
