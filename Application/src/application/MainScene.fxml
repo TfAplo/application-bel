@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="AnchorPaneLeft" layoutY="-2.0" prefHeight="294.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <TextField fx:id="rechercher" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="218.0" promptText="Rechercher" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <VBox layoutX="14.0" layoutY="64.0" prefHeight="616.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+               <children>
+                  <VBox fx:id="afficherResultatContainer" prefHeight="348.0" prefWidth="250.0" />
+                  <AnchorPane prefHeight="294.0" prefWidth="250.0">
+                     <children>
+                        <Label layoutX="18.0" layoutY="14.0" text="Images selectionnées :" />
+                        <VBox fx:id="imageSelected" layoutX="3.0" layoutY="43.0" prefHeight="200.0" prefWidth="129.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mainContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <HBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <AnchorPane fx:id="glisserDeposer" nodeOrientation="LEFT_TO_RIGHT">
+                     <children>
+                        <Label contentDisplay="CENTER" text="Glisser votre image ici" textAlignment="JUSTIFY" />
+                     </children>
+                  </AnchorPane>
+                  <VBox>
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label text="Opérateur :" />
+                              <TextField promptText="Opérateur " />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Grossissement :" />
+                              <TextField promptText="Grossissement " />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Largeur réelle :" />
+                              <TextField promptText="Largeur réelle " />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Nom du Produit :" />
+                              <TextField promptText="Nom du Produit " />
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Selectionner une image" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button layoutX="463.0" layoutY="587.0" mnemonicParsing="false" text="Valider le dépôt" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPaneTop" prefHeight="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="DeposerImage" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" text="Déposer une image" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="3.0" />
+            <Button fx:id="afficherStats" layoutX="169.0" layoutY="2.0" mnemonicParsing="false" text="Afficher les statistiques" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="3.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
