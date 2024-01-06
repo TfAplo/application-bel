@@ -127,8 +127,8 @@ public class ControleExport extends Application{
 		   	popupStage.setScene(nouvelleScene);
 		   	controleur.initialiser(listeHistogrammes);
 		   	ControleExport controleurExport = ihmStatistiques.getControleurExport();  	   		
-		   fenetreExport.setControleurExport(controleurExport);
-		   popupStage.showAndWait();
+		   	fenetreExport.setControleurExport(controleurExport);
+		    popupStage.showAndWait();
 	     } catch (Exception e) {
 	       e.printStackTrace();
 	     }

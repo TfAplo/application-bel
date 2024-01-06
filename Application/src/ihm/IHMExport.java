@@ -60,7 +60,6 @@ public class IHMExport
 
     public void creerCheckBox(List<BarChart<String, Number>> listeHistogrammes,VBox checkBoxContainer) {
     	checkBoxContainer.getChildren().clear();
-    	
         int countCheckBoxes = 0; 
 
         for (int i = 0; i < listeHistogrammes.size(); i++) {
@@ -71,6 +70,7 @@ public class IHMExport
             countCheckBoxes++;
             checkBox.setMinWidth(150); 
         }
+    	
 
 
     }

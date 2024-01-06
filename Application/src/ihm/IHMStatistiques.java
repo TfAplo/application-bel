@@ -42,6 +42,7 @@ public class IHMStatistiques extends Application {
 	 
 	 
 	public IHMStatistiques() {
+		controleurExport = new ControleExport(this,listeHistogrammes);
 	}
 	 
     @Override
@@ -50,8 +51,7 @@ public class IHMStatistiques extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../controleurs/IHMStats.fxml"));
 
         Scene scene = new Scene(root,600,400);  	     
-        controleurExport = new ControleExport(this,listeHistogrammes);
-        
+
         primaryStage.setScene(scene);
         primaryStage.show();
         
@@ -69,20 +69,15 @@ public class IHMStatistiques extends Application {
      */
     @FXML
     public void  boutonExport() {
-    	controleurExport.boutonExport();
-    }
-    
-    public void initialize() {
-
     	listeHistogrammes.clear();
 	    listeHistogrammes.add(histo1);
 	         
 	    listeHistogrammes.add(histo2);
 	    listeHistogrammes.add(histo3);
 	    listeHistogrammes.add(histo4);
-
+    	controleurExport.boutonExport();
     }
-    
+
 
 
     public ControleExport getControleurExport() {
