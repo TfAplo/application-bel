@@ -2,7 +2,7 @@ package metier;
 
 public class TabElement {
 	public String nomImage;
-	public int grossissement;
+	public double grossissement;
 	private int nbParticulesTrouvees;
 	private double ratioSurfaceCouverte;
 	private double moyenneAires;
@@ -10,7 +10,7 @@ public class TabElement {
 	private double ecartTypeAires;
 	private double ecartTypeDiametreEquivalent;
 	
-	public TabElement(String nomImage, int grossissement, int nbParticulesTrouvees, double ratioSurfaceCouverte,
+	public TabElement(String nomImage, double grossissement, int nbParticulesTrouvees, double ratioSurfaceCouverte,
 			double moyenneAires, double moyenneDiametresEquivalents, double ecartTypeAires,
 			double ecartTypeDiametreEquivalent) {
 		this.nomImage = nomImage;
@@ -31,7 +31,7 @@ public class TabElement {
 		this.nomImage = nomImage;
 	}
 
-	public int getGrossissement() {
+	public double getGrossissement() {
 		return grossissement;
 	}
 

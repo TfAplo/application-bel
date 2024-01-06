@@ -168,8 +168,13 @@ public class Controleur {
 			stage.setOnCloseRequest(e-> {
 				if (CtrlAnalyse.getIhm().isAfficher()) {
 					ArrayList<Image> l = new ArrayList<Image>();
-					l.add(new Image(2, "113.tif", 50,50,10,20));
-					l.add(new Image(3, "751.tif", 50,50,10,20));
+					Image i1 = new Image("113.tif ","url", 50 ,50,50,50,10,20);
+					i1.setIdImage(2);
+					l.add(i1);
+					i1.setIdImage(2);
+					Image i2 =new Image("751.tif","url", 50,50,50,50,10,20);
+					i2.setIdImage(3);
+					l.add(i2);
 					CtrlAnalyse.afficher(l);//CtrlRecherche.getListeImageSelectionner()
 					mainContainer.getChildren().clear();
 					ScrollPane sp = new ScrollPane();
