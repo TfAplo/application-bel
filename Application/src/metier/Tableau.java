@@ -3,10 +3,10 @@ package metier;
 import java.util.*;
 
 import metier.Diagramme;
-import metier.EnsembleStatistiques;
+import metier.EnsembleParticules;
 
 /**
- * Permet l'affichage d'un tableau dans lequel toutes les statistiques des particules seront affichés
+ * Permet l'affichage d'un tableau dans lequel toutes les Particules des particules seront affichés
  */
 public class Tableau extends Diagramme {
 
@@ -17,10 +17,10 @@ public class Tableau extends Diagramme {
     }
 
     /**
-     * Affiche le tableau depuis statistiques correspondantes
-     * @param statistiques EnsembleStatistiques à partir duquel on créer le tableau
+     * Affiche le tableau depuis Particules correspondantes
+     * @param particules EnsembleParticules à partir duquel on créer le tableau
      */
-    public void afficherTableau(EnsembleStatistiques statistiques) {
+    public void afficherTableau(EnsembleParticules particules) {
         // TODO implement here
     }
 

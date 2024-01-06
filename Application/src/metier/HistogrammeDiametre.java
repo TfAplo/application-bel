@@ -15,21 +15,21 @@ public class HistogrammeDiametre extends Diagramme {
 
     /**
      * Permet l'affichage d'un histogramme de diamètre
-     * @param statistiques  EnsembleStatistiques à afficher
+     * @param particules  EnsembleParticules à afficher
 	 * @param diametreMin  double définissant le diamètre minimum parmi toutes les particules
 	 * @param diametreMax  double définissant le diamètre maximum parmi toutes les particules
      */
-    public void afficherHistoDiametre(EnsembleStatistiques statistiques, double diametreMin, double diametreMax) {
+    public void afficherHistoDiametre(EnsembleParticules particules, double diametreMin, double diametreMax) {
         // TODO implement here
     }
 
     /**
      * Permet l'affichage d'un histogramme de diamètre cumulatif
-     * @param statistiques EnsembleStatistiques à afficher
+     * @param particules EnsembleParticules à afficher
      * @param diametreMin double définissant le diamètre minimum parmi toutes les particules
      * @param diametreMax double définissant le diamètre maximum parmi toutes les particules
      */
-    public void afficherHistoDiametreCumu(EnsembleStatistiques statistiques, double diametreMin, double diametreMax) {
+    public void afficherHistoDiametreCumu(EnsembleParticules particules, double diametreMin, double diametreMax) {
         // TODO implement here
     }
 

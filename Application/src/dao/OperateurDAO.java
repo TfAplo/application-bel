@@ -1,20 +1,17 @@
 package dao;
 
+import java.math.BigInteger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
-import metier.Image;
 import metier.Operateur;
 
 /**
  * Classe servant a effectuer des operations entre l'objet Operateur et son equivalent, la table Operateur, dans la base de donnees.
  */
-public class OperateurDAO extends DAO<Image> {
-
-    /**
-     * Default constructor
-     */
-    public OperateurDAO() {
-    }
+public class OperateurDAO extends DAO<Operateur> {
 
     /**
      * Methode de creation d'un operateur dans la base de donnees a partir des attributs de l'objet Operateur.
@@ -22,8 +19,36 @@ public class OperateurDAO extends DAO<Image> {
      * @return Instance de la classe Operateur ayant ete inseree dans la base de donnees.
      */
     public Operateur creer(Operateur operateur) {
-        // TODO implement here
-        return null;
+    	String rechercheOperateur = "SELECT idOperateur FROM operateur "
+				+ "WHERE nomOperateur = '"+ operateur.getNomOperateur()+ "'";
+    	try {
+    		ResultSet rs = stmt.executeQuery(rechercheOperateur);
+        	// si nomOperateur n'est pas deja dans la bdd
+			if (!rs.next()) {
+				// on le cree
+				String requete = "INSERT INTO operateur (nomOperateur) "
+						+ "VALUES('" + operateur.getNomOperateur()+"')";
+				
+				try {
+					stmt.executeUpdate(requete,Statement.RETURN_GENERATED_KEYS);
+					ResultSet cles = stmt.getGeneratedKeys();
+					if(cles.next()){
+						int idOperateur = cles.getInt(1);
+						operateur.setIdOperateur(idOperateur);
+					}
+				} catch (SQLException e) {
+					System.err.println("Erreur requete SQL");
+					e.printStackTrace();
+				}
+			} else {
+				// on lui affecte son id situe dans la bdd
+				operateur.setIdOperateur(rs.getInt("idOperateur"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Erreur requete SQL");
+			e.printStackTrace();
+		}
+        return operateur;
     }
 
     /**
@@ -55,27 +80,9 @@ public class OperateurDAO extends DAO<Image> {
     }
 
 	@Override
-	public ArrayList<Image> lire() {
+	public ArrayList<Operateur> lire() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Image creer(Image obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Image mettreAJour(Image obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void supprimer(Image obj) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
