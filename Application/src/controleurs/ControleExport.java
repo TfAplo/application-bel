@@ -28,9 +28,7 @@ public class ControleExport {
      * @param fenetreExport     la fenêtre d'exportation
      * @param generateurFichier le générateur de fichiers
      */
-    public ControleExport(IHMExport fenetreExport, GenerateurFichier generateurFichier) {
-        this.fenetreExport = fenetreExport;
-        this.generateurFichier = generateurFichier;
+    public ControleExport() {
     }
 
     /**

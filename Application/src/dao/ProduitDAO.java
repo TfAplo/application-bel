@@ -1,20 +1,16 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
-import metier.Image;
 import metier.Produit;
 
 /**
  * Classe servant a effectuer des operations entre l'objet Produit et son equivalent, la table Produit, dans la base de donnees.
  */
-public class ProduitDAO extends DAO<Image>{
-
-    /**
-     * Default constructor
-     */
-    public ProduitDAO() {
-    }
+public class ProduitDAO extends DAO<Produit>{
 
     /**
      * Methode de creation d'un produit dans la base de donnees a partir des attributs de l'objet Produit.
@@ -22,10 +18,36 @@ public class ProduitDAO extends DAO<Image>{
      * @return Instance de la classe Produit ayant ete inseree dans la base de donnees.
      */
     public Produit creer(Produit produit) {
-    	// si nomProduit deja dans la bdd
-		// alors on ne le cree pas
-		// sinon on cree
-        return null;
+    	String rechercheProduit = "SELECT * FROM produit "
+				+ "WHERE nomProduit = '"+ produit.getNomProduit()+ "'";
+    	try {
+    		ResultSet rs = stmt.executeQuery(rechercheProduit);
+        	// si nomProduit n'est pas deja dans la bdd
+			if (!rs.next()) {
+				// on le cree
+				String requete = "INSERT INTO produit (nomProduit) "
+						+ "VALUES('" + produit.getNomProduit()+"')";
+				
+				try {
+					stmt.executeUpdate(requete,Statement.RETURN_GENERATED_KEYS);
+					ResultSet cles = stmt.getGeneratedKeys();
+					if(cles.next()){
+						int idProduit = cles.getInt(1);
+						produit.setIdProduit(idProduit);
+					}
+				} catch (SQLException e) {
+					System.err.println("Erreur requete SQL");
+					e.printStackTrace();
+				}
+			} else {
+				// on lui affecte son id situe dans la bdd
+				produit.setIdProduit(rs.getInt("idProduit"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Erreur requete SQL");
+			e.printStackTrace();
+		}
+        return produit;
     }
 
     /**
@@ -57,27 +79,9 @@ public class ProduitDAO extends DAO<Image>{
     }
 
 	@Override
-	public ArrayList<Image> lire() {
+	public ArrayList<Produit> lire() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Image creer(Image obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Image mettreAJour(Image obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void supprimer(Image obj) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

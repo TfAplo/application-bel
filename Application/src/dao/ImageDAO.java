@@ -1,14 +1,16 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
-
+import dao.SingleConnection;
 import metier.Image;
 
 /**
  * Classe servant a effectuer des operations entre l'objet Image et son equivalent, la table Image, dans la base de donnees.
  */
 public class ImageDAO extends DAO<Image>{
-
     /**
      * Default constructor
      */
@@ -22,10 +24,39 @@ public class ImageDAO extends DAO<Image>{
      */
     @Override
     public Image creer(Image image) {
-    	// si url deja dans la bdd
-    	// alors on ne depose rien
-    	// sinon on depose
-    	return null;
+    	
+    	//recuperation des attributs
+        String nomImage = image.getNomImage();
+        String url = image.getUrl();
+        double largeurPx = image.getLargeurPx();
+        double hauteurPx = image.getHauteurPx();
+        double grossissement = image.getGrossissement();
+        double largeurReel = image.getLargeurReel();
+        int idOperateur = image.getIdOperateur();
+        int idProduit = image.getIdProduit();
+        
+        
+        //creation de la requete SQL
+        String sql = "INSERT INTO image (nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit) "
+        		+ "VALUES (\""+ nomImage +"\", \""+ url + "\", " + largeurPx+", " + hauteurPx +", " + grossissement + ", " + largeurReel +", "+idOperateur + ", " + idProduit + ");";
+        // Execution de la requete
+        System.out.println(sql);
+ 		try {
+ 			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+ 			ResultSet res = stmt.getGeneratedKeys();
+ 			
+ 			if(res.next()) {
+ 				//ajout de l'id a  image
+ 				int idImage = res.getInt(1);
+ 	 			image.setIdImage(idImage);
+ 			}
+ 			return image;
+ 		}
+ 		catch(SQLException e) {
+ 			System.err.println("Erreur requete SQL");
+ 			e.printStackTrace();
+ 		}
+        return null;
     }
 
     /**
@@ -35,7 +66,36 @@ public class ImageDAO extends DAO<Image>{
      */
 
     public Image lire(int idImage) {
-        // TODO implement here
+    	
+    	 //creation de la requete SQL
+    	String sql = "SELECT * FROM image WHERE idImage = " + idImage;
+    	
+
+ 		ResultSet rs = null;
+ 		try {
+ 			rs = stmt.executeQuery(sql);
+
+ 			while(rs.next()) {
+ 				
+		        String nomImage = rs.getString("nomImage");
+		        String url = rs.getString("url");
+		        double largeurPx = rs.getInt("largeurPx");
+		        double hauteurPx = rs.getInt("hauteurPx");
+		        double grossissement = rs.getInt("grossissement");
+		        double largeurReel = rs.getDouble("largeurReel");
+		        int idOperateur = rs.getInt("idOperateur");
+		        int idProduit = rs.getInt("idProduit");
+ 		        
+ 		     //Creation de l'objet image
+ 		      Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+ 		      newImage.setIdImage(idImage);
+			return newImage;
+ 			}
+ 		}
+ 		catch(SQLException e) {
+ 			System.err.println("Erreur requete SQL");
+ 			e.printStackTrace();
+ 		}
         return null;
     }
 
@@ -46,8 +106,36 @@ public class ImageDAO extends DAO<Image>{
      */
     @Override
     public Image mettreAJour(Image image) {
-        // TODO implement here
-        return null;
+    	
+    	//recuperation des attributs
+    	int idImage = image.getIdImage();
+        String nomImage = image.getNomImage();
+        String url = image.getUrl();
+        double largeurPx = image.getLargeurPx();
+        double hauteurPx = image.getHauteurPx();
+        double grossissement = image.getGrossissement();
+        double largeurReel = image.getLargeurReel();
+        int idOperateur = image.getIdOperateur();
+        int idProduit = image.getIdProduit();
+        
+         
+        //creation de la requete SQL
+        String sql = "UPDATE image SET nomFichier = '" + nomImage+ "',";
+        sql += "url= '" + url + "'";
+        sql += "largeurPx = " + largeurPx  + ",";
+        sql += "hauteurPx = " +hauteurPx +",";
+        sql += "grossissement = "+ grossissement + ",";
+        sql += "largeurReel = "+ largeurReel + ",";
+        sql +=  "idOperateur = " + idOperateur + ",";
+        sql += "idProduit = " + idProduit + " WHERE idImage = " + idImage;
+         
+        //Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
+        return image;
     }
 
     /**
@@ -56,22 +144,104 @@ public class ImageDAO extends DAO<Image>{
      */
     @Override
     public void supprimer(Image image) {
-        // TODO implement here
+    	//recuperation des attributs
+    	int idImage = image.getIdImage();
+    	
+    	//creation de la requete SQL
+    	String sql = "DELETE FROM image WHERE idImage =" + idImage;
+    	
+    	//Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
     }
     
     /**
-     * @param nomFichier 
+     * @param nomImage
      * @return , une liste contenant les noms des images qui sont retournées d'apres la recherche. 
      */
-    public ArrayList<String> lire(String nomFichier) {
-        // TODO implement here
-        return null;
+    public ArrayList<Image> lire(String recherche) {
+    	
+    	//Liste<Image>
+    	ArrayList<Image> listeImage = new ArrayList<>();
+    	
+   	 	//creation de la requete SQL
+    	String sql = "SELECT * FROM image WHERE nomImage LIKE  '%"+ recherche +"%'";
+   	
+   	
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()) {
+				
+				int idImage = rs.getInt("idImage");
+		        String nomImage = rs.getString("nomImage");
+		        String url = rs.getString("url");
+		        int largeurPx = rs.getInt("largeurPx");
+		        int hauteurPx = rs.getInt("hauteurPx");
+		        int grossissement = rs.getInt("grossissement");
+		        double largeurReel = rs.getDouble("largeurReel");
+		        int idOperateur = rs.getInt("idOperateur");
+		        int idProduit = rs.getInt("idProduit");
+		        
+		        
+		     //Creation de l'objet image
+			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			newImage.setIdImage(idImage);
+			//ajout a la liste
+			listeImage.add(newImage);
+			}
+		}
+		catch(SQLException e) {
+			System.err.println("Erreur requete SQL");
+			e.printStackTrace();
+		}
+    	
+        return listeImage;
     }
 
 	@Override
 	public ArrayList<Image> lire() {
-		// TODO Auto-generated method stub
-		return null;
+		//Liste<Image>
+    	ArrayList<Image> listeImage = new ArrayList<>();
+    	
+   	 	//creation de la requete SQL
+    	String sql = "SELECT * FROM image";
+   	
+   	
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()) {
+				
+				int idImage = rs.getInt("idImage");
+		        String nomImage = rs.getString("nomImage");
+		        String url = rs.getString("url");
+		        int largeurPx = rs.getInt("largeurPx");
+		        int hauteurPx = rs.getInt("hauteurPx");
+		        int grossissement = rs.getInt("grossissement");
+		        double largeurReel = rs.getDouble("largeurReel");
+		        int idOperateur = rs.getInt("idOperateur");
+		        int idProduit = rs.getInt("idProduit");
+		        
+		        
+		     //Creation de l'objet image
+			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			newImage.setIdImage(idImage);
+			//ajout a la liste
+			listeImage.add(newImage);
+			}
+		}
+		catch(SQLException e) {
+			System.err.println("Erreur requete SQL");
+			e.printStackTrace();
+		}
+    	
+        return listeImage;
 	}
 
 }
