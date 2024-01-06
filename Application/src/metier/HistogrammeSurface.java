@@ -117,5 +117,13 @@ public class HistogrammeSurface extends Diagramme {
 		container.add(bc);
 		container.add(bcc);
 	}
+	
+	public BarChart<String, Number> getBc() {
+		return bc;
+	}
+
+	public BarChart<String, Number> getBcc() {
+		return bcc;
+	}
 
 }

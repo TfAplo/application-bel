@@ -85,6 +85,7 @@ public class ControleAnalyse {
 			Particule part = new Particule(line.split(","));
 			this.ensembleTemporaire.ajouterParticule(part);
 		}
+		br.close();
 		try {
             Files.delete(Paths.get(System.getProperty("user.dir") + "\\scriptsImages\\res\\out_data.csv"));
         } catch (IOException e) {

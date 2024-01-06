@@ -20,7 +20,7 @@ public class HistogrammeDiametre extends Diagramme {
 	private BarChart<String,Number> bc;
 	private CategoryAxis xAxis;
 	private NumberAxis yAxis;
-	
+
 	private ArrayList<Pair<String, Double>> lc;
 	private BarChart<String,Number> bcc;
 	private CategoryAxis xAxisc;
@@ -116,6 +116,14 @@ public class HistogrammeDiametre extends Diagramme {
 	public void afficher(ObservableList<Node> container) {
 		container.add(bc);
 		container.add(bcc);
+	}
+	
+	public BarChart<String, Number> getBc() {
+		return bc;
+	}
+
+	public BarChart<String, Number> getBcc() {
+		return bcc;
 	}
 
 }
