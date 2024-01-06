@@ -9,7 +9,6 @@ import dao.ParticuleDAO;
 import metier.AnalyseImage;
 import metier.EnsembleParticules;
 import metier.Image;
-import metier.ImageRecherche;
 import metier.Particule;
 
 /**
