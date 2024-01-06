@@ -50,6 +50,7 @@ public class Controleur {
 		 afficherStats.setOnAction(e -> mainContainerAfficher());
 		 
 		 //envoyer la recherche d'image au controleur
+		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
 		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
 		  
 	 }
