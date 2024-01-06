@@ -115,7 +115,7 @@ public class ControleExport extends Application{
         
     	try {
 
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../controleurs/IHMExport.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
 	        Parent nouvelleSceneParent = loader.load();
 	        ControleExport controleur = loader.getController();
 	

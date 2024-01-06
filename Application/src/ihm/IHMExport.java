@@ -137,12 +137,12 @@ public class IHMExport
     
     @FXML
     public void FenetreValideExport() {
-    	openFXMLWindow("../controleurs/IHMValideExport.fxml");  
+    	openFXMLWindow("../application/IHMValideExport.fxml");  
     }
     
     @FXML
     public void FenetreErreurExport() {
-    	openFXMLWindow("../controleurs/IHMErreurExport.fxml");
+    	openFXMLWindow("../application/IHMErreurExport.fxml");
 
     }
     

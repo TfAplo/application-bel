@@ -47,7 +47,7 @@ public class IHMStatistiques extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("IHMStats.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../controleurs/IHMStats.fxml"));
 
         Scene scene = new Scene(root,600,400);  	     
         controleurExport = new ControleExport(this,listeHistogrammes);
