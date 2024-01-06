@@ -8,11 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+//import des controleurs
+import controleurs.ControleRecherche;
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
-//import des controleurs
-import controleurs.ControleRecherche;
 
 
 public class Controleur {
@@ -32,6 +33,8 @@ public class Controleur {
 	 private Button DeposerImage;
 	 @FXML
 	 private Button afficherStats;
+	 @FXML
+	 public VBox imageSelected;
 	 
 	 Controleur(ControleRecherche CtrlRecherche, ControleAnalyse CtrlAnalyse, ControleDepot CtrlDepot, ControleExport CtrlExport) {
 		 this.CtrlRecherche = CtrlRecherche;
@@ -47,7 +50,7 @@ public class Controleur {
 		 afficherStats.setOnAction(e -> mainContainerAfficher());
 		 
 		 //envoyer la recherche d'image au controleur
-		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer));
+		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
 		  
 	 }
 	
