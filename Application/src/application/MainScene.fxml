@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -28,7 +31,8 @@
                <children>
                   <AnchorPane fx:id="glisserDeposer" nodeOrientation="LEFT_TO_RIGHT">
                      <children>
-                        <Label contentDisplay="CENTER" text="Glisser votre image ici" textAlignment="JUSTIFY" />
+                        <Label fx:id="LabelGlisserImage" contentDisplay="CENTER" layoutX="63.0" layoutY="137.0" text="Glisser votre image ici" textAlignment="JUSTIFY" />
+                        <Label fx:id="LabelNomImage" layoutX="47.0" layoutY="137.0" prefHeight="27.0" prefWidth="206.0" text="Nom de l'image" />
                      </children>
                   </AnchorPane>
                   <VBox>
@@ -36,33 +40,35 @@
                         <HBox>
                            <children>
                               <Label text="Opérateur :" />
-                              <TextField promptText="Opérateur " />
+                              <TextField fx:id="champOperateur" promptText="Opérateur " />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
                               <Label text="Grossissement :" />
-                              <TextField promptText="Grossissement " />
+                              <TextField fx:id="champGrossissement" promptText="Grossissement " />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <Label text="Largeur réelle :" />
-                              <TextField promptText="Largeur réelle " />
+                              <Label text="Largeur réelle (en cm):" />
+                              <TextField fx:id="champLargeurReel" promptText="Largeur réelle" />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
                               <Label text="Nom du Produit :" />
-                              <TextField promptText="Nom du Produit " />
+                              <TextField fx:id="champNomProduit" promptText="Nom du Produit " />
                            </children>
                         </HBox>
-                        <Button mnemonicParsing="false" text="Selectionner une image" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Button layoutX="463.0" layoutY="587.0" mnemonicParsing="false" text="Valider le dépôt" />
+            <Button fx:id="btnValiderDepot" layoutX="463.0" layoutY="587.0" mnemonicParsing="false" text="Valider le dépôt" />
+            <Button fx:id="btnSelectionImage" layoutX="40.0" layoutY="323.0" mnemonicParsing="false" text="Selectionner une image" />
+            <Rectangle fx:id="RectangleStatutDepot" arcHeight="5.0" arcWidth="5.0" fill="#b9c3cd" height="159.0" layoutX="760.0" layoutY="508.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
+            <Label fx:id="LabelStatutDepot" layoutX="773.0" layoutY="525.0" prefHeight="125.0" prefWidth="224.0" text="Statut du depot" AnchorPane.leftAnchor="773.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="AnchorPaneTop" prefHeight="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
