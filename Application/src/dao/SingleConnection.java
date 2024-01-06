@@ -28,7 +28,11 @@ public class SingleConnection {
 	
 	public static Connection getInstance() throws ClassNotFoundException, SQLException{
 		if(connect == null){  
+<<<<<<< HEAD
 			new SingleConnection("127.0.0.1", "beldb", "root", "");
+=======
+			new SingleConnection("127.0.0.1", "belDB", "root", "");
+>>>>>>> refs/remotes/origin/Biardeau_Florian
 		}
 		return connect; 
 	}

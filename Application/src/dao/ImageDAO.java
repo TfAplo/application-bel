@@ -38,9 +38,15 @@ public class ImageDAO extends DAO<Image>{
         
         //creation de la requete SQL
         String sql = "INSERT INTO image (nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit) "
+<<<<<<< HEAD
         		+ "VALUES ('"+ nomImage +"', '"+ url + "', " + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReel +", "+idOperateur + ", " + idProduit + ");";
         
         // Execution de la requete
+=======
+        		+ "VALUES (\""+ nomImage +"\", \""+ url + "\", " + largeurPx+", " + hauteurPx +", " + grossissement + ", " + largeurReel +", "+idOperateur + ", " + idProduit + ");";
+        // Execution de la requete
+        System.out.println(sql);
+>>>>>>> refs/remotes/origin/Biardeau_Florian
  		try {
  			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
  			ResultSet res = stmt.getGeneratedKeys();
