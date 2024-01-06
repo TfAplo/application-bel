@@ -53,11 +53,19 @@ public class IHMExport
     private List<CheckBox> listeCheckBox = new ArrayList<>();
 
     
-    
+    /**
+     * constucteur de la classe IHMExport
+     * @param controleur : instance de la classe ContoleExport
+     */
     public IHMExport(ControleExport controleur) {
     	this.controleurExport=controleur;
     }
 
+    /**
+     * methode permettant de créer les checkbox en fonction des histogrammes passés en paramètre
+     * @param listeHistogrammes : liste des histogrammes
+     * @param checkBoxContainer : conteneur de type VBox
+     */
     public void creerCheckBox(List<BarChart<String, Number>> listeHistogrammes,VBox checkBoxContainer) {
     	checkBoxContainer.getChildren().clear();
         int countCheckBoxes = 0; 
@@ -75,6 +83,12 @@ public class IHMExport
 
     }
     
+    /**
+     * methode gerant l'action d'exportation des histogrammes lors du clique sur le bouton exporter, on va vérifier les checkbox sélectionnés lors du clique sur le bouton et si aucune checkbox n'est selectionnée alors ouvre une alert
+     * @param event : action du clique sur le bouton
+     * @param checkBoxContainer : conteneur de type VBox
+     * @param popup : popup d'exportation de type Stage
+     */
     public void exporterHistogrammesEnPNG(ActionEvent event,VBox checkBoxContainer,Stage popup) {
     	compteurCheckBox=0;
     	boolean isSelected = checkBoxContainer.getChildren().stream()
@@ -82,6 +96,7 @@ public class IHMExport
     	        .map(node -> (CheckBox) node)
     	        .anyMatch(CheckBox::isSelected);
 
+    	//test si aucune checkbox n'est sélectionnée
     	if (!isSelected) {
     	    	
     	    afficherMessageAucuneSelection();
@@ -109,15 +124,23 @@ public class IHMExport
     	afficheFenetreValide();
     }	
     
-    
+    /**
+     * compare le compteur des histogrammes exportés et des checkbox sélectionnées lors du clique sur le bouton exporter puis ouvre une popup validant l'exportation si le compte est bon
+     * 
+     */
     public void afficheFenetreValide() {
     	if (compteurExport==compteurCheckBox && compteurCheckBox != 0) {
     		FenetreValideExport(); 		
     	}
+    	
     }
     
-    private File choisirDossierDeDestination() {
-    	
+	/**
+	 * methode permettant de choisir le dossier de destination des histogrammes à exporter
+	 * @return retourne le chemin du dossier de destination
+	 */
+    public File choisirDossierDeDestination() {
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir un dossier de destination");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -126,7 +149,9 @@ public class IHMExport
     }
 
 
-    
+    /**
+     * methode affichant une alert dans le cas où aucune checkbox n'est selectionnée
+     */
     public void afficherMessageAucuneSelection() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Aucune sélection");
@@ -135,17 +160,27 @@ public class IHMExport
         alert.showAndWait();
     }
     
+    /**
+     * methode ouvrant une nouvelle fenetre validant l'exportation
+     */
     @FXML
     public void FenetreValideExport() {
     	openFXMLWindow("../application/IHMValideExport.fxml");  
     }
     
+    /**
+     * methode ouvrant une nouvelle fenetre affichant une erreur d'exportation
+     */
     @FXML
     public void FenetreErreurExport() {
     	openFXMLWindow("../application/IHMErreurExport.fxml");
 
     }
     
+    /**
+     * methode permettant d'ouvrir une nouvelle fenetre en fonction du chemin passé en paramètre
+     * @param fxmlFilePath : chemin du fichier fxml
+     */
     public void openFXMLWindow(String fxmlFilePath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));

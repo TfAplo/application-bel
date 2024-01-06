@@ -37,10 +37,6 @@ import javafx.stage.Stage;
 public class ControleExport extends Application{
 	
 
-
-     /**
-     * Attribut privé de type FenetreExport
-     */
     private static IHMExport fenetreExport;
 	@FXML 
 	private Button boutonExport;
@@ -63,63 +59,38 @@ public class ControleExport extends Application{
     private static IHMStatistiques ihmStatistiques;
     private int compteurExport=0;
     private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
-
-	/**
-     * Attribut privé de type GenerateurFichier
-     */
     private static GenerateurFichier generateurFichier;
 
-    
-    public ControleExport(IHMStatistiques ihmStat, List<BarChart<String, Number>> listeHistogrammes) {
-    	this.ihmStatistiques = ihmStat;
-    	this.listeHistogrammes = listeHistogrammes;
-    }
-    
-    public ControleExport() {
-    	this.generateurFichier = new GenerateurFichier(this);
-
-	}
-
-    /**
-     * Gère l'action d'exportation des images.
-     */
-    public void main() {
-        // TODO implement here
-    }
-
-    /**
-     * Getter de l'attribut FenetreExport
-     * @return fenetreExport
-     */
-    public IHMExport getFenetreExport() {
-		return fenetreExport;
-	}
-    
-    /**
-     * Getter de l'attribut generateurFichier
-     * @return generateurFichier
-     */
-	public GenerateurFichier getGenerateurFichier() 
-	{
-		return generateurFichier;
+	
+	/**
+	 * Constructeur de la classe ContoleExport 
+	 * @param ihmStat : instance de la classe IHMStatistique
+	 * @param listeHistogrammes : liste des histogrammes
+	 */
+	public ControleExport(IHMStatistiques ihmStat, List<BarChart<String, Number>> listeHistogrammes) {
+		this.ihmStatistiques = ihmStat;
+		this.listeHistogrammes = listeHistogrammes;
 	}
 	
-	public Scene getNouvelleScene() {
-		return nouvelleScene;
+	/**
+	 * Constructeur sans paramètre de la classe ControleExport
+	 */
+	public ControleExport() {
+		this.generateurFichier = new GenerateurFichier(this);
+	
 	}
-	   /**
-     * Gère l'événement de clic sur le bouton d'export
-     */
     
-    public void boutonExport(){
-        
-    	try {
-
+    
+	/**
+	 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
+	 */
+	public void boutonExport(){
+	    
+		try {
+	
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
 	        Parent nouvelleSceneParent = loader.load();
-	        ControleExport controleur = loader.getController();
-	
-		   	         
+	        ControleExport controleur = loader.getController();	   	         
 		   	popupStage = new Stage();
 		   	popupStage.initModality(Modality.APPLICATION_MODAL);
 		   	popupStage.setTitle("Export d'Histogrammes");
@@ -133,19 +104,13 @@ public class ControleExport extends Application{
 	       e.printStackTrace();
 	     }
 	  }
-    
-	public void clearCheckBoxes() {
-	    checkBoxContainer.getChildren().clear();
-	}
 	
-
-	public void resetController() {
-	    checkBoxContainer.getChildren().clear();
-	    listeHistogrammes.clear();
-	 
-	}
 	
-
+	
+	/**
+	 * methode d'initialisation de la fenetre d'exportation
+	 * @param histogrammes : liste des histogrammes
+	 */
 	public void initialiser(List<BarChart<String, Number>> histogrammes) {
 	    fenetreExport= new IHMExport(this);
 	    fenetreExport.creerCheckBox(listeHistogrammes,checkBoxContainer);
@@ -153,24 +118,26 @@ public class ControleExport extends Application{
 	        
 	  }
 		
-	  private File choisirDossierDeDestination() {
-		  FileChooser fileChooser = new FileChooser();
-	      fileChooser.setTitle("Choisir un dossier de destination");
-	      fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-	      fileChooser.setInitialFileName("histogrammes_exportes");
-
-	      return fileChooser.showSaveDialog(null);
-	  }
-	  
+	
+	  /**
+	   * methode étant liée à un bouton fxml dont son action est initalisé dans la methode initialiser()
+	   */
 	  @FXML
 	  public void boutonValide() {		  
 	  }
-		
+	  
+	  /**
+	   * methode étant liée au bouton de confirmation d'exportation
+	   */
 	  @FXML
 	  public void boutonExportOk() {
 			 Stage stage = (Stage) okExport.getScene().getWindow();
 			 stage.close();
-		}
+	  }
+	  
+	  /**
+	   * methode étant liée au bouton de retour sur le popup d'exportation
+	   */
 	  @FXML
 	  public void boutonRetour() {
 		  Stage stage = (Stage) retour.getScene().getWindow();
@@ -179,6 +146,13 @@ public class ControleExport extends Application{
 		  listeHistogrammes.clear();
 	  }
 	  
+	  /**
+	   * methode permettant d'exporter des histogrammes en PNG appelant une methode créant ces même fichier
+	   * @param histogramme : liste des histogrammes
+	   * @param cheminFichier : chemin du dossier de destination des images à exporter
+	   * @param ihmExport : instance de IHMExport
+	   * @return retourne un compteur de type entier
+	   */
 	  public int exporterHistogramme(BarChart<?, ?> histogramme, String cheminFichier,IHMExport ihmExport) {
 		  boolean res =generateurFichier.enregistrerHistogrammeEnPNG(histogramme, cheminFichier);
 	    	
@@ -191,12 +165,38 @@ public class ControleExport extends Application{
 	       return compteurExport;
 	   }  
 	    
+
+    /**
+     * Getter de l'attribut FenetreExport
+     * @return fenetreExport
+     */
+	 public IHMExport getFenetreExport() {
+		 return fenetreExport;
+	 }
+    
+	/**
+	 * Getter de l'attribut generateurFichier
+	 * @return generateurFichier
+	 */
+	public GenerateurFichier getGenerateurFichier() 
+	{
+		return generateurFichier;
+	}
+	
+	public Scene getNouvelleScene() {
+		return nouvelleScene;
+	}
+	   /**
+	 * Gère l'événement de clic sur le bouton d'export
+	 */
+		    
+	   
     	
-		@Override
-		public void start(Stage arg0) throws Exception {
-			// TODO Auto-generated method stub
-			
-		}
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

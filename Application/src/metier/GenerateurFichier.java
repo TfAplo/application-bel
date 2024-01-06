@@ -26,38 +26,38 @@ public class GenerateurFichier
 	@FXML
 	private BarChart histo1;
 	private static ControleExport controleExport;
-
-
-    /**
-     * Constructeur du générateur de fichiers
-     */
-    public GenerateurFichier(ControleExport controle) {
-
-    	this.controleExport=controle;
-    	
-    }
-
-
-    /**
-     * Crée le fichier PNG à partir des données d'histogrammes
-     *
-     * @return l'image du fichier généré au format BufferedImage
-     */
-
-    public boolean enregistrerHistogrammeEnPNG(BarChart<?, ?> histogramme, String cheminFichier) {
-
-	        try {
-	            WritableImage image = histogramme.snapshot(new SnapshotParameters(), null);
-	            File file = new File(cheminFichier);
-	            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+	
+	
+	/**
+	 * Constructeur du générateur de fichiers
+	 */
+	public GenerateurFichier(ControleExport controle) {
+	
+		this.controleExport=controle;
+		
+	}
+	
+	
+	/**
+	 * Crée le fichier PNG à partir des données d'histogrammes
+	 *
+	 * @return retourne true si le fichier est bien exporter et false dans le cas contraire
+	 */
+	
+	public boolean enregistrerHistogrammeEnPNG(BarChart<?, ?> histogramme, String cheminFichier) {
+	
+		try {
+            WritableImage image = histogramme.snapshot(new SnapshotParameters(), null);
+            File file = new File(cheminFichier);
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 	            return true;
    
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
-	    
-    }
+		    
+	    }
 
 
 
