@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihm.IHMStatistiques">
+   <children>
+      <Button layoutX="274.0" layoutY="314.0" mnemonicParsing="false" onAction="#boutonExport" text="Export" />
+      <BarChart fx:id="histo1" layoutX="68.0" layoutY="36.0" prefHeight="123.0" prefWidth="152.0" title="histo 1" AnchorPane.bottomAnchor="241.0" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="36.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <BarChart fx:id="histo2" layoutX="349.0" layoutY="36.0" prefHeight="117.0" prefWidth="123.0" title="histo 2">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <BarChart fx:id="histo3" layoutX="38.0" layoutY="186.0" prefHeight="99.0" prefWidth="139.0" title="histo 3">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <BarChart fx:id="histo4" layoutX="364.0" layoutY="186.0" prefHeight="78.0" prefWidth="114.0" title="histo 4">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

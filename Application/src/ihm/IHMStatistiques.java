@@ -1,22 +1,99 @@
 package ihm;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
+import controleurs.ControleExport;
 import metier.Diagramme;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import  javafx.event.ActionEvent;
 
 /**
  * Vue permettant l'affichage des différents diagrammes souhaités pour afficher les statistiques, Propose aussi les différents boutons utiles à l'utilisateur
  */
-public class IHMStatistiques {
+public class IHMStatistiques extends Application {
+	
+ 
 
 
-    public IHMStatistiques() {
-    }
 
     private ArrayList<Diagramme> listeDiagrammes;
     private int nbIntervalles;
     private ArrayList<String> listeAffichagesVoulus;
+    private static ControleExport controleurExport;
+    private IHMExport ihmExport;
+    
+	@FXML
+	private BarChart histo1;
+	@FXML
+	private BarChart histo2;
+	@FXML
+	private BarChart histo3;
+	@FXML
+	private BarChart histo4;
+	 private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
+	 
+	 
+	   public IHMStatistiques() {
+	    }
+	 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
 
+        Parent root = FXMLLoader.load(getClass().getResource("IHMStats.fxml"));
+
+        Scene scene = new Scene(root,600,400);  	     
+        controleurExport = new ControleExport(this,listeHistogrammes);
+        
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+    }
+    
+    
+    public static void main(String[] args) {
+        launch(args);
+ 
+		
+    }
+    
+    // ---------------------TEST----------------
+    @FXML
+    public void  boutonExport() {
+    	controleurExport.boutonExport();
+    }
+    
+    public void initialize() {
+    		
+    		
+    		listeHistogrammes.clear();
+	         listeHistogrammes.add(histo1);
+	         
+	         listeHistogrammes.add(histo2);
+	         listeHistogrammes.add(histo3);
+	         listeHistogrammes.add(histo4);
+
+    }
+    
+    
+    // --------------------- FIN TEST----------------
+
+
+
+    public ControleExport getControleurExport() {
+        return controleurExport;
+    }
+    public IHMExport getIhmExport() {
+        return ihmExport;
+    }
     /**
      * Permet d'afficher les différents diagrammes de statistiques qui sont dans la liste listeDiagrammes
      */
@@ -67,7 +144,13 @@ public class IHMStatistiques {
     /**
      * Gère l'événement de clic sur le bouton d'export
      */
-    public void boutonExport() {
-    }
+  /*  @FXML
+    public void boutonExport(ActionEvent e) throws IOException{
+    	System.out.println("export");
+    	AnchorPane pane =  FXMLLoader.load(getClass().getResource("../ihm/IHMExport.fxml"));
+    	rootPane.getChildren().setAll(pane);
+    }*/
+
+
 
 }
