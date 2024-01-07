@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -47,6 +48,7 @@ import ihm.IHMStatistiques;
 import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
+import controleurs.ControleExportCSV;
 
 
 public class Controleur {
@@ -55,6 +57,7 @@ public class Controleur {
 	 private ControleDepot CtrlDepot;
 	 private ControleExport CtrlExport;
 	 private ControleRecherche CtrlRecherche;
+	 private ControleExportCSV CtrlExportCSV;
 	 
 	 @FXML
 	 private HBox conteneurExports;
@@ -102,11 +105,12 @@ public class Controleur {
 	private double hauteurPx;
 	private java.io.File selectedFile;
 	 
-	 Controleur(ControleRecherche CtrlRecherche, ControleAnalyse CtrlAnalyse, ControleDepot CtrlDepot, ControleExport CtrlExport) {
+	 Controleur(ControleRecherche CtrlRecherche, ControleAnalyse CtrlAnalyse, ControleDepot CtrlDepot, ControleExport CtrlExport, ControleExportCSV CtrlExportCSV) {
 		 this.CtrlRecherche = CtrlRecherche;
 		 this.CtrlAnalyse = CtrlAnalyse;
 		 this.CtrlDepot = CtrlDepot;
 		 this.CtrlExport = CtrlExport;
+		 this.CtrlExportCSV = CtrlExportCSV;
 	 }
 	 
 	 @FXML
@@ -122,6 +126,7 @@ public class Controleur {
 		 btnSelectionImage.setOnAction(e -> selectionImageParBouton());
 		 btnValiderDepot.setOnAction(e -> validerDepot());
 		 boutonExportPNG.setOnAction(e -> boutonExport());
+		 boutonExportCSV.setOnAction(e -> afficherFormulaireCSV());
 		 
 		 LabelNomImage.setVisible(false);
 	 }
@@ -311,6 +316,61 @@ public class Controleur {
 		       e.printStackTrace();
 		     }
 		  }
+		
+		public void afficherFormulaireCSV() {
+			 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PopUpExportCSV.fxml"));
+	         fxmlLoader.setController(CtrlExportCSV.getIHM());
+			try {
+				Parent root1 = (Parent) fxmlLoader.load();
+				Stage stage = new Stage();
+		        stage.setTitle("Export au format CSV");
+		        stage.setScene(new Scene(root1));
+		        IHMStatistiques IHM = CtrlAnalyse.getIhm();
+		        VBox vbox = new VBox();
+		        ArrayList<CheckBox> listCh = new ArrayList<>();
+		        if(IHM.histoSPresent()) {
+					CheckBox ch1 = new CheckBox();
+					CheckBox ch2 = new CheckBox();
+					ch1.setId("statistiques");
+					ch1.setText("Statistiques");
+					ch2.setId("histogrammeSurface");
+					ch2.setText("Histogramme de Surface");
+					vbox.getChildren().addAll(ch1, ch2);
+					listCh.add(ch1);
+					listCh.add(ch2);
+				}
+				if(IHM.histoDPresent()) {
+					CheckBox ch3 = new CheckBox();
+					CheckBox ch4 = new CheckBox();
+					ch3.setId("histogrammeSurfaceCumulatif");
+					ch3.setText("Histogramme de Surface Cumulatif");
+					ch4.setId("histogrammeDiametreEquivalent");
+					ch4.setText("Histogramme de Diametre Equivalent");
+					vbox.getChildren().addAll(ch3, ch4);
+					listCh.add(ch3);
+					listCh.add(ch4);
+				}
+				if(IHM.tabPresent()) {
+					CheckBox ch5 = new CheckBox();
+					ch5.setId("histogrammeDiametreEquivalentCumulatif");
+					ch5.setText("Histogramme de Diametre Equivalent Cumulatif");
+					vbox.getChildren().add(ch5);
+					listCh.add(ch5);
+				}
+				CtrlExportCSV.getIHM().setVbox(vbox);
+				CtrlExportCSV.getIHM().alimenterFenetre();
+				CtrlExportCSV.getIHM().alimenterCheckBox(listCh);
+				CtrlExportCSV.getIHM().setHistoDiamBarChart(CtrlAnalyse.getIhm().getHistoDiam().getBc());
+				CtrlExportCSV.getIHM().setHistoDiamCumBarChar(CtrlAnalyse.getIhm().getHistoDiam().getBcc());
+				CtrlExportCSV.getIHM().setHistoSurfaceBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBc());
+				CtrlExportCSV.getIHM().setHistoDiamCumBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBcc());
+				CtrlExportCSV.getIHM().setStatistiques(CtrlAnalyse.getIhm().getTab().getTab());
+		        stage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 }
 }
 
 

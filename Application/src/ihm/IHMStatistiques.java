@@ -45,6 +45,7 @@ public class IHMStatistiques {
     private boolean tabCheck;
     private boolean afficher;
     private ArrayList<BarChart<String,Number>> listeGraphiques;
+
 	 @FXML
 	 private Button idAfficherButton;
 	 @FXML

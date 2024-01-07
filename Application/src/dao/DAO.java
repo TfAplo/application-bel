@@ -14,7 +14,7 @@ public abstract class DAO<T> {
 	public DAO() {
 		open();
 	}
-
+	
 	public void open() {
 		try {
 			connect=  SingleConnection.getInstance();

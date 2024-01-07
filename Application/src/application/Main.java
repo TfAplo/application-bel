@@ -10,6 +10,7 @@ import controleurs.ControleAnalyse;
 import controleurs.ControleDepot;
 import controleurs.ControleExport;
 import controleurs.ControleRecherche;
+import controleurs.ControleExportCSV;
 
 //--module-path "C:\Program Files\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml,javafx.swing
 
@@ -24,11 +25,12 @@ public class Main extends Application {
     		ControleAnalyse CtrlAnalyse = new ControleAnalyse();
     		ControleDepot CtrlDepot = new ControleDepot();
     		ControleExport CtrlExport = new ControleExport();
+    		ControleExportCSV CtrlExportCSV = new ControleExportCSV();
     		
     		FXMLLoader root = new FXMLLoader(getClass().getResource("MainScene.fxml"));
 
     		//Initialisere le controleur principale
-    		root.setController(new Controleur(CtrlRecherche, CtrlAnalyse, CtrlDepot, CtrlExport));
+    		root.setController(new Controleur(CtrlRecherche, CtrlAnalyse, CtrlDepot, CtrlExport, CtrlExportCSV));
     		
             Scene scene = new Scene(root.load());
             

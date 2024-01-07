@@ -134,8 +134,25 @@ public class ControleExport extends Application{
 	       }
 	       return compteurExport;
 	   }  
-	    
-	  
+
+  /**
+     * Constructeur prenant en paramètre la fenêtre d'exportation et le générateur de fichiers.
+     *
+     * @param fenetreExport     la fenêtre d'exportation
+     * @param generateurFichier le générateur de fichiers
+     */
+    public ControleExport(IHMExport fenetreExport, GenerateurFichier generateurFichier) {
+        this.fenetreExport = fenetreExport;
+        this.generateurFichier = generateurFichier;
+    }
+    
+    /**
+     * Gère l'action d'exportation des images.
+     */
+    public void main() {
+        // TODO implement here
+    }
+
     /**
      * Getter de l'attribut FenetreExport
      * @return fenetreExport
