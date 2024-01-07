@@ -66,9 +66,9 @@ public class HistogrammeDiametre extends Diagramme {
     	this.l = new ArrayList<Pair<String, Double>>();
     	//permet d'arrondir la valeure pour faciliter la lecture du diagramme
     	DecimalFormat decimalFormat = new DecimalFormat("#.##");
-    	l.add(new Pair<String, Double>("0-"+Double.parseDouble(decimalFormat.format(tabIntervalles[0])), 0.0));
+    	l.add(new Pair<String, Double>("0-"+Double.parseDouble(decimalFormat.format(tabIntervalles[0]).replace(",", ".")), 0.0));
     	for (int j = 1; j < nbIntervalles; j++) {
-    		l.add(new Pair<String, Double>(Double.parseDouble(decimalFormat.format(tabIntervalles[j-1]))+"-"+decimalFormat.format(tabIntervalles[j]), 0.0));
+    		l.add(new Pair<String, Double>(Double.parseDouble(decimalFormat.format(tabIntervalles[j-1]).replace(",", "."))+"-"+decimalFormat.format(tabIntervalles[j]).replace(",", "."), 0.0));
 		}
     	ArrayList<Particule> parts = particules.getListeParticules();
     	//on compte le nombre d'occurence pour chaques intervalles
