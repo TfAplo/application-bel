@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -128,11 +130,12 @@ public class Controleur {
 			mainContainer.getChildren().add(sp);
 		 }**/
 	 
+	 /**
 	 public void afficherEtDisparaitreStatutDepot() {
 		 LabelStatutDepot.setVisible(true);
          //RectangleStatutDepot.setVisible(true);
          
-         // Créer une timeline pour déclencher l'action de suppression après 3 secondes
+         // Créer une timeline pour déclencher l'action de suppression après 5 secondes
          Duration delay = Duration.seconds(5);
          KeyFrame keyFrame = new KeyFrame(delay, event -> {
              // Code à exécuter après le délai
@@ -143,6 +146,15 @@ public class Controleur {
          Timeline timeline = new Timeline(keyFrame);
          timeline.setCycleCount(1);
          timeline.play();
+	 }
+	 **/
+	 public void afficherEtDisparaitreStatutDepot(String titre, String haut, String bas) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(haut);
+        alert.setContentText(bas);
+
+        alert.showAndWait();
 	 }
 	 
 	 private void validerDepot() {
@@ -180,14 +192,13 @@ public class Controleur {
 	             champGrossissement.setText(null);
 	             champLargeurReelle.setText(null);
 	             champNomProduit.setText(null);
-	             LabelStatutDepot.setText("L'image a bien été déposée dans la base de donnée.");
+	             afficherEtDisparaitreStatutDepot("Statut de votre dépôt", "Dépôt effectué !", "L'image a bien été déposée dans la base de donnée.");
 			 } catch (NumberFormatException e) {
-				 LabelStatutDepot.setText("Erreur - L'image n'a pas été déposée dans la base de donnée. Veillez à bien renseigner des informations correctes.");
+				 afficherEtDisparaitreStatutDepot("Statut de votre dépôt", "Erreur lors du dépôt", "L'image n'a pas été déposée dans la base de donnée.\nVeillez à bien renseigner des informations correctes.");
 			 }
 		 } else {
-			 LabelStatutDepot.setText("Erreur - L'image n'a pas été déposée dans la base de donnée. Veillez à bien remplir tous les champs et à sélectionner une image.");
+			 afficherEtDisparaitreStatutDepot("Statut de votre dépôt", "Erreur lors du dépôt", "L'image n'a pas été déposée dans la base de donnée.\nVeillez à bien remplir tous les champs et à sélectionner une image.");
 		 }
-		 afficherEtDisparaitreStatutDepot();
 	 }
 	 
 	 private void selectionImageParBouton() {
