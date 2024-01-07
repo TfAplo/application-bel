@@ -3,6 +3,8 @@ package controleurs;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 import dao.ParticuleDAO;
@@ -42,13 +44,13 @@ public class ControleAnalyse {
         	Statistique stat = new Statistique();
         	ParticuleDAO DBpart = new ParticuleDAO();
         	StatistiqueDAO DBstat = new StatistiqueDAO();
-        	ensembleTemporaire = DBpart.lire(image.idImage);
+        	ensembleTemporaire = DBpart.lire(image.getIdImage());
 			if (ensembleTemporaire.estVide()) {
 				//analyse les images et les ajoutes à la base de donnée
 				try {
-					analyseure.executerScripts(image.nomImage);
+					analyseure.executerScripts(image.getNomImage());
 					lecteurCSV();
-					ensembleTemporaire = DBpart.creer(image.idImage, ensembleTemporaire);
+					ensembleTemporaire = DBpart.creer(image.getIdImage(), ensembleTemporaire);
 					//générer les stats de ensemble temporaire et les ajouter à la base
 					stat = DBstat.creer(new Statistique(ensembleTemporaire));
 					
@@ -57,7 +59,7 @@ public class ControleAnalyse {
 					e.printStackTrace();
 				}
 			}else {
-				stat = DBstat.lire(image.idImage);
+				stat = DBstat.lire(image.getIdImage());
 			}
 			ihm.alimenterTableau(stat, image);//
 			//alimente l'ensemble général avec les particules de ensembleTemporaire
@@ -83,6 +85,12 @@ public class ControleAnalyse {
 			Particule part = new Particule(line.split(","));
 			this.ensembleTemporaire.ajouterParticule(part);
 		}
+		br.close();
+		try {
+            Files.delete(Paths.get(System.getProperty("user.dir") + "\\scriptsImages\\res\\out_data.csv"));
+        } catch (IOException e) {
+            System.err.println("Une erreure est survenue en supprimant les fichiers: " + e.getMessage());
+        }
     }
 
 	public EnsembleParticules getEnsemble() {

@@ -9,7 +9,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import metier.GenerateurFichier;
-import metier.GenerateurFichierHistoCSV;
+import metier.GenerateurFichierCSV;
 import metier.HistogrammeDiametre;
 
 /**

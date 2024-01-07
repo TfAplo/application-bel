@@ -9,7 +9,7 @@ import java.util.Iterator;
 /**
  * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
  */
-public class GenerateurFichierHistoCSV {
+public class GenerateurFichierCSV {
 	private final String[] nomColonnesStatistiques = {"nom de l'image", "grossissement", "nombre de particules trouvees",
 			"ratio de surface couverte", "moyenne des aires", "moyenne diametres equivalents",
 			"ecart-type des aires", "ecart-type des diametres equivalents"};
@@ -17,7 +17,7 @@ public class GenerateurFichierHistoCSV {
 	/**
      * Constructeur du générateur de fichiers
      */
-    public GenerateurFichierHistoCSV() {
+    public GenerateurFichierCSV() {
     	this.compteur = 0;
     }
 

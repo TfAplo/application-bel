@@ -14,7 +14,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import metier.GenerateurFichierHistoCSV;
+import metier.GenerateurFichierCSV;
 import metier.TabElement;
 
 public class IHMExportCSV {
@@ -38,7 +38,7 @@ public class IHMExportCSV {
 	
 	private TableView<TabElement> statistiques;
 	
-	private GenerateurFichierHistoCSV gen;
+	private GenerateurFichierCSV gen;
 
 	public IHMExportCSV() {
 	}
