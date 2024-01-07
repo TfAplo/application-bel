@@ -80,4 +80,8 @@ public class Tableau extends Diagramme {
 		tab.getItems().add(tabel);
 	}
 
+	public TableView<TabElement> getTab() {
+		return tab;
+	}
+
 }
