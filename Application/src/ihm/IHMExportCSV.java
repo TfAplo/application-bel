@@ -141,14 +141,21 @@ public class IHMExportCSV {
 	
 	
 	public void export() {
+		if(isValideHistogrammeDiametreEquivalent()) {
+			exportHistogramme(this.histoDiamBarChart);
+		}
 		if (isValideHistogrammeDiametreEquivalentCumulatif()){
-			exportHistogrammeDiametreEquivalentCumulatif(this.histoDiamCumBarChar);
+			exportHistogramme(this.histoDiamCumBarChar);
 		}
-		//GenerateurFichierCSV generateur = new GenerateurFichierCSV();
-		//generateur.creerFichier();
+		if(isValideHistogrammeSurface()) {
+			exportHistogramme(this.histoSurfaceBarChar);
+		}
+		if(isValideHistogrammeSurfaceCumulatif()) {
+			exportHistogramme(this.histoSurfaceCumBarChar);
+		}
 	}
 	
-	public void exportHistogrammeDiametreEquivalent(BarChart<String,Number> histo) {
+	public void exportHistogramme(BarChart<String,Number> histo) {
 		ArrayList<String> intervalles = new ArrayList<>();
 		ArrayList<Number> number = new ArrayList<>();
 		ObservableList<Series<String, Number>> list = histo.getData();
@@ -168,63 +175,7 @@ public class IHMExportCSV {
 		gen.creerFichierHistoCSV(intervalles, numberEntier);
 	}
 	
-	public void exportHistogrammeDiametreEquivalentCumulatif(BarChart<String,Number> histo) {
-		ArrayList<String> intervalles = new ArrayList<>();
-		ArrayList<Number> number = new ArrayList<>();
-		ObservableList<Series<String, Number>> list = histo.getData();
-		for (XYChart.Series<String, Number> chartSeries : histo.getData()) {
-            for (XYChart.Data<String, Number> data : chartSeries.getData()) {
-                String intervalle = data.getXValue();
-                Number pourcentage = data.getYValue();
-                intervalles.add(intervalle);
-                number.add(pourcentage);
-            }
-        }
-		ArrayList<Integer> numberEntier = new ArrayList<>();
-		for (Number numberInInt : number) {
-			int valeurEntiere = numberInInt.intValue();
-			numberEntier.add(valeurEntiere);
-		}
-		gen.creerFichierHistoCSV(intervalles, numberEntier);
-	}
-	
-	public void exportHistogrammeSurface(BarChart<String,Number> histo) {
-		ArrayList<String> intervalles = new ArrayList<>();
-		ArrayList<Number> number = new ArrayList<>();
-		ObservableList<Series<String, Number>> list = histo.getData();
-		for (XYChart.Series<String, Number> chartSeries : histo.getData()) {
-            for (XYChart.Data<String, Number> data : chartSeries.getData()) {
-                String intervalle = data.getXValue();
-                Number pourcentage = data.getYValue();
-                intervalles.add(intervalle);
-                number.add(pourcentage);
-            }
-        }
-		ArrayList<Integer> numberEntier = new ArrayList<>();
-		for (Number numberInInt : number) {
-			int valeurEntiere = numberInInt.intValue();
-			numberEntier.add(valeurEntiere);
-		}
-		gen.creerFichierHistoCSV(intervalles, numberEntier);
-	}
-	
-	public void exportHistogrammeSurfaceCumulatif(BarChart<String,Number> histo) {
-		ArrayList<String> intervalles = new ArrayList<>();
-		ArrayList<Number> number = new ArrayList<>();
-		ObservableList<Series<String, Number>> list = histo.getData();
-		for (XYChart.Series<String, Number> chartSeries : histo.getData()) {
-            for (XYChart.Data<String, Number> data : chartSeries.getData()) {
-                String intervalle = data.getXValue();
-                Number pourcentage = data.getYValue();
-                intervalles.add(intervalle);
-                number.add(pourcentage);
-            }
-        }
-		ArrayList<Integer> numberEntier = new ArrayList<>();
-		for (Number numberInInt : number) {
-			int valeurEntiere = numberInInt.intValue();
-			numberEntier.add(valeurEntiere);
-		}
-		gen.creerFichierHistoCSV(intervalles, numberEntier);
+	public void exportStatistiques() {
+		
 	}
 }
