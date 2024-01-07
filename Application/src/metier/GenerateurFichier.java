@@ -23,8 +23,6 @@ public class GenerateurFichier
 {
 	@FXML 
 	private Button boutonExport;
-	@FXML
-	private BarChart histo1;
 	private static ControleExport controleExport;
 	
 	

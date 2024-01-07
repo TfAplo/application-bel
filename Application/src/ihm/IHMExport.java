@@ -37,9 +37,6 @@ public class IHMExport
 	private static ControleExport controleurExport;
 	@FXML
     private VBox checkBoxContainer;
-	//test 
-  	@FXML
-  	private VBox checkBoxContainer2;
 	@FXML 
 	private Button retour;
 	@FXML 

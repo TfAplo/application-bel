@@ -40,10 +40,6 @@ public class ControleExport extends Application{
     private static IHMExport fenetreExport;
 	@FXML 
 	private Button boutonExport;
-	private BarChart histo1;
-	private BarChart histo2;
-	private BarChart histo3;
-	private BarChart histo4;
 	@FXML 
 	private Scene nouvelleScene;
 	@FXML 
@@ -82,29 +78,6 @@ public class ControleExport extends Application{
 	
 	}
     
-
-	/*public void boutonExport(){
-	    
-		try {
-	
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
-	        Parent nouvelleSceneParent = loader.load();
-	        ControleExport controleur = loader.getController();	   	         
-		   	popupStage = new Stage();
-		   	popupStage.initModality(Modality.APPLICATION_MODAL);
-		   	popupStage.setTitle("Export d'Histogrammes");
-		   	nouvelleScene = new Scene(nouvelleSceneParent);
-		   	popupStage.setScene(nouvelleScene);
-		   	controleur.initialiser(listeHistogrammes);
-		   	//ControleExport controleurExport = ihmStatistiques.getControleurExport();  	   		
-		   	//fenetreExport.setControleurExport(controleurExport);
-		    popupStage.showAndWait();
-	     } catch (Exception e) {
-	       e.printStackTrace();
-	     }
-	  }
-	*/
-	
 	
 	/**
 	 * methode d'initialisation de la fenetre d'exportation

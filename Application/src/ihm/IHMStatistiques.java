@@ -30,54 +30,13 @@ public class IHMStatistiques extends Application {
     private ArrayList<String> listeAffichagesVoulus;
     private static ControleExport controleurExport;
     private IHMExport ihmExport;
-	@FXML
-	private BarChart histo1;
-	@FXML
-	private BarChart histo2;
-	@FXML
-	private BarChart histo3;
-	@FXML
-	private BarChart histo4;
+
 	private static List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();
 	 
 	 
 	public IHMStatistiques() {
 		controleurExport = new ControleExport(this,listeHistogrammes);
 	}
-	 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("../controleurs/IHMStats.fxml"));
-
-        Scene scene = new Scene(root,600,400);  	     
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        
-    }
-    
-    
-    public static void main(String[] args) {
-        launch(args);
- 
-		
-    }
-    
-    /**
-     * Gère l'événement de clic sur le bouton d'export
-     */
-  /*  @FXML
-    public void  boutonExport() {
-    	listeHistogrammes.clear();
-	    listeHistogrammes.add(histo1);
-	         
-	    listeHistogrammes.add(histo2);
-	    listeHistogrammes.add(histo3);
-	    listeHistogrammes.add(histo4);
-    	controleurExport.boutonExport();
-    }*/
-
 
 
     public ControleExport getControleurExport() {
@@ -132,6 +91,13 @@ public class IHMStatistiques extends Application {
         // TODO implement here
         return null;
     }
+
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
     
     
    /* public ArrayList<BarChart<String,Number>> getGraphiques(){
