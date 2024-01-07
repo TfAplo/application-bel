@@ -4,8 +4,12 @@ import java.util.*;
 
 import ihm.IHMExport;
 import ihm.IHMExportCSV;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import metier.GenerateurFichier;
-import metier.GenerateurFichierCSV;
+import metier.GenerateurFichierHistoCSV;
 import metier.HistogrammeDiametre;
 
 /**
@@ -27,7 +31,6 @@ public class ControleExportCSV {
 		this.IHM = IHM;
 	}
 	
-	public void export(HistogrammeDiametre histo) {
-		
-	}
+	
+	
 }

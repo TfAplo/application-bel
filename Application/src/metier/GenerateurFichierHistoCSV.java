@@ -8,30 +8,29 @@ import java.util.ArrayList;
 /**
  * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
  */
-public class GenerateurFichierCSV 
+public class GenerateurFichierHistoCSV 
 {
 	//private ArrayList<Objet> listeOblet;
-	private final String[] nomColonnes = {"nom de l'image", "grossissement", "nombre de particules trouvees",
+	private final String[] nomColonnesStatistiques = {"nom de l'image", "grossissement", "nombre de particules trouvees",
 			"ratio de surface couverte", "moyenne des aires", "moyenne diametres equivalents",
 			"ecart-type des aires", "ecart-type des diametres equivalents"};
-	
-    /**
+    private ArrayList<String> intervalles;
+    private ArrayList<Integer> numberEnEntier;
+	/**
      * Constructeur du générateur de fichiers
      */
-    public GenerateurFichierCSV() {
+    public GenerateurFichierHistoCSV() {
     }
 
     /**
      * Crée le fichier CSV à partir des données d'histogrammes
-     *
-     * @return un boolean qui est true si le fichier est bien créer ou false si il ne s'est pas créer
      */
-    public void creerFichier() 
+    public void creerFichierHistoCSV() 
     {
     	try (BufferedWriter writer = new BufferedWriter(new FileWriter("fichierCSV.csv"))) {
             // En-têtes du fichier CSV
-    		for(int i = 0; i < this.nomColonnes.length; i++) {
-    			writer.write(nomColonnes[i] + ";");
+    		for(int i = 0; i < this.nomColonnesStatistiques.length; i++) {
+    			writer.write(nomColonnesStatistiques[i] + ";");
     		}
             writer.write("\n");
             String[] noms = {"Doe", "Smith", "Johnson"};
