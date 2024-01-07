@@ -46,7 +46,7 @@ public class GenerateurFichierCSV {
     	this.compteur++;
     }
     
-    public void creerFichierTabCSV(ArrayList<String> nomImage,
+    public void creerFichierStatistiquesCSV(ArrayList<String> nomImage,
     								ArrayList<Double> grossissement,
     								ArrayList<Integer> nbParticuleTrouve,
     								ArrayList<Double> ratioSurfaceCouverte,

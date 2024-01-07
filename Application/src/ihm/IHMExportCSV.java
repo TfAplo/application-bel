@@ -82,22 +82,22 @@ public class IHMExportCSV {
 	
 	public void alimenterCheckBox(ArrayList<CheckBox> checkbox) {
 		Insets insets = new Insets(10, 10, 10, 10);
-		for (CheckBox checkBox2 : checkbox) {
-			checkBox2.setPadding(insets);
-			if(checkBox2.getId() == "statistiques") {
-				checkBox2.setOnAction(e -> cocheStatistiques());
+		for (CheckBox CheckBox : checkbox) {
+			CheckBox.setPadding(insets);
+			if(CheckBox.getId() == "statistiques") {
+				CheckBox.setOnAction(e -> cocheStatistiques());
 			}
-			if(checkBox2.getId() == "histogrammeSurface") {
-				checkBox2.setOnAction(e -> cocheHistogrammeSurface());
+			if(CheckBox.getId() == "histogrammeSurface") {
+				CheckBox.setOnAction(e -> cocheHistogrammeSurface());
 			}
-			if(checkBox2.getId() == "histogrammeSurfaceCumulatif") {
-				checkBox2.setOnAction(e -> cocheHistogrammeSurfaceCumulatif());
+			if(CheckBox.getId() == "histogrammeSurfaceCumulatif") {
+				CheckBox.setOnAction(e -> cocheHistogrammeSurfaceCumulatif());
 			}
-			if(checkBox2.getId() == "histogrammeDiametreEquivalent") {
-				checkBox2.setOnAction(e -> cocheHistogrammeDiametreEquivalent());
+			if(CheckBox.getId() == "histogrammeDiametreEquivalent") {
+				CheckBox.setOnAction(e -> cocheHistogrammeDiametreEquivalent());
 			}
-			if(checkBox2.getId() == "histogrammeDiametreEquivalentCumulatif") {
-				checkBox2.setOnAction(e -> cocheHistogrammeDiametreEquivalentCumulatif());
+			if(CheckBox.getId() == "histogrammeDiametreEquivalentCumulatif") {
+				CheckBox.setOnAction(e -> cocheHistogrammeDiametreEquivalentCumulatif());
 			}
 		}
 	}
@@ -146,6 +146,8 @@ public class IHMExportCSV {
 		this.statistiques = statistiques;
 	}
 	
+	
+	
 	public void export() {
 		if(isValideHistogrammeDiametreEquivalent()) {
 			exportHistogramme(this.histoDiamBarChart);
@@ -158,6 +160,9 @@ public class IHMExportCSV {
 		}
 		if(isValideHistogrammeSurfaceCumulatif()) {
 			exportHistogramme(this.histoSurfaceCumBarChar);
+		}
+		if(isValideStatistiques()) {
+			exportStatistiques(this.statistiques);
 		}
 	}
 	
