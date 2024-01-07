@@ -199,7 +199,7 @@ public class Controleur {
 				 afficherEtDisparaitreStatutDepot("Statut de votre dépôt", "Erreur lors du dépôt", "L'image n'a pas été déposée dans la base de donnée.\nVeillez à bien renseigner des informations correctes.");
 			 }
 		 } else {
-			 afficherEtDisparaitreStatutDepot("Statut de votre dépôt", "Erreur lors du dépôt", "L'image n'a pas été déposée dans la base de donnée.\nVeillez à bien remplir tous les champs et à sélectionner une image.");
+			 afficherEtDisparaitreStatutDepot("Statut de votre dépôt", "Erreur lors du dépôt", "L'image n'a pas été déposée dans la base de donnée.\nVeillez à bien remplir tous les champs et à sélectionner\nune image.");
 		 }
 	 }
 	 
