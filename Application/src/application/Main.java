@@ -11,7 +11,7 @@ import controleurs.ControleDepot;
 import controleurs.ControleExport;
 import controleurs.ControleRecherche;
 
-//--module-path "C:\Program Files\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml
+//--module-path "C:\Program Files\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml,javafx.swing
 
 
 public class Main extends Application {
@@ -57,4 +57,3 @@ public class Main extends Application {
         launch(args);
     } 
 }
-

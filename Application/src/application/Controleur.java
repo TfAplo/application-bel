@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import metier.Image;
@@ -89,6 +90,10 @@ public class Controleur {
 	 private AnchorPane glisserDeposer;
 	 @FXML
 	 private Button idAnalyser;
+	 @FXML 
+	 private static Stage popupStage;
+	 @FXML 
+	 private Scene nouvelleScene;
 	 
 	// Variable servant a plusieurs methodes
 	private String nomImage;
@@ -116,6 +121,7 @@ public class Controleur {
 		 glisserDeposer.setOnDragDropped(e -> selectionImageParDrag(e));
 		 btnSelectionImage.setOnAction(e -> selectionImageParBouton());
 		 btnValiderDepot.setOnAction(e -> validerDepot());
+		 boutonExportPNG.setOnAction(e -> boutonExport());
 		 
 		 LabelNomImage.setVisible(false);
 	 }
@@ -295,6 +301,30 @@ public class Controleur {
 			e.printStackTrace();
 		}
 	}
+	 
+	 /**
+		 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
+		 */
+		public void boutonExport(){
+			    
+			try {
+
+		        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
+		        Parent nouvelleSceneParent = loader.load();
+		        ControleExport controleur = loader.getController();	   	         
+			   	popupStage = new Stage();
+			   	popupStage.initModality(Modality.APPLICATION_MODAL);
+			   	popupStage.setTitle("Export d'Histogrammes");
+			   	nouvelleScene = new Scene(nouvelleSceneParent);
+			   	popupStage.setScene(nouvelleScene);
+			    controleur.initialiser(CtrlAnalyse.getIhm().getGraphiques(),popupStage);
+			   	CtrlExport = CtrlAnalyse.getIhm().getControleurExport();  	   		
+			   	CtrlExport.getIhmExport().setControleurExport(CtrlExport);
+			    popupStage.showAndWait();
+		     } catch (Exception e) {
+		       e.printStackTrace();
+		     }
+		  }
 }
 
 

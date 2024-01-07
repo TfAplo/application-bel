@@ -1,7 +1,10 @@
 package ihm;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
+import controleurs.ControleExport;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -30,6 +33,7 @@ import metier.Tableau;
  * Vue permettant l'affichage des différents diagrammes souhaités pour afficher les statistiques, Propose aussi les différents boutons utiles à l'utilisateur
  */
 public class IHMStatistiques {
+	private static ControleExport controleurExport;
 	private ArrayList<Diagramme> listeDiagrammes;
     private int nbIntervallesHS;
     private int nbIntervallesHD;
@@ -69,6 +73,7 @@ public class IHMStatistiques {
 	    tabCheck = true;
 	    afficher = false;
 	    listeGraphiques = new ArrayList<BarChart<String,Number>>();
+	    controleurExport = new ControleExport(this,listeGraphiques);
 	}
 
 	/**
@@ -116,7 +121,7 @@ public class IHMStatistiques {
     public void ajouter(Diagramme diag) {
         listeDiagrammes.add(diag);
     }
-    
+
     /**
      * Gère l'événement de clic sur le bouton d'export
      */
@@ -263,5 +268,9 @@ public class IHMStatistiques {
 		}
 		return listeGraphiques;
 	}
+	
+    public ControleExport getControleurExport() {
+        return controleurExport;
+    }
 
 }
