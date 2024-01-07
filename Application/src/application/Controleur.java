@@ -125,21 +125,6 @@ public class Controleur {
 		 
 		 LabelNomImage.setVisible(false);
 	 }
-	
-	 
-	 /**public void mainContainerAfficher() {
-			// clear le container
-			mainContainer.getChildren().clear();
-			ScrollPane sp = new ScrollPane();
-			VBox main = new VBox();
-			sp.setContent(main);
-			sp.setMaxSize(mainContainer.getWidth(), mainContainer.getHeight());
-			sp.setPannable(true);
-			sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-			ObservableList<Node> container = main.getChildren();
-			CtrlAnalyse.getIhm().afficherDiagrammes(container);
-			mainContainer.getChildren().add(sp);
-		 }**/
 	 
 	 public void afficherEtDisparaitreStatutDepot(String titre, String haut, String bas) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -157,6 +142,7 @@ public class Controleur {
 
         timer.schedule(task, 5000); // Programme la tâche pour s'exécuter après 5000 millisecondes (5 secondes)
         alert.show();
+        CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
 	 }
 	 
 	 private void validerDepot() {

@@ -36,6 +36,14 @@ public class Tableau extends Diagramme {
     	ecartTypeAiresCol.setCellValueFactory(new PropertyValueFactory<>("ecartTypeAires"));
     	TableColumn<TabElement, String> ecartTypeDiametreEquivalentCol = new TableColumn<TabElement, String>("ecartType des Diametres Equivalents");
     	ecartTypeDiametreEquivalentCol.setCellValueFactory(new PropertyValueFactory<>("ecartTypeDiametreEquivalent"));
+    	TableColumn<TabElement, String> moyenneAiresPxCol = new TableColumn<TabElement, String>("moyenne des Aires en pixel");
+    	moyenneAiresPxCol.setCellValueFactory(new PropertyValueFactory<>("moyenneAiresPx"));
+    	TableColumn<TabElement, String> moyenneDiametresEquivalentsPxCol = new TableColumn<TabElement, String>("moyenne des Diametres Equivalents en pixel");
+    	moyenneDiametresEquivalentsPxCol.setCellValueFactory(new PropertyValueFactory<>("moyenneDiametresEquivalentsPx"));
+    	TableColumn<TabElement, String> ecartTypeAiresPxCol = new TableColumn<TabElement, String>("ecartType des Aires en pixel");
+    	ecartTypeAiresPxCol.setCellValueFactory(new PropertyValueFactory<>("ecartTypeAiresPx"));
+    	TableColumn<TabElement, String> ecartTypeDiametreEquivalentPxCol = new TableColumn<TabElement, String>("ecartType des Diametres Equivalents en pixel");
+    	ecartTypeDiametreEquivalentPxCol.setCellValueFactory(new PropertyValueFactory<>("ecartTypeDiametreEquivalentPx"));
     	
     	tab.getColumns().add(nomImageCol);
     	tab.getColumns().add(grossissementCol);
@@ -45,7 +53,10 @@ public class Tableau extends Diagramme {
     	tab.getColumns().add(moyenneDiametresEquivalentsCol);
     	tab.getColumns().add(ecartTypeAiresCol);
     	tab.getColumns().add(ecartTypeDiametreEquivalentCol);
-    	
+    	tab.getColumns().add(moyenneAiresPxCol);
+    	tab.getColumns().add(moyenneDiametresEquivalentsPxCol);
+    	tab.getColumns().add(ecartTypeAiresPxCol);
+    	tab.getColumns().add(ecartTypeDiametreEquivalentPxCol);
     }
     
     /**
@@ -65,7 +76,7 @@ public class Tableau extends Diagramme {
 	public void alimenter(Statistique stat, Image image) {
 		TabElement tabel = new TabElement(image.getNomImage(), image.getGrossissement(), stat.getNbParticulesTrouvees(),
 				stat.getRatioSurfaceCouverte(), stat.getMoyenneAires(), stat.getMoyenneDiametresEquivalents(),
-				stat.getEcartTypeAires(), stat.getEcartTypeDiametreEquivalent());
+				stat.getEcartTypeAires(), stat.getEcartTypeDiametreEquivalent(), image);
 		tab.getItems().add(tabel);
 	}
 

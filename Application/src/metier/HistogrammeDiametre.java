@@ -51,6 +51,7 @@ public class HistogrammeDiametre extends Diagramme {
      */
     public void alimenterHistoDiametre(EnsembleParticules particules, int nbIntervalles) {
     	double min = particules.getMinDiametre(); double max = particules.getMaxDiametre();
+    	//min = ConvertisseurPxToµm.convertir(lr, lp, min);
     	double ecart = max-min;
     	double intervalle = ecart/nbIntervalles;
     	double[] tabIntervalles = new double[nbIntervalles];

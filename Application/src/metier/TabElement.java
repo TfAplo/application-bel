@@ -5,22 +5,32 @@ public class TabElement {
 	public double grossissement;
 	private int nbParticulesTrouvees;
 	private double ratioSurfaceCouverte;
+	private double moyenneAiresPx;
+	private double moyenneDiametresEquivalentsPx;
+	private double ecartTypeAiresPx;
+	private double ecartTypeDiametreEquivalentPx;
 	private double moyenneAires;
 	private double moyenneDiametresEquivalents;
 	private double ecartTypeAires;
 	private double ecartTypeDiametreEquivalent;
 	
 	public TabElement(String nomImage, double grossissement, int nbParticulesTrouvees, double ratioSurfaceCouverte,
-			double moyenneAires, double moyenneDiametresEquivalents, double ecartTypeAires,
-			double ecartTypeDiametreEquivalent) {
+			double moyenneAiresPx, double moyenneDiametresEquivalentsPx, double ecartTypeAiresPx,
+			double ecartTypeDiametreEquivalentPx,Image image ) {
 		this.nomImage = nomImage;
 		this.grossissement = grossissement;
 		this.nbParticulesTrouvees = nbParticulesTrouvees;
 		this.ratioSurfaceCouverte = ratioSurfaceCouverte;
-		this.moyenneAires = moyenneAires;
-		this.moyenneDiametresEquivalents = moyenneDiametresEquivalents;
-		this.ecartTypeAires = ecartTypeAires;
-		this.ecartTypeDiametreEquivalent = ecartTypeDiametreEquivalent;
+		this.moyenneAiresPx = moyenneAiresPx;
+		this.moyenneDiametresEquivalentsPx = moyenneDiametresEquivalentsPx;
+		this.ecartTypeAiresPx = ecartTypeAiresPx;
+		this.ecartTypeDiametreEquivalentPx = ecartTypeDiametreEquivalentPx;
+		double lr = image.getLargeurReelle();
+		double lp = image.getLargeurPx();
+		this.moyenneAires = ConvertisseurPxToµm.convertir(lr, lp, moyenneAiresPx);
+		this.moyenneDiametresEquivalents = ConvertisseurPxToµm.convertir(lr, lp, moyenneDiametresEquivalentsPx);
+		this.ecartTypeAires = ConvertisseurPxToµm.convertir(lr, lp, ecartTypeAiresPx);
+		this.ecartTypeDiametreEquivalent = ConvertisseurPxToµm.convertir(lr, lp, ecartTypeDiametreEquivalentPx);
 	}
 
 	public String getNomImage() {
@@ -85,6 +95,42 @@ public class TabElement {
 
 	public void setEcartTypeDiametreEquivalent(double ecartTypeDiametreEquivalent) {
 		this.ecartTypeDiametreEquivalent = ecartTypeDiametreEquivalent;
+	}
+
+	public double getMoyenneAiresPx() {
+		return moyenneAiresPx;
+	}
+
+	public void setMoyenneAiresPx(double moyenneAiresPx) {
+		this.moyenneAiresPx = moyenneAiresPx;
+	}
+
+	public double getMoyenneDiametresEquivalentsPx() {
+		return moyenneDiametresEquivalentsPx;
+	}
+
+	public void setMoyenneDiametresEquivalentsPx(double moyenneDiametresEquivalentsPx) {
+		this.moyenneDiametresEquivalentsPx = moyenneDiametresEquivalentsPx;
+	}
+
+	public double getEcartTypeAiresPx() {
+		return ecartTypeAiresPx;
+	}
+
+	public void setEcartTypeAiresPx(double ecartTypeAiresPx) {
+		this.ecartTypeAiresPx = ecartTypeAiresPx;
+	}
+
+	public double getEcartTypeDiametreEquivalentPx() {
+		return ecartTypeDiametreEquivalentPx;
+	}
+
+	public void setEcartTypeDiametreEquivalentPx(double ecartTypeDiametreEquivalentPx) {
+		this.ecartTypeDiametreEquivalentPx = ecartTypeDiametreEquivalentPx;
+	}
+
+	public void setGrossissement(double grossissement) {
+		this.grossissement = grossissement;
 	}
 	
 	
