@@ -168,7 +168,7 @@ public class IHMExportCSV {
 			int valeurEntiere = numberInInt.intValue();
 			numberEntier.add(valeurEntiere);
 		}
-		GenerateurFichierHistoCSV gen = new GenerateurFichierHistoCSV();
+		GenerateurFichierHistoCSV gen = new GenerateurFichierHistoCSV(intervalles, numberEntier);
 		
 	}
 }
