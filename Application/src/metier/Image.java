@@ -6,51 +6,72 @@ import java.util.*;
  * Classe representant une image. Elle contient les informations lui etant liees.
  */
 public class Image {
-
     /**
-     * Default constructor
-     */
-    public Image() {
-    }
-
-    public Image(int idImage, String nomImage, int largeurPx, int hauteurPx, int grossissement, double largeurImage) {
-		this.idImage = idImage;
-		this.nomImage = nomImage;
-		this.largeurPx = largeurPx;
-		this.hauteurPx = hauteurPx;
-		this.grossissement = grossissement;
-		this.largeurImage = largeurImage;
-	}
-
-	/**
      * ID de l'image dans la base de donnees.
      */
-    public int idImage;
+    private int idImage;
 
     /**
      * Nom du fichier de l'image.
      */
-    public String nomImage;
+    private String nomImage;
+    
+    /*
+     * emplacement de stockage de l'image
+     */
+    private String url;
 
     /**
      * Largeur de l'image en pixel.
      */
-    public int largeurPx;
+    private double largeurPx;
 
     /**
      * Hauteur de l'image en pixel.
      */
-    public int hauteurPx;
+    private double hauteurPx;
 
     /**
      * Grossissement du microscope lors de la prise de l'image.
      */
-    public int grossissement;
+    private double grossissement;
 
     /**
      * Largeur réelle de l'image.
      */
-    public double largeurImage;
+    private double largeurReelle;
+    
+    /*
+     * id de l'operateur qui a stocker l'image
+     */
+    private int idOperateur;
+    
+    /*
+     * id du produit auquel cette image est associée
+     */
+    private int idProduit;
+
+	/**
+     * Default constructor
+     */
+    public Image(String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReelle, int idOperateur, int idProduit) {
+    	this.nomImage = nomImage;
+    	this.url = url;
+    	this.largeurPx = largeurPx;
+    	this.hauteurPx = hauteurPx;
+    	this.grossissement = grossissement;
+    	this.largeurReelle = largeurReelle;
+    	this.idOperateur = idOperateur;
+    	this.idProduit = idProduit;
+    	
+    }
+
+	@Override
+	public String toString() {
+		return "Image [idImage=" + idImage + ", nomImage=" + nomImage + ", url=" + url + ", largeurPx=" + largeurPx
+				+ ", hauteurPx=" + hauteurPx + ", grossissement=" + grossissement + ", largeurReelle=" + largeurReelle
+				+ ", idOperateur=" + idOperateur + ", idProduit=" + idProduit + "]";
+	}
 
 	public int getIdImage() {
 		return idImage;
@@ -68,7 +89,15 @@ public class Image {
 		this.nomImage = nomImage;
 	}
 
-	public int getLargeurPx() {
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public double getLargeurPx() {
 		return largeurPx;
 	}
 
@@ -76,7 +105,7 @@ public class Image {
 		this.largeurPx = largeurPx;
 	}
 
-	public int getHauteurPx() {
+	public double getHauteurPx() {
 		return hauteurPx;
 	}
 
@@ -84,7 +113,7 @@ public class Image {
 		this.hauteurPx = hauteurPx;
 	}
 
-	public int getGrossissement() {
+	public double getGrossissement() {
 		return grossissement;
 	}
 
@@ -92,12 +121,32 @@ public class Image {
 		this.grossissement = grossissement;
 	}
 
-	public double getLargeurImage() {
-		return largeurImage;
+	public double getLargeurReelle() {
+		return largeurReelle;
 	}
 
-	public void setLargeurImage(double largeurImage) {
-		this.largeurImage = largeurImage;
+	public void setLargeurReelle(double largeurReelle) {
+		this.largeurReelle = largeurReelle;
 	}
+
+	public int getIdOperateur() {
+		return idOperateur;
+	}
+
+	public void setIdOperateur(int idOperateur) {
+		this.idOperateur = idOperateur;
+	}
+
+	public int getIdProduit() {
+		return idProduit;
+	}
+
+	public void setIdProduit(int idProduit) {
+		this.idProduit = idProduit;
+	}
+    
+   
+
+
 
 }

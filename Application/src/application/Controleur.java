@@ -94,42 +94,14 @@ public class Controleur {
 				vbox.getChildren().add(ch5);
 				listCh.add(ch5);
 			}
-			/**
-			CheckBox ch1 = new CheckBox();
-			ch1.setId("statistiques");
-			ch1.setText("Statistiques");
-			CheckBox ch2 = new CheckBox();
-			ch2.setId("histogrammeSurface");
-			ch2.setText("Histogramme de Surface");
-			CheckBox ch3 = new CheckBox();
-			ch3.setId("histogrammeSurfaceCumulatif");
-			ch3.setText("Histogramme de Surface Cumulatif");
-			CheckBox ch4 = new CheckBox();
-			ch4.setId("histogrammeDiametreEquivalent");
-			ch4.setText("Histogramme de Diametre Equivalent");
-			CheckBox ch5 = new CheckBox();
-			ch5.setId("histogrammeDiametreEquivalentCumulatif");
-			ch5.setText("Histogramme de Diametre Equivalent Cumulatif");
-			vbox.getChildren().add(ch1);
-			vbox.getChildren().add(ch2);
-			vbox.getChildren().add(ch3);
-			vbox.getChildren().add(ch4);
-			vbox.getChildren().add(ch5);
-			**/
 			CtrlExportCSV.getIHM().setVbox(vbox);
 			CtrlExportCSV.getIHM().alimenterFenetre();
-			/**
-			listCh.add(ch1);
-			listCh.add(ch2);
-			listCh.add(ch3);
-			listCh.add(ch4);
-			listCh.add(ch5);
-			**/
 			CtrlExportCSV.getIHM().alimenterCheckBox(listCh);
 			CtrlExportCSV.getIHM().setHistoDiamBarChart(CtrlAnalyse.getIhm().getHistoDiam().getBc());
 			CtrlExportCSV.getIHM().setHistoDiamCumBarChar(CtrlAnalyse.getIhm().getHistoDiam().getBcc());
 			CtrlExportCSV.getIHM().setHistoSurfaceBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBc());
 			CtrlExportCSV.getIHM().setHistoDiamCumBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBcc());
+			CtrlExportCSV.getIHM().setStatistiques(CtrlAnalyse.getIhm().getTab().getTab());
 	        stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

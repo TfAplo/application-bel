@@ -24,25 +24,68 @@ public class GenerateurFichierHistoCSV {
     /**
      * Crée le fichier CSV à partir des données d'histogrammes
      */
-    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier)
-    {
-    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("fichierCSV.csv"))) {
+    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier) {
+    	String[] Intervalles = intervalles.toArray(new String[0]);
+        int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
+    	
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("fichierCSV.csv"))) {
             // En-têtes du fichier CSV
     		for (String string : intervalles) {
 				writer.write(string + ";");
 			}
             writer.write("\n");
-            String[] test2 = intervalles.toArray(new String[0]);
-            int[] test1 = numberEntier.stream().mapToInt(Integer::intValue).toArray();
             
             // Écrire les données dans le fichier CSV
-            for (int i = 0; i < test2.length; i++) {
-                writer.write(test2[i] + ";" + test1[i] + "\n");
+            for (int i = 0; i < Intervalles.length; i++) {
+                writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     	System.out.println("Fichier CSV créé avec succès: fichierCSV" + this.compteur + ".csv");
     	this.compteur++;
+    }
+    
+    public void creerFichierTabCSV(ArrayList<String> nomImage,
+    								ArrayList<Double> grossissement,
+    								ArrayList<Integer> nbParticuleTrouve,
+    								ArrayList<Double> ratioSurfaceCouverte,
+    								ArrayList<Double> moyenneAiresPx,
+    								ArrayList<Double> moyenneDiametresEquivalentsPx,
+    								ArrayList<Double> ecartTypeAiresPx,
+    								ArrayList<Double> ecartTypeDiametreEquivalentPx,
+    								ArrayList<Double> moyenneAires,
+    								ArrayList<Double> moyenneDiametresEquivalents,
+    								ArrayList<Double> ecartTypeAires,
+    								ArrayList<Double> ecartTypeDiametreEquivalent) {
+    	String[] NomImage = nomImage.toArray(new String[0]);
+    	double[] Grossissement = grossissement.stream().mapToDouble(Double::doubleValue).toArray();
+    	int[] NbParticuleTrouve = nbParticuleTrouve.stream().mapToInt(Integer::intValue).toArray();
+    	double[] RatioSurfaceCouverte = ratioSurfaceCouverte.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] MoyenneAiresPx = moyenneAiresPx.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] MoyenneDiametresEquivalentsPx = moyenneDiametresEquivalentsPx.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] EcartTypeAiresPx = ecartTypeAiresPx.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] EcartTypeDiametreEquivalentPx = ecartTypeDiametreEquivalentPx.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] MoyenneAires = moyenneAires.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] MoyenneDiametresEquivalents = moyenneDiametresEquivalents.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] EcartTypeAires = ecartTypeAires.stream().mapToDouble(Double::doubleValue).toArray();
+    	double[] EcartTypeDiametreEquivalent = ecartTypeDiametreEquivalent.stream().mapToDouble(Double::doubleValue).toArray();
+    	
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("fichierCSV.csv"))) {
+            for(int i = 0; i < this.nomColonnesStatistiques.length; i++) {
+            	writer.write(this.nomColonnesStatistiques[i] + ";\n");
+            }
+    		
+    		for (int i = 0; i < this.nomColonnesStatistiques.length; i++) {
+                writer.write(NomImage[i] + ";" + Grossissement[i] + ";" + NbParticuleTrouve[i] 
+                			+ ";" + RatioSurfaceCouverte[i] + ";" + MoyenneAiresPx[i] + ";" +
+                			MoyenneDiametresEquivalentsPx[i] + ";" + EcartTypeAiresPx[i] + ";" +
+                			EcartTypeDiametreEquivalentPx[i] + ";" + MoyenneAires[i] + ";" +
+                			MoyenneDiametresEquivalents[i] + ";" + EcartTypeAires[i] +  
+                			";" + EcartTypeDiametreEquivalent[i] + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

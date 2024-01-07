@@ -11,9 +11,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import metier.GenerateurFichierHistoCSV;
+import metier.TabElement;
 
 public class IHMExportCSV {
 	@FXML
@@ -33,6 +35,8 @@ public class IHMExportCSV {
 	private BarChart histoDiamCumBarChar;
 	private BarChart histoSurfaceBarChar;
 	private BarChart histoSurfaceCumBarChar;
+	
+	private TableView<TabElement> statistiques;
 	
 	private GenerateurFichierHistoCSV gen;
 
@@ -138,7 +142,9 @@ public class IHMExportCSV {
 		this.histoSurfaceCumBarChar = barChart;
 	}
 	
-	
+	public void setStatistiques(TableView<TabElement> statistiques) {
+		this.statistiques = statistiques;
+	}
 	
 	public void export() {
 		if(isValideHistogrammeDiametreEquivalent()) {
@@ -175,7 +181,32 @@ public class IHMExportCSV {
 		gen.creerFichierHistoCSV(intervalles, numberEntier);
 	}
 	
-	public void exportStatistiques() {
-		
+	public void exportStatistiques(TableView<TabElement> statistiques) {
+		ArrayList<String> nomImage = new ArrayList<>();
+		ArrayList<Double> grossissement = new ArrayList<>();
+		ArrayList<Integer> nbParticuleTrouve = new ArrayList<>();
+		ArrayList<Double> ratioSurfaceCouverte = new ArrayList<>();
+		ArrayList<Double> moyenneAiresPx = new ArrayList<>();
+		ArrayList<Double> moyenneDiametresEquivalentsPx = new ArrayList<>();
+		ArrayList<Double> ecartTypeAiresPx = new ArrayList<>();
+		ArrayList<Double> ecartTypeDiametreEquivalentPx = new ArrayList<>();
+		ArrayList<Double> moyenneAires = new ArrayList<>();
+		ArrayList<Double> moyenneDiametresEquivalents = new ArrayList<>();
+		ArrayList<Double> ecartTypeAires = new ArrayList<>();
+		ArrayList<Double> ecartTypeDiametreEquivalent = new ArrayList<>();
+		for (TabElement element : statistiques.getItems()) {
+			nomImage.add(element.getNomImage());
+			grossissement.add(element.getGrossissement());
+			nbParticuleTrouve.add(element.getNbParticulesTrouvees());
+			ratioSurfaceCouverte.add(element.getRatioSurfaceCouverte());
+			moyenneAiresPx.add(element.getMoyenneAiresPx());
+			moyenneDiametresEquivalentsPx.add(element.getMoyenneDiametresEquivalentsPx());
+			ecartTypeAiresPx.add(element.getEcartTypeAiresPx());
+			ecartTypeDiametreEquivalentPx.add(element.getEcartTypeDiametreEquivalentPx());
+			moyenneAires.add(element.getMoyenneAires());
+			moyenneDiametresEquivalents.add(element.getMoyenneDiametresEquivalents());
+			ecartTypeAires.add(element.getEcartTypeAires());
+			ecartTypeDiametreEquivalent.add(element.getEcartTypeDiametreEquivalent());
+        }
 	}
 }
