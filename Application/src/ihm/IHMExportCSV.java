@@ -151,23 +151,23 @@ public class IHMExportCSV {
 	
 	public void export() {
 		if(isValideHistogrammeDiametreEquivalent()) {
-			exportHistogramme(this.histoDiamBarChart);
+			exportHistogramme(this.histoDiamBarChart, "donneesHistoDiamEq.csv", "pourcentage de particule");
 		}
 		if (isValideHistogrammeDiametreEquivalentCumulatif()){
-			exportHistogramme(this.histoDiamCumBarChar);
+			exportHistogramme(this.histoDiamCumBarChar, "donneesHistoDiamEqCumulatif.csv", "pourcentage cumulatif de particule");
 		}
 		if(isValideHistogrammeSurface()) {
-			exportHistogramme(this.histoSurfaceBarChar);
+			exportHistogramme(this.histoSurfaceBarChar, "donneesHistoDiamSur.csv", "pourcentage de particule");
 		}
 		if(isValideHistogrammeSurfaceCumulatif()) {
-			exportHistogramme(this.histoSurfaceCumBarChar);
+			exportHistogramme(this.histoSurfaceCumBarChar, "donneesHistoDiamSurCumulatif.csv", "pourcentage cumulatif de particule");
 		}
 		if(isValideStatistiques()) {
 			exportStatistiques(this.statistiques);
 		}
 	}
 	
-	public void exportHistogramme(BarChart<String,Number> histo) {
+	public void exportHistogramme(BarChart<String,Number> histo, String nom, String colonne) {
 		ArrayList<String> intervalles = new ArrayList<>();
 		ArrayList<Number> number = new ArrayList<>();
 		ObservableList<Series<String, Number>> list = histo.getData();
@@ -184,7 +184,7 @@ public class IHMExportCSV {
 			int valeurEntiere = numberInInt.intValue();
 			numberEntier.add(valeurEntiere);
 		}
-		gen.creerFichierHistoCSV(intervalles, numberEntier);
+		gen.creerFichierHistoCSV(intervalles, numberEntier, nom, colonne);
 	}
 	
 	public void exportStatistiques(TableView<TabElement> statistiques) {
@@ -214,5 +214,6 @@ public class IHMExportCSV {
 			ecartTypeAires.add(element.getEcartTypeAires());
 			ecartTypeDiametreEquivalent.add(element.getEcartTypeDiametreEquivalent());
         }
+		gen.creerFichierStatistiquesCSV(nomImage, grossissement, nbParticuleTrouve, ratioSurfaceCouverte, moyenneAiresPx, moyenneDiametresEquivalentsPx, ecartTypeAiresPx, ecartTypeDiametreEquivalentPx, moyenneAires, moyenneDiametresEquivalents, ecartTypeAires, ecartTypeDiametreEquivalent);
 	}
 }

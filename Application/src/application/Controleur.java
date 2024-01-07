@@ -363,7 +363,7 @@ public class Controleur {
 				CtrlExportCSV.getIHM().setHistoDiamBarChart(CtrlAnalyse.getIhm().getHistoDiam().getBc());
 				CtrlExportCSV.getIHM().setHistoDiamCumBarChar(CtrlAnalyse.getIhm().getHistoDiam().getBcc());
 				CtrlExportCSV.getIHM().setHistoSurfaceBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBc());
-				CtrlExportCSV.getIHM().setHistoDiamCumBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBcc());
+				CtrlExportCSV.getIHM().setHistoSurfaceCumBarChar(CtrlAnalyse.getIhm().getHistoSurf().getBcc());
 				CtrlExportCSV.getIHM().setStatistiques(CtrlAnalyse.getIhm().getTab().getTab());
 		        stage.show();
 			} catch (IOException e) {
