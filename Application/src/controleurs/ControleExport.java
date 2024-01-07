@@ -82,10 +82,7 @@ public class ControleExport extends Application{
 	
 	}
     
-    
-	/**
-	 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
-	 */
+
 	/*public void boutonExport(){
 	    
 		try {
@@ -114,10 +111,8 @@ public class ControleExport extends Application{
 	 * @param histogrammes : liste des histogrammes
 	 */
 	public void initialiser(List<BarChart<String, Number>> histogrammes,Stage popup) {
-	    //fenetreExport= new IHMExport(this);
 	    ihmExport.creerCheckBox(histogrammes,checkBoxContainer);
 	    boutonValider.setOnAction(event -> ihmExport.exporterHistogrammesEnPNG(event,checkBoxContainer,popup));
-	        System.out.println("test");
 	  }
 		
 	
@@ -155,6 +150,7 @@ public class ControleExport extends Application{
 	   * @param ihmExport : instance de IHMExport
 	   * @return retourne un compteur de type entier
 	   */
+	  
 	  public int exporterHistogramme(BarChart<?, ?> histogramme, String cheminFichier,IHMExport ihmExport) {
 		  boolean res =generateurFichier.enregistrerHistogrammeEnPNG(histogramme, cheminFichier);
 	    	
@@ -167,7 +163,7 @@ public class ControleExport extends Application{
 	       return compteurExport;
 	   }  
 	    
-
+	  
     /**
      * Getter de l'attribut FenetreExport
      * @return fenetreExport

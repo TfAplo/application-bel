@@ -74,6 +74,7 @@ public class Controleur {
 		 //rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
 		 
 		 boutonExportPNG.setOnAction(e -> boutonExport());
+		 boutonExportPNG.setVisible(false); // boutonExport à mettre en visible lors de l'affichage des stats
 		  
 	 }
 	
@@ -154,25 +155,14 @@ public class Controleur {
 		mainContainer.getChildren().clear();
 	 }
 	 
+	    
+	/**
+	 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
+	 */
 	public void boutonExport(){
 		    
 		try {
-			//ligne du dessous test
-			List<BarChart<String, Number>> listeHistogrammes = new ArrayList<>();	
-			CategoryAxis xAxis = new CategoryAxis();
-			NumberAxis yAxis = new NumberAxis();
-			BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-			xAxis.setLabel("Catégorie");
-			yAxis.setLabel("Valeur");
-			barChart.setTitle("Titre de l'histogramme");
-			XYChart.Series<String, Number> series = new XYChart.Series<>();
-			series.getData().add(new XYChart.Data<>("Catégorie1", 50));
-			series.getData().add(new XYChart.Data<>("Catégorie2", 80));
-			barChart.getData().add(series);
-			listeHistogrammes.add(barChart);
-			//fin test
-			
-			
+
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
 	        Parent nouvelleSceneParent = loader.load();
 	        ControleExport controleur = loader.getController();	   	         
@@ -181,7 +171,7 @@ public class Controleur {
 		   	popupStage.setTitle("Export d'Histogrammes");
 		   	nouvelleScene = new Scene(nouvelleSceneParent);
 		   	popupStage.setScene(nouvelleScene);
-		    controleur.initialiser(listeHistogrammes,popupStage); //CtrlAnalyse.getIhm().getGraphiques() à mettre entre les parenthese
+		    controleur.initialiser(CtrlAnalyse.getIhm().getGraphiques(),popupStage);
 		   	CtrlExport = CtrlAnalyse.getIhm().getControleurExport();  	   		
 		   	CtrlExport.getIhmExport().setControleurExport(CtrlExport);
 		    popupStage.showAndWait();
