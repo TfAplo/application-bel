@@ -94,8 +94,8 @@
                                                                   </HBox>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <Label text="Largeur réelle (cm) :" />
-                                                                        <TextField fx:id="champLargeurReelle" />
+                                                                        <Label text="largeur réelle (cm) :" />
+                                                                        <TextField fx:id="champLargeurReel" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">
@@ -112,8 +112,6 @@
                                                 </AnchorPane>
                                                 <Button fx:id="btnSelectionImage" mnemonicParsing="false" text="Sélectionner une image" />
                                                 <Button fx:id="btnValiderDepot" mnemonicParsing="false" text="Valider le dépot">
-                                                
-            									<Label fx:id="LabelStatutDepot" layoutX="773.0" layoutY="525.0" prefHeight="125.0" prefWidth="224.0" text="Statut du depot" AnchorPane.leftAnchor="773.0" />
                                                    <VBox.margin>
                                                       <Insets />
                                                    </VBox.margin>
@@ -126,7 +124,24 @@
                             </Tab>
                             <Tab text="Afficher les statistiques">
                               <content>
-                                <AnchorPane fx:id="mainContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane layoutX="219.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <content>
+                                                <VBox prefWidth="1014.0">
+                                                   <children>
+                                                      <VBox fx:id="mainContainer" prefWidth="1016.0" />
+                                                      <HBox fx:id="conteneurExports" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" visible="false">
+                                                         <children>
+                                                            <Button fx:id="boutonExportCSV" mnemonicParsing="false" text="Exporter en CSV" />
+                                                            <Button fx:id="boutonExportPNG" mnemonicParsing="false" text="Exporter en PNG" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children></AnchorPane>
                               </content>
                             </Tab>
                           </tabs>

@@ -2,6 +2,7 @@ package application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -53,11 +56,17 @@ public class Controleur {
 	 private ControleRecherche CtrlRecherche;
 	 
 	 @FXML
+	 private HBox conteneurExports;
+	 @FXML
+	 private Button boutonExportPNG;
+	 @FXML
+	 private Button boutonExportCSV;
+	 @FXML
 	 private TextField rechercher;
 	 @FXML
 	 private VBox afficherResultatContainer;
 	 @FXML
-	 private AnchorPane mainContainer;
+	 private VBox mainContainer;
 	 @FXML
 	 public VBox imageSelected;
 	 @FXML
@@ -76,8 +85,6 @@ public class Controleur {
 	 private Label LabelGlisserImage;
 	 @FXML
 	 private Label LabelNomImage;
-	 @FXML
-	 private Label LabelStatutDepot;
 	 @FXML
 	 private AnchorPane glisserDeposer;
 	 @FXML
@@ -111,8 +118,6 @@ public class Controleur {
 		 btnValiderDepot.setOnAction(e -> validerDepot());
 		 
 		 LabelNomImage.setVisible(false);
-		 LabelStatutDepot.setVisible(false);
-		 //RectangleStatutDepot.setVisible(false);
 	 }
 	
 	 
@@ -130,31 +135,22 @@ public class Controleur {
 			mainContainer.getChildren().add(sp);
 		 }**/
 	 
-	 /**
-	 public void afficherEtDisparaitreStatutDepot() {
-		 LabelStatutDepot.setVisible(true);
-         //RectangleStatutDepot.setVisible(true);
-         
-         // Créer une timeline pour déclencher l'action de suppression après 5 secondes
-         Duration delay = Duration.seconds(5);
-         KeyFrame keyFrame = new KeyFrame(delay, event -> {
-             // Code à exécuter après le délai
-        	 LabelStatutDepot.setVisible(false);
-             //RectangleStatutDepot.setVisible(false);
-         });
-
-         Timeline timeline = new Timeline(keyFrame);
-         timeline.setCycleCount(1);
-         timeline.play();
-	 }
-	 **/
 	 public void afficherEtDisparaitreStatutDepot(String titre, String haut, String bas) {
 		Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(titre);
         alert.setHeaderText(haut);
         alert.setContentText(bas);
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                if (alert.isShowing()) {
+                    Platform.runLater(alert::close);
+                }
+            }
+        };
 
-        alert.showAndWait();
+        timer.schedule(task, 5000); // Programme la tâche pour s'exécuter après 5000 millisecondes (5 secondes)
+        alert.show();
 	 }
 	 
 	 private void validerDepot() {
@@ -289,15 +285,9 @@ public class Controleur {
 				if (CtrlAnalyse.getIhm().isAfficher()) {
 					CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
 					mainContainer.getChildren().clear();
-					ScrollPane sp = new ScrollPane();
-					VBox main = new VBox();
-					sp.setContent(main);
-					sp.setMaxSize(mainContainer.getWidth(), mainContainer.getHeight());
-					sp.setPannable(true);
-					sp.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-					ObservableList<Node> container = main.getChildren();
+					ObservableList<Node> container = mainContainer.getChildren();
 					CtrlAnalyse.getIhm().afficherDiagrammes(container);
-					mainContainer.getChildren().add(sp);
+					conteneurExports.setVisible(true);
 				}
 			});
 		} catch (IOException e) {

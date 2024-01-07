@@ -39,7 +39,7 @@ public class HistogrammeSurface extends Diagramme {
         xAxisc = new CategoryAxis();
         yAxisc = new NumberAxis();
         bcc = new BarChart<String,Number>(xAxisc,yAxisc);
-        bcc.setTitle("Histogramme des diamètres équivalents cumulatif");
+        bcc.setTitle("Histogramme des surfaces cumulatif");
         xAxisc.setLabel("intervalles de surfaces");       
         yAxisc.setLabel("Pourcentage cumulatif de particules");
     }
