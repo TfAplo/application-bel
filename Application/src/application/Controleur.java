@@ -67,7 +67,7 @@ public class Controleur {
 	 @FXML
 	 private TextField champGrossissement;
 	 @FXML
-	 private TextField champLargeurReel;
+	 private TextField champLargeurReelle;
 	 @FXML
 	 private TextField champNomProduit;
 	 @FXML
@@ -148,18 +148,18 @@ public class Controleur {
 	 private void validerDepot() {
 		 String nomOperateur = champOperateur.getText();
 		 String grossissement = champGrossissement.getText();
-		 String largeurReel = champLargeurReel.getText();
+		 String largeurReelle = champLargeurReelle.getText();
 		 String nomProduit = champNomProduit.getText();
 
 		// si tous les champs sont bien remplis
-		 if ((nomOperateur != null) && (nomImage != null) && (url != null) && (largeurPx != 0) && (hauteurPx != 0) && (grossissement != null) && (largeurReel != null) && (nomProduit != null) ) {
+		 if ((nomOperateur != null) && (nomImage != null) && (url != null) && (largeurPx != 0) && (hauteurPx != 0) && (grossissement != null) && (largeurReelle != null) && (nomProduit != null) ) {
 			 try {
 				 Double grossissementDouble = Double.parseDouble(grossissement);
-				 Double largeurReelDouble = Double.parseDouble(largeurReel);
+				 Double largeurReelleDouble = Double.parseDouble(largeurReelle);
 				 
 				 CtrlDepot.deposerImage(nomOperateur, nomImage, url,
 						 largeurPx, hauteurPx, grossissementDouble, 
-						 largeurReelDouble, nomProduit);
+						 largeurReelleDouble, nomProduit);
 				 
 				 // on remet tout de l'image selectionnee a zero
 				 nomImage = null;
@@ -178,14 +178,14 @@ public class Controleur {
 	             // vider tous les champs
 	             champOperateur.setText(null);
 	             champGrossissement.setText(null);
-	             champLargeurReel.setText(null);
+	             champLargeurReelle.setText(null);
 	             champNomProduit.setText(null);
 	             LabelStatutDepot.setText("L'image a bien été déposée dans la base de donnée.");
 			 } catch (NumberFormatException e) {
-				 LabelStatutDepot.setText("1Erreur - L'image n'a pas été déposée dans la base de donnée. Veillez à bien renseigner des informations correctes.");
+				 LabelStatutDepot.setText("Erreur - L'image n'a pas été déposée dans la base de donnée. Veillez à bien renseigner des informations correctes.");
 			 }
 		 } else {
-			 LabelStatutDepot.setText("2Erreur - L'image n'a pas été déposée dans la base de donnée. Veillez à bien remplir tous les champs et à sélectionner une image.");
+			 LabelStatutDepot.setText("Erreur - L'image n'a pas été déposée dans la base de donnée. Veillez à bien remplir tous les champs et à sélectionner une image.");
 		 }
 		 afficherEtDisparaitreStatutDepot();
 	 }

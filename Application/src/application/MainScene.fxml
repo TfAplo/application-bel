@@ -94,8 +94,8 @@
                                                                   </HBox>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <Label text="largeur réelle (cm) :" />
-                                                                        <TextField fx:id="champLargeurReel" />
+                                                                        <Label text="Largeur réelle (cm) :" />
+                                                                        <TextField fx:id="champLargeurReelle" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">

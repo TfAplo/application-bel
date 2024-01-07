@@ -33,7 +33,7 @@ public class ControleDepot {
      * @param nomProduit Nom du produit sur l'image.
      * @return Booleen qui indique si l'image a ete deposee dans la base de donnees ou non.
      */
-    public void deposerImage(String nomOperateur, String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReel, String nomProduit) {
+    public void deposerImage(String nomOperateur, String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReelle, String nomProduit) {
 		// on cree un objet OperateurDAO et Operateur qu'on creer dans la bdd
     	OperateurDAO operateurDAO = new OperateurDAO();
     	Operateur operateur = new Operateur(nomOperateur);
@@ -46,7 +46,7 @@ public class ControleDepot {
     	int idProduit = produit.getIdProduit();
         // on cree un objet ImageDAO et Image qu'on ajoute dans la bdd
     	ImageDAO imageDAO = new ImageDAO();
-    	Image image = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+    	Image image = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
         imageDAO.creer(image);
     }
 

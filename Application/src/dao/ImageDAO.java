@@ -31,14 +31,14 @@ public class ImageDAO extends DAO<Image>{
         double largeurPx = image.getLargeurPx();
         double hauteurPx = image.getHauteurPx();
         double grossissement = image.getGrossissement();
-        double largeurReel = image.getLargeurReel();
+        double largeurReelle = image.getLargeurReelle();
         int idOperateur = image.getIdOperateur();
         int idProduit = image.getIdProduit();
         
         
         //creation de la requete SQL
-        String sql = "INSERT INTO image (nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit) "
-        		+ "VALUES ('"+ nomImage +"', '"+ url + "', " + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReel +", "+idOperateur + ", " + idProduit + ");";
+        String sql = "INSERT INTO image (nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit) "
+        		+ "VALUES ('"+ nomImage +"', '"+ url + "', " + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReelle +", "+idOperateur + ", " + idProduit + ");";
         
         // Execution de la requete
  		try {
@@ -82,12 +82,12 @@ public class ImageDAO extends DAO<Image>{
 		        double largeurPx = rs.getInt("largeurPx");
 		        double hauteurPx = rs.getInt("hauteurPx");
 		        double grossissement = rs.getInt("grossissement");
-		        double largeurReel = rs.getDouble("largeurReel");
+		        double largeurReelle = rs.getDouble("largeurReelle");
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
  		        
  		     //Creation de l'objet image
- 		      Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+ 		      Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
  		      newImage.setIdImage(idImage);
 			return newImage;
  			}
@@ -114,7 +114,7 @@ public class ImageDAO extends DAO<Image>{
         double largeurPx = image.getLargeurPx();
         double hauteurPx = image.getHauteurPx();
         double grossissement = image.getGrossissement();
-        double largeurReel = image.getLargeurReel();
+        double largeurReelle = image.getLargeurReelle();
         int idOperateur = image.getIdOperateur();
         int idProduit = image.getIdProduit();
         
@@ -125,7 +125,7 @@ public class ImageDAO extends DAO<Image>{
         sql += "largeurPx = " + largeurPx  + ",";
         sql += "hauteurPx = " +hauteurPx +",";
         sql += "grossissement = "+ grossissement + ",";
-        sql += "largeurReel = "+ largeurReel + ",";
+        sql += "largeurReelle = "+ largeurReelle + ",";
         sql +=  "idOperateur = " + idOperateur + ",";
         sql += "idProduit = " + idProduit + " WHERE idImage = " + idImage;
          
@@ -183,13 +183,13 @@ public class ImageDAO extends DAO<Image>{
 		        int largeurPx = rs.getInt("largeurPx");
 		        int hauteurPx = rs.getInt("hauteurPx");
 		        int grossissement = rs.getInt("grossissement");
-		        double largeurReel = rs.getDouble("largeurReel");
+		        double largeurReelle = rs.getDouble("largeurReelle");
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
 		        
 		        
 		     //Creation de l'objet image
-			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
 			newImage.setIdImage(idImage);
 			//ajout a la liste
 			listeImage.add(newImage);
@@ -224,13 +224,13 @@ public class ImageDAO extends DAO<Image>{
 		        int largeurPx = rs.getInt("largeurPx");
 		        int hauteurPx = rs.getInt("hauteurPx");
 		        int grossissement = rs.getInt("grossissement");
-		        double largeurReel = rs.getDouble("largeurReel");
+		        double largeurReelle = rs.getDouble("largeurReelle");
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
 		        
 		        
 		     //Creation de l'objet image
-			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReel, idOperateur, idProduit);
+			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
 			newImage.setIdImage(idImage);
 			//ajout a la liste
 			listeImage.add(newImage);

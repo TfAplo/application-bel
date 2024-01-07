@@ -39,7 +39,7 @@ public class Image {
     /**
      * Largeur réelle de l'image.
      */
-    private double largeurReel;
+    private double largeurReelle;
     
     /*
      * id de l'operateur qui a stocker l'image
@@ -54,13 +54,13 @@ public class Image {
 	/**
      * Default constructor
      */
-    public Image(String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReel, int idOperateur, int idProduit) {
+    public Image(String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReelle, int idOperateur, int idProduit) {
     	this.nomImage = nomImage;
     	this.url = url;
     	this.largeurPx = largeurPx;
     	this.hauteurPx = hauteurPx;
     	this.grossissement = grossissement;
-    	this.largeurReel = largeurReel;
+    	this.largeurReelle = largeurReelle;
     	this.idOperateur = idOperateur;
     	this.idProduit = idProduit;
     	
@@ -69,7 +69,7 @@ public class Image {
 	@Override
 	public String toString() {
 		return "Image [idImage=" + idImage + ", nomImage=" + nomImage + ", url=" + url + ", largeurPx=" + largeurPx
-				+ ", hauteurPx=" + hauteurPx + ", grossissement=" + grossissement + ", largeurReel=" + largeurReel
+				+ ", hauteurPx=" + hauteurPx + ", grossissement=" + grossissement + ", largeurReelle=" + largeurReelle
 				+ ", idOperateur=" + idOperateur + ", idProduit=" + idProduit + "]";
 	}
 
@@ -121,12 +121,12 @@ public class Image {
 		this.grossissement = grossissement;
 	}
 
-	public double getLargeurReel() {
-		return largeurReel;
+	public double getLargeurReelle() {
+		return largeurReelle;
 	}
 
-	public void setLargeurReel(double largeurReel) {
-		this.largeurReel = largeurReel;
+	public void setLargeurReelle(double largeurReelle) {
+		this.largeurReelle = largeurReelle;
 	}
 
 	public int getIdOperateur() {
