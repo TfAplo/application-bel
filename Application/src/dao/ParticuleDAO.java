@@ -74,13 +74,13 @@ public class ParticuleDAO extends DAO<Particule>{
     public EnsembleParticules creer(int idImage,EnsembleParticules ens) {
     	ArrayList<Particule> l = ens.getListeParticules();
     	String requete = "INSERT INTO particule (surfaceParticulePx, coCoinHautGaucheX,"
-    			+ "coCoinHautGaucheY,coCoinHautDroitX,"
-    			+ "coCoinHautDroitY,coCentreX,coCentreY,orientation,"
+    			+ "coCoinHautGaucheY,coCoinBasDroitX,"
+    			+ "coCoinBasDroitY,coCentreX,coCentreY,orientation,"
     			+ "longueurAxeMajeur,longueurAxeMineur,diametreEquivalent,idImage) VALUES ";
     	for (Particule p : l) {
 			requete += "(" + p.getSurfaceParticulePx() + "," + p.getcoCoinHautGaucheX() + ","
-			+ p.getcoCoinHautGaucheY()+ "," + p.getcoCoinHautGaucheX()+ "," 
-			+p.getcoCoinHautDroitY()+ ","+ p.getCoCentreX()+ ","
+			+ p.getcoCoinHautGaucheY()+ "," + p.getcoCoinBasDroitX()+ "," 
+			+p.getcoCoinBasDroitY()+ ","+ p.getCoCentreX()+ ","
 			+ p.getCoCentreY()+ ","+ p.getOrientation()+ ","+
 			p.getLongueurAxeMajeur()+ "," + p.getLongueurAxeMineur()+ "," + p.getDiametreEquivalent()+ "," + idImage +"),";
 		}

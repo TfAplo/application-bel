@@ -15,13 +15,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javafx.stage.FileChooser;
 
 /**
- * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
+ * La classe GenerateurFichierCSV est responsable de la génération des fichiers CSV à partir des données d'histogrammes
  */
 public class GenerateurFichierCSV {
 	private final String[] nomColonnesStatistiques = {"nom de l'image", "grossissement", "nombre de particules trouvees",
 			"ratio de surface couverte", "moyenne des aires px",  "moyenne diametres equivalents px",
 			"ecart-type des aires px", "ecart-type des diametres equivalents px", "moyenne des aires", 
 			"moyenne diametres equivalents", "ecart-type des aires", "ecart-type des diametres equivalents"};
+	
 	/**
      * Constructeur du générateur de fichiers
      */
@@ -29,7 +30,10 @@ public class GenerateurFichierCSV {
     }
 
     
-    
+    /**
+	 * methode permettant de choisir le dossier de destination des histogrammes ou des statistiques à exporter
+	 * @return retourne le chemin du dossier de destination
+	 */
     public File choisirDossierDeDestination() {
 
         FileChooser fileChooser = new FileChooser();
@@ -38,70 +42,17 @@ public class GenerateurFichierCSV {
         fileChooser.setInitialFileName("donnees");
         return fileChooser.showSaveDialog(null); 
     }
-    
-    
-    
+
     /**
-     * Crée le fichier CSV à partir des données d'histogrammes
+     * methode permettant de creer un fichier csv qui represente un histogramme
+     * @param intervalles parametre qui represente les intervalles d'un histogramme
+     * @param pourcentParticule parametre qui represente les pourcentage de particule
+     * @param nom parametre qui represente le nom du fichier CSV obtenu a la fin de la methode
+     * @param colonne parametre qui represente le nom de la seconde colonne du fichier CSV
      */
-    /**
-    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier, String nom, String colonne) {
-    	String[] Intervalles = intervalles.toArray(new String[0]);
-        int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
-    	        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nom))) {
-            // En-têtes du fichier CSV
-    		writer.write("intervalles;" + colonne + "\n");
-        
-            // Écrire les données dans le fichier CSV
-            for (int i = 0; i < Intervalles.length; i++) {
-                writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    	System.out.println("Fichier CSV créé avec succès: " + nom + "");
-    }
-    **/
-    
-    /**
-    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier, String nomFichier, String colonne) {
-        // Utilisation de FileDialog pour choisir l'emplacement du fichier
-        Frame frame = new Frame();
-        FileDialog fileDialog = new FileDialog(frame, "Choisir l'emplacement du fichier", FileDialog.SAVE);
-        fileDialog.setFile(nomFichier);
-        fileDialog.setVisible(true);
-
-        String fichierChoisi = fileDialog.getFile();
-        if (fichierChoisi == null) {
-            System.out.println("Opération annulée par l'utilisateur.");
-            return;
-        }
-
-        String repertoireChoisi = fileDialog.getDirectory();
-        nomFichier = repertoireChoisi + fichierChoisi;
-
+    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> pourcentParticule, String nom, String colonne) {
         String[] Intervalles = intervalles.toArray(new String[0]);
-        int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomFichier + ".csv"))) {
-            // En-têtes du fichier CSV
-            writer.write("intervalles;" + colonne + "\n");
-
-            // Écrire les données dans le fichier CSV
-            for (int i = 0; i < Intervalles.length; i++) {
-                writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
-            }
-            System.out.println("Fichier CSV créé avec succès : " + nomFichier + ".csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-**/
-    
-    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier, String nom, String colonne) {
-        String[] Intervalles = intervalles.toArray(new String[0]);
-        int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
+        int[] PourcentParticule = pourcentParticule.stream().mapToInt(Integer::intValue).toArray();
 
         File selectedDirectory = choisirDossierDeDestination();
 
@@ -114,7 +65,7 @@ public class GenerateurFichierCSV {
 
                 // Écrire les données dans le fichier CSV
                 for (int i = 0; i < Intervalles.length; i++) {
-                    writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
+                    writer.write(Intervalles[i] + ";" + PourcentParticule[i] + "\n");
                 }
 
                 System.out.println("Fichier CSV créé avec succès : donnees" + nom);
@@ -126,7 +77,21 @@ public class GenerateurFichierCSV {
 
     
     
-    
+    /**
+     * methode permettant de creer un fichier csv qui represente les statistiques d'une image
+     * @param nomImage parametre de type ArrayList<String> qui represente les noms des images selectionnees
+     * @param grossissement parametre de type ArrayList<Double> qui represente le grossissement
+     * @param nbParticuleTrouve parametre de type ArrayList<Integer> qui represente le nombre de particules
+     * @param ratioSurfaceCouverte parametre de type ArrayList<Double> qui represente le ratio de la surface couverte
+     * @param moyenneAiresPx parametre de type ArrayList<Double> qui represente la moyenne des aires en des particules en pixels
+     * @param moyenneDiametresEquivalentsPx parametre de type ArrayList<Double> qui represente la moyenne des diametres equivalents des particules en pixels
+     * @param ecartTypeAiresPx parametre de type ArrayList<Double> qui represente l'ecart type des aires des particules en pixels
+     * @param ecartTypeDiametreEquivalentPx parametre de type ArrayList<Double> qui represente l'ecart type des diametres equivalents des particules en pixels
+     * @param moyenneAires parametre de type ArrayList<Double> qui represente la moyenne des aires en des particules
+     * @param moyenneDiametresEquivalents parametre de type ArrayList<Double> qui represente la moyenne des diametres equivalents des particules
+     * @param ecartTypeAires parametre de type ArrayList<Double> qui represente l'ecart type des diametres equivalents des particules
+     * @param ecartTypeDiametreEquivalent parametre de type ArrayList<Double> qui represente l'ecart type des diametres equivalents des particules
+     */
     public void creerFichierStatistiquesCSV(ArrayList<String> nomImage,
     								ArrayList<Double> grossissement,
     								ArrayList<Integer> nbParticuleTrouve,

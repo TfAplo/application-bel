@@ -10,8 +10,8 @@ public class Particule {
     private double surfaceParticulePx;
     private double coCoinHautGaucheX;
     private double coCoinHautGaucheY;
-    private double coCoinHautDroitX;
-    private double coCoinHautDroitY;
+    private double coCoinBasDroitX;
+    private double coCoinBasDroitY;
     private double coCentreX;
     private double coCentreY;
     private double orientation;
@@ -27,8 +27,8 @@ public class Particule {
     	surfaceParticulePx = Double.parseDouble(attributs[0]);
     	coCoinHautGaucheX = Double.parseDouble(attributs[1]);
     	coCoinHautGaucheY = Double.parseDouble(attributs[2]);
-    	coCoinHautDroitX = Double.parseDouble(attributs[3]);
-    	coCoinHautDroitY = Double.parseDouble(attributs[4]);
+    	coCoinBasDroitX = Double.parseDouble(attributs[3]);
+    	coCoinBasDroitY = Double.parseDouble(attributs[4]);
     	coCentreX = Double.parseDouble(attributs[5]);
     	coCentreY = Double.parseDouble(attributs[6]);
     	orientation = Double.parseDouble(attributs[7]);
@@ -40,14 +40,14 @@ public class Particule {
     
 
 	public Particule(int idParticule, double surfaceParticulePx, double coCoinHautGaucheX, double coCoinHautGaucheY,
-			double coCoinHautDroitX, double coCoinHautDroitY, double coCentreX, double coCentreY, double orientation,
+			double coCoinBasDroitX, double coCoinBasDroitY, double coCentreX, double coCentreY, double orientation,
 			double longueurAxeMajeur, double longueurAxeMineur, double diametreEquivalent, int idImage) {
 		this.idParticule = idParticule;
 		this.surfaceParticulePx = surfaceParticulePx;
 		this.coCoinHautGaucheX = coCoinHautGaucheX;
 		this.coCoinHautGaucheY = coCoinHautGaucheY;
-		this.coCoinHautDroitX = coCoinHautDroitX;
-		this.coCoinHautDroitY = coCoinHautDroitY;
+		this.coCoinBasDroitX = coCoinBasDroitX;
+		this.coCoinBasDroitY = coCoinBasDroitY;
 		this.coCentreX = coCentreX;
 		this.coCentreY = coCentreY;
 		this.orientation = orientation;
@@ -63,7 +63,7 @@ public class Particule {
 	public String toString() {
 		return "Particule [idParticule=" + idParticule + ", surfaceParticulePx=" + surfaceParticulePx
 				+ ", coCoinHautGaucheX=" + coCoinHautGaucheX + ", coCoinHautGaucheY=" + coCoinHautGaucheY
-				+ ", coCoinHautDroitX=" + coCoinHautDroitX + ", coCoinHautDroitY=" + coCoinHautDroitY
+				+ ", coCoinBasDroitX=" + coCoinBasDroitX + ", coCoinBasDroitY=" + coCoinBasDroitY
 				+ ", coCentreX=" + coCentreX + ", coCentreY=" + coCentreY + ", orientation=" + orientation
 				+ ", longueurAxeMajeur=" + longueurAxeMajeur + ", longueurAxeMineur=" + longueurAxeMineur
 				+ ", diametreEquivalent=" + diametreEquivalent + "]";
@@ -102,20 +102,20 @@ public class Particule {
 		this.coCoinHautGaucheY = coCoinHautGaucheY;
 	}
 
-	public double getcoCoinHautDroitX() {
-		return coCoinHautDroitX;
+	public double getcoCoinBasDroitX() {
+		return coCoinBasDroitX;
 	}
 
-	public void setcoCoinHautDroitX(double coCoinHautDroitX) {
-		this.coCoinHautDroitX = coCoinHautDroitX;
+	public void setcoCoinBasDroitX(double coCoinBasDroitX) {
+		this.coCoinBasDroitX = coCoinBasDroitX;
 	}
 
-	public double getcoCoinHautDroitY() {
-		return coCoinHautDroitY;
+	public double getcoCoinBasDroitY() {
+		return coCoinBasDroitY;
 	}
 
-	public void setcoCoinHautDroitY(double coCoinHautDroitY) {
-		this.coCoinHautDroitY = coCoinHautDroitY;
+	public void setcoCoinBasDroitY(double coCoinBasDroitY) {
+		this.coCoinBasDroitY = coCoinBasDroitY;
 	}
 
 	public double getCoCentreX() {

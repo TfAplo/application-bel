@@ -12,9 +12,9 @@
       <Button fx:id="boutonValider" layoutX="286.0" layoutY="194.0" mnemonicParsing="false" onAction="#boutonValide" prefHeight="25.0" prefWidth="68.0" text="export" />
       <Button fx:id="retour" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" onAction="#boutonRetour" prefHeight="25.0" prefWidth="68.0" text="retour" />
       <Line endX="500.0" layoutY="35.0" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="164.0" layoutY="52.0" prefHeight="133.0" prefWidth="173.0" style="-fx-border-width: 0px; -fx-background-color: #F4F4F4; -fx-border-color: #F4F4F4;">
+      <ScrollPane hbarPolicy="NEVER" layoutX="67.0" layoutY="58.0" prefHeight="109.0" prefWidth="367.0" style="-fx-border-width: 0px; -fx-background-color: #F4F4F4; -fx-border-color: #F4F4F4;">
          <content>
-            <VBox fx:id="checkBoxContainer" prefHeight="124.0" prefWidth="172.0" />
+            <VBox fx:id="checkBoxContainer" prefHeight="106.0" prefWidth="367.0" />
          </content>
       </ScrollPane>
    </children>

@@ -48,18 +48,25 @@ public class IHMExportCSV {
 	
 	private GenerateurFichierCSV gen;
 
+	/**
+	 * constructeur de la classe IHMExportCSV
+	 */
 	public IHMExportCSV() {
 		gen = new GenerateurFichierCSV();
 	}
 	
+	/**
+	 * methode permetant l'initialisation des bouton de la fenetre popup exportCSV
+	 */
 	@FXML
 	 public void initialize() {
 		 export.setOnAction(e -> export());
 		 retour.setOnAction(e -> boutonRetour());
 	 }
 	
-	
-	
+	/**
+	 * Bouton permettant la fermeture de la fenetre popup exportCSV
+	 */
 	@FXML
 	  public void boutonRetour() {
 		  Stage stage = (Stage) retour.getScene().getWindow();
@@ -67,33 +74,56 @@ public class IHMExportCSV {
 	  }
 	
 	
-	
+	/**
+	 * setter de l'attribut valideStatistiques
+	 */
 	public void cocheStatistiques() {
 		this.valideStatistiques = !this.valideStatistiques;
 	}
+	/**
+	 * setter de l'attribut valideHistogrammeSurface
+	 */
 	public void cocheHistogrammeSurface() {
 		this.valideHistogrammeSurface = !this.valideHistogrammeSurface;
 	}
+	/**
+	 * setter de l'attribut valideHistogrammeSurfaceCumulatif
+	 */
 	public void cocheHistogrammeSurfaceCumulatif() {
 		this.valideHistogrammeSurfaceCumulatif = !this.valideHistogrammeSurfaceCumulatif;
 	}
+	/**
+	 * setter de l'attribut valideHistogrammeDiametreEquivalent
+	 */
 	public void cocheHistogrammeDiametreEquivalent() {
 		this.valideHistogrammeDiametreEquivalent = !this.valideHistogrammeDiametreEquivalent;
 	}
+	/**
+	 * setter de l'attribut valideHistogrammeDiametreEquivalentCumulatif
+	 */
 	public void cocheHistogrammeDiametreEquivalentCumulatif() {
 		this.valideHistogrammeDiametreEquivalentCumulatif = !this.valideHistogrammeDiametreEquivalentCumulatif;
 	}
 	
 	
-	
+	/**
+	 * setter de l'attribut vbox
+	 */
 	public void setVbox(VBox vbox) {
 		this.vbox = vbox;
 	}
 	
+	/**
+	 * methode permettant d'alimenter la fenetre popup exportCSV
+	 */
 	public void alimenterFenetre() {
 		anchorMain.getChildren().add(vbox);
 	}
 	
+	/**
+	 * methode permettant alimenter les checkbox en fonction de leur Id
+	 * @param checkbox parametre de type ArrayList<CheckBox> qui représente les CheckBox à alimenter
+	 */
 	public void alimenterCheckBox(ArrayList<CheckBox> checkbox) {
 		Insets insets = new Insets(10, 10, 10, 10);
 		for (CheckBox CheckBox : checkbox) {
@@ -117,45 +147,83 @@ public class IHMExportCSV {
 	}
 	
 	
-
+	/**
+	 * getter de l'attribut valideStatistiques
+	 * @return un booleen qui correspond à l'etat de la CheckBox (coche ou non)
+	 */
 	public boolean isValideStatistiques() {
 		return valideStatistiques;
 	}
 
+	/**
+	 * getter de l'attribut valideHistogrammeSurface
+	 * @return un booleen qui correspond à l'etat de la CheckBox (coche ou non)
+	 */
 	public boolean isValideHistogrammeSurface() {
 		return valideHistogrammeSurface;
 	}
 
+	/**
+	 * getter de l'attribut valideHistogrammeSurfaceCumulatif
+	 * @return un booleen qui correspond à l'etat de la CheckBox (coche ou non)
+	 */
 	public boolean isValideHistogrammeSurfaceCumulatif() {
 		return valideHistogrammeSurfaceCumulatif;
 	}
 
+	/**
+	 * getter de l'attribut valideHistogrammeDiametreEquivalent
+	 * @return un booleen qui correspond à l'etat de la CheckBox (coche ou non)
+	 */
 	public boolean isValideHistogrammeDiametreEquivalent() {
 		return valideHistogrammeDiametreEquivalent;
 	}
 
+	/**
+	 * getter de l'attribut valideHistogrammeDiametreEquivalentCumulatif
+	 * @return un booleen qui correspond à l'etat de la CheckBox (coche ou non)
+	 */
 	public boolean isValideHistogrammeDiametreEquivalentCumulatif() {
 		return valideHistogrammeDiametreEquivalentCumulatif;
 	}
 	
 	
-	
+	/**
+	 * setter de l'atribut histoDiamBarChart
+	 * @param barChart parametre de type BarChart qui represente un histogramme
+	 */
 	public void setHistoDiamBarChart(BarChart barChart) {
 		this.histoDiamBarChart = barChart;
 	}
 	
+	/**
+	 * setter de l'atribut histoDiamCumBarChar
+	 * @param barChart parametre de type BarChart qui represente un histogramme
+	 */
 	public void setHistoDiamCumBarChar(BarChart barChart) {
 		this.histoDiamCumBarChar = barChart;
 	}
 	
+	/**
+	 * setter de l'atribut histoSurfaceBarChar
+	 * @param barChart parametre de type BarChart qui represente un histogramme
+	 */
 	public void setHistoSurfaceBarChar(BarChart barChart) {
 		this.histoSurfaceBarChar = barChart;
 	}
 	
+	/**
+	 * setter de l'atribut histoSurfaceCumBarChar
+	 * @param barChart parametre de type BarChart qui represente un histogramme
+	 */
 	public void setHistoSurfaceCumBarChar(BarChart barChart) {
 		this.histoSurfaceCumBarChar = barChart;
 	}
 	
+	/**
+	 * setter de l'atribut statistiques
+	 * @param statistiques parametre de type TableView<TabElement> qui represente le tableau de statistiques d'une image
+	 */
 	public void setStatistiques(TableView<TabElement> statistiques) {
 		this.statistiques = statistiques;
 	}
@@ -185,13 +253,12 @@ public class IHMExportCSV {
             e.printStackTrace();
         }
     }
-	
+  
     
-    
-    
-    
-    
-    
+    /**
+     * methode qui s'active lorsque le bouton export est actionné, qui se sert de getter afin
+     * d'actionner ou non les methodes qui exporte les différents histogrammes ou les statistiques
+     */
 	public void export() {
 		if(isValideHistogrammeDiametreEquivalent()) {
 			exportHistogramme(this.histoDiamBarChart, "HistoDiamEq.csv", "pourcentage de particule");
@@ -211,26 +278,36 @@ public class IHMExportCSV {
 		FenetreValideExport();
 	}
 	
+	/**
+	 * methode qui sert a exporter les differents hisotgrammes
+	 * @param histo parametre de type BarChart<String,Number> qui represente un histogramme
+	 * @param nom parametre de type String qui represente le nom du fichier CSV
+	 * @param colonne parametre de type String qui represente le nom de la seconde colonne du fichier CSV
+	 */
 	public void exportHistogramme(BarChart<String,Number> histo, String nom, String colonne) {
 		ArrayList<String> intervalles = new ArrayList<>();
-		ArrayList<Number> number = new ArrayList<>();
+		ArrayList<Number> pourcentParticule = new ArrayList<>();
 		ObservableList<Series<String, Number>> list = histo.getData();
 		for (XYChart.Series<String, Number> chartSeries : histo.getData()) {
             for (XYChart.Data<String, Number> data : chartSeries.getData()) {
                 String intervalle = data.getXValue();
                 Number pourcentage = data.getYValue();
                 intervalles.add(intervalle);
-                number.add(pourcentage);
+                pourcentParticule.add(pourcentage);
             }
         }
 		ArrayList<Integer> numberEntier = new ArrayList<>();
-		for (Number numberInInt : number) {
-			int valeurEntiere = numberInInt.intValue();
+		for (Number PourcentParticule : pourcentParticule) {
+			int valeurEntiere = PourcentParticule.intValue();
 			numberEntier.add(valeurEntiere);
 		}
 		gen.creerFichierHistoCSV(intervalles, numberEntier, nom, colonne);
 	}
 	
+	/**
+	 * methode qui sert a exporter les statistiques
+	 * @param statistiques parametre de type TableView<TabElement> qui represente le tableau de statistiques d'une image
+	 */
 	public void exportStatistiques(TableView<TabElement> statistiques) {
 		ArrayList<String> nomImage = new ArrayList<>();
 		ArrayList<Double> grossissement = new ArrayList<>();

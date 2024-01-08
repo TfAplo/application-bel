@@ -13,20 +13,31 @@ import metier.GenerateurFichierCSV;
 import metier.HistogrammeDiametre;
 
 /**
- * La classe ControleExport gère le processus d'exportation des histogrammes au format CSV.
+ * La classe ControleExportCSV gère le processus d'exportation des histogrammes ou des statistiques au format CSV.
  */
 public class ControleExportCSV {
     private IHMExportCSV IHM;
 	
+    /**
+     * constructeur de la classe ControleExportCSV
+     */
     public ControleExportCSV() 
     {
     	this.IHM = new IHMExportCSV();
     }
 	
+    /**
+     * getter de l'attribut IHM
+     * @return IHM de type IHMExportCSV
+     */
 	public IHMExportCSV getIHM() {
 		return IHM;
 	}
 
+	/**
+	 * setter de l'attribut IHM
+	 * @param IHM de type IHMExportCSV
+	 */
 	public void setIHM(IHMExportCSV IHM) {
 		this.IHM = IHM;
 	}
