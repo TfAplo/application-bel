@@ -56,7 +56,6 @@ public class ProduitDAO extends DAO<Produit>{
      * @return Instance de la classe Produit contenant les donnees lues dans la base de donnees par rapport a l'ID.
      */
     public Produit lire(int idProduit) {
-        // TODO implement here
         return null;
     }
 
@@ -66,7 +65,6 @@ public class ProduitDAO extends DAO<Produit>{
      * @return Instance de la classe Produit ayant ete mise a jour dans la base de donnees.
      */
     public Produit mettreAJour(Produit produit) {
-        // TODO implement here
         return null;
     }
 
@@ -75,12 +73,10 @@ public class ProduitDAO extends DAO<Produit>{
      * @param produit Instance de la classe Produit devant etre supprimee dans la base de donnees.
      */
     public void supprimer(Produit produit) {
-        // TODO implement here
     }
 
 	@Override
 	public ArrayList<Produit> lire() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

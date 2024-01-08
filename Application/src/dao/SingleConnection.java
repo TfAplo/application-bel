@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
@@ -10,7 +9,7 @@ public class SingleConnection {
 
 	private static Connection connect;
 
-	//Constructeur priv� pour une connexion avec MysqlDataSource
+	//Constructeur privé pour une connexion avec MysqlDataSource
 	private SingleConnection(String serverName, String dbName, String login, String password) throws ClassNotFoundException, SQLException{
 		// Parametres de connexion : url, login, mdp
 		String url="jdbc:mysql://"+serverName+":3306/"+dbName+"?serverTimezone=UTC";

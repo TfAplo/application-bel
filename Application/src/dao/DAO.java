@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public abstract class DAO<T> {
 	
 	protected Connection connect;
@@ -14,26 +13,31 @@ public abstract class DAO<T> {
 	public DAO() {
 		open();
 	}
-	
+	/**
+     * Ouvre une connexion à la base de données
+     */
 	public void open() {
 		try {
+			 // Obtient une instance unique de connexion à la base de données
 			connect=  SingleConnection.getInstance();
 			stmt = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// En cas d'erreur, affiche un message
 			System.out.println(" === ERREUR OPEN DAO === ");
 			e.printStackTrace();
 		}
 		
 	}
-	
+	/**
+     * Ferme la connexion à la base de données.
+     */
 	public void close(){
-		//on ferme l'acces a la BDD
+		// Ferme la connexion à la base de données en utilisant la classe SingleConnection
 		try {
 			SingleConnection.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			 // En cas d'erreur, affiche un message
 			System.out.println(" === ERREUR CLOSE DAO === ");
 			e.printStackTrace();
 		}

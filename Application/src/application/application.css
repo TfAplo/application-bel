@@ -1,15 +1,15 @@
-/* couleur des boutons #2b2d42 */
-
 /* config par default */
 .label{
 	-fx-padding: 2px 10px 2px 10px;
 	-fx-font-size: 15px;
 }
+
 TextField{
 	-fx-font-size: 15px;
     -fx-pref-height: 30px;
     -fx-pref-width: 250px;
 }
+
 .button{
 	-fx-background-color: #2b2d42; 
 	-fx-font-size: 13px;
@@ -23,26 +23,31 @@ TextField{
 .button:hover{
 	-fx-background-color: #0077b6; 
 }
+
 .tab{
 	-fx-background-color: #2b2d42;
 	-fx-padding: 5px 20px;
 }
+
 .tab-label{
 	-fx-font-size: 13px;
     -fx-text-fill: #f8f9fa;
 }
+
 .tab:selected{
 	-fx-background-color: #0077b6; 
 }
 
-/* SplitPane left */
+/* SplitPane gauche*/
 #leftContainer{
 	-fx-min-width: 250px;
 }
+
 #afficherResultatContainer{
 	-fx-padding: 10px 0 0 0;
 	-fx-spacing: 2px; 
 }
+
 /* element creer par la recherche (HBox label checkbox) */
 #hContainer {
     -fx-padding: 5px; 
@@ -52,19 +57,21 @@ TextField{
     -fx-background-radius: 5px;
     -fx-background-color: #6d6875;
 }
+
 #hContainer:hover {
     -fx-background-color: #0077b6; 
 }
+
 #hContainer .label{
 	-fx-label-padding: 0 100px 0 0;
 	-fx-font-size: 13px;
 }
+
 #hContainer .check-box{
 	-fx-font-size: 18px;
 }
 
-
-/* mainContainer */
+/* Conteneur principale */
 #btnSelectionImage{
 	-fx-margin: 0 0 0 50px;
 }
@@ -75,6 +82,7 @@ TextField{
 	-fx-border-color: #495057;
 	-fx-alignment: center;
 }
+
 #glisserDeposer .label {
 	-fx-alignment: center;
 }

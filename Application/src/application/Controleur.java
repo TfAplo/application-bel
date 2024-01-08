@@ -1,7 +1,5 @@
 package application;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,12 +12,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -30,14 +22,9 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import metier.Image;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,10 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 //import des controleurs
 import controleurs.ControleRecherche;
 import ihm.IHMStatistiques;
@@ -131,16 +115,24 @@ public class Controleur {
 	 
 	 @FXML
 	 public void initialize() {
-		 idAnalyser.setOnAction(e -> afficherFormulaireAnalyse());
-		 
 		 //envoyer la recherche d'image au controleur
-		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected,splitPane);
-		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected,splitPane));
+		 CtrlRecherche.setSplitPane(splitPane);
+		 CtrlRecherche.setAfficherResultatContainer(afficherResultatContainer);
+		 CtrlRecherche.setImageSelectionner(imageSelected);
+		 
+		 CtrlRecherche.recherche("");
+		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText()));
+		 
+		 //actionne l'analyse des images selectionnées
+		 idAnalyser.setOnAction(e -> afficherFormulaireAnalyse());
 		  
 		 glisserDeposer.setOnDragOver(e -> gestionnaireDragOver(e));
 		 glisserDeposer.setOnDragDropped(e -> selectionImageParDrag(e));
+		 
 		 btnSelectionImage.setOnAction(e -> selectionImageParBouton());
 		 btnValiderDepot.setOnAction(e -> validerDepot());
+		 
+		 //bouton d'export des resultats d'analyse
 		 boutonExportPNG.setOnAction(e -> boutonExport());
 		 boutonExportCSV.setOnAction(e -> afficherFormulaireCSV());
 		 
@@ -163,7 +155,7 @@ public class Controleur {
 
         timer.schedule(task, 5000); // Programme la tâche pour s'exécuter après 5000 millisecondes (5 secondes)
         alert.show();
-        CtrlRecherche.recherche("",afficherResultatContainer,imageSelected,splitPane);
+        CtrlRecherche.recherche("");
 	 }
 	 
 	 private void validerDepot() {

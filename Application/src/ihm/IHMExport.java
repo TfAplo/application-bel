@@ -45,10 +45,8 @@ public class IHMExport
 	private int compteurCheckBox;
 	private int compteurExport;
 	private List<BarChart<String, Number>> listeHistogrammes; 
-
     private List<CheckBox> listeCheckBox = new ArrayList<>();
 
-    
     /**
      * constucteur de la classe IHMExport
      * @param controleur : instance de la classe ContoleExport
@@ -76,8 +74,6 @@ public class IHMExport
             checkBox.setMinWidth(150); 
         }
     	
-
-
     }
     
     /**
@@ -112,8 +108,7 @@ public class IHMExport
 	                    String cheminFichier = selectedDirectory.getAbsolutePath()  + checkBox.getText() + ".png";
 	                    compteurExport=controleurExport.exporterHistogramme(histogramme,cheminFichier,this);
 	                    popup.close();
-	                    
-	               
+	                    	               
 	                }
 	             }
 	         }
@@ -146,7 +141,6 @@ public class IHMExport
         return fileChooser.showSaveDialog(null); 
     }
 
-
     /**
      * methode affichant une alert dans le cas où aucune checkbox n'est selectionnée
      */
@@ -172,7 +166,6 @@ public class IHMExport
     @FXML
     public void FenetreErreurExport() {
     	openFXMLWindow("../application/IHMErreurExport.fxml");
-
     }
     
     /**
@@ -194,13 +187,9 @@ public class IHMExport
 	public Button getBoutonValider() {
 		return boutonValider;
 	}
-
-
 	
    public void setControleurExport(ControleExport controleurExport) {
         this.controleurExport = controleurExport;
     }
 	
-
-
 }

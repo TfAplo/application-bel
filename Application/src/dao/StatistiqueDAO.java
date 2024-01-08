@@ -12,7 +12,6 @@ public class StatistiqueDAO extends DAO<Statistique> {
 
 	@Override
 	public ArrayList<Statistique> lire() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

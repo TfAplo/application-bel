@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-import dao.SingleConnection;
 import metier.Image;
 
 /**
@@ -34,8 +33,7 @@ public class ImageDAO extends DAO<Image>{
         double largeurReelle = image.getLargeurReelle();
         int idOperateur = image.getIdOperateur();
         int idProduit = image.getIdProduit();
-        
-        
+                
         //creation de la requete SQL
         String sql = "INSERT INTO image (nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit) "
         		+ "VALUES ('"+ nomImage +"', '"+ url + "', " + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReelle +", "+idOperateur + ", " + idProduit + ");";
@@ -64,13 +62,11 @@ public class ImageDAO extends DAO<Image>{
      * @param idImage ID de l'image devant etre lue dans la base de donnees.
      * @return Instance de la classe Image contenant les donnees lu dans la base de donnees par rapport a l'ID.
      */
-
     public Image lire(int idImage) {
     	
     	 //creation de la requete SQL
     	String sql = "SELECT * FROM image WHERE idImage = " + idImage;
     	
-
  		ResultSet rs = null;
  		try {
  			rs = stmt.executeQuery(sql);
@@ -159,8 +155,9 @@ public class ImageDAO extends DAO<Image>{
     }
     
     /**
+     *  Recuperer les images dans la base de donnée en fonction de leur nom
      * @param nomImage
-     * @return , une liste contenant les noms des images qui sont retournées d'apres la recherche. 
+     * @return , une liste contenant des objets image qui sont retournées d'apres la recherche. 
      */
     public ArrayList<Image> lire(String recherche) {
     	
@@ -169,8 +166,7 @@ public class ImageDAO extends DAO<Image>{
     	
    	 	//creation de la requete SQL
     	String sql = "SELECT * FROM image WHERE nomImage LIKE  '%"+ recherche +"%'";
-   	
-   	
+   	  	
 		ResultSet rs = null;
 		try {
 			rs = stmt.executeQuery(sql);
@@ -186,8 +182,7 @@ public class ImageDAO extends DAO<Image>{
 		        double largeurReelle = rs.getDouble("largeurReelle");
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
-		        
-		        
+		        		        
 		     //Creation de l'objet image
 			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
 			newImage.setIdImage(idImage);
@@ -210,8 +205,7 @@ public class ImageDAO extends DAO<Image>{
     	
    	 	//creation de la requete SQL
     	String sql = "SELECT * FROM image";
-   	
-   	
+   	  	
 		ResultSet rs = null;
 		try {
 			rs = stmt.executeQuery(sql);
@@ -227,8 +221,7 @@ public class ImageDAO extends DAO<Image>{
 		        double largeurReelle = rs.getDouble("largeurReelle");
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
-		        
-		        
+		        		 
 		     //Creation de l'objet image
 			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
 			newImage.setIdImage(idImage);

@@ -1,6 +1,5 @@
 package application;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +12,6 @@ import controleurs.ControleRecherche;
 import controleurs.ControleExportCSV;
 
 //--module-path "C:\Program Files\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml,javafx.swing
-
 
 public class Main extends Application {
 

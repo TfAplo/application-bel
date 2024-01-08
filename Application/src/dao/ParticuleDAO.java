@@ -1,12 +1,10 @@
 package dao;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-import controleurs.ControleAnalyse;
 import metier.EnsembleParticules;
 import metier.Particule;
 
@@ -55,7 +53,6 @@ public class ParticuleDAO extends DAO<Particule>{
      */
     public Particule mettreAJour(Particule part) {
 		return part;
-        // TODO implement here
     }
 
     /**
@@ -63,7 +60,6 @@ public class ParticuleDAO extends DAO<Particule>{
      * @param idParticule à supprimer
      */
     public void supprimer(int idParticule) {
-        // TODO implement here
     }
     
     /**
@@ -104,19 +100,15 @@ public class ParticuleDAO extends DAO<Particule>{
 
 	@Override
 	public Particule creer(Particule obj) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void supprimer(Particule obj) {
-		// TODO Auto-generated method stub
-		
+	public void supprimer(Particule obj) {		
 	}
 
 	@Override
 	public ArrayList<Particule> lire() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
