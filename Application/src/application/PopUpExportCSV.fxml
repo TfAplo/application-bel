@@ -24,7 +24,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Retour">
+            <Button fx:id="retour" mnemonicParsing="false" text="Retour">
                <HBox.margin>
                   <Insets bottom="20.0" left="40.0" right="50.0" top="20.0" />
                </HBox.margin>

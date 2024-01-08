@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -60,6 +61,8 @@ public class Controleur {
 	 private ControleRecherche CtrlRecherche;
 	 private ControleExportCSV CtrlExportCSV;
 	 
+	 @FXML
+	 private TabPane tabPane;
 	 @FXML
 	 private HBox conteneurExports;
 	 @FXML
@@ -271,31 +274,35 @@ public class Controleur {
 	 }
 	 
 	 private void afficherFormulaireAnalyse() {
-		 //affiche la popup
-		try {
-			CtrlAnalyse.setIhm(new IHMStatistiques());
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
-			fxmlLoader.setController(CtrlAnalyse.getIhm());
-			Parent root1 = (Parent) fxmlLoader.load();
-			//charger le fichier css
-            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			Stage stage = new Stage();
-			stage.setTitle("Sélection des affichages souhaités");
-			stage.setScene(new Scene(root1));
-			stage.show();
-			stage.setOnCloseRequest(e-> {
-				if (CtrlAnalyse.getIhm().isAfficher()) {
-					CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
-					mainContainer.getChildren().clear();
-					ObservableList<Node> container = mainContainer.getChildren();
-					CtrlAnalyse.getIhm().afficherDiagrammes(container);
-					conteneurExports.setVisible(true);
+		 if(!(CtrlRecherche.getListeImageSelectionner().isEmpty())) {
+			//affiche la popup
+				try {
+					CtrlAnalyse.setIhm(new IHMStatistiques());
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
+					fxmlLoader.setController(CtrlAnalyse.getIhm());
+					Parent root1 = (Parent) fxmlLoader.load();
+					//charger le fichier css
+		            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					Stage stage = new Stage();
+					stage.setTitle("Sélection des affichages souhaités");
+					stage.setScene(new Scene(root1));
+					stage.show();
+					stage.setOnCloseRequest(e-> {
+						if (CtrlAnalyse.getIhm().isAfficher()) {
+							CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
+							mainContainer.getChildren().clear();
+							ObservableList<Node> container = mainContainer.getChildren();
+							CtrlAnalyse.getIhm().afficherDiagrammes(container);
+							conteneurExports.setVisible(true);
+							tabPane.getSelectionModel().select(1);
+						}
+					});
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 }
+		 
 	}
 	 
 	 /**
@@ -304,7 +311,6 @@ public class Controleur {
 		public void boutonExport(){
 			    
 			try {
-
 		        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
 		        Parent nouvelleSceneParent = loader.load();
 		        ControleExport controleur = loader.getController();	   	         
@@ -328,7 +334,7 @@ public class Controleur {
 			try {
 				Parent root1 = (Parent) fxmlLoader.load();
 				//charger le fichier css
-	            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	           // root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				Stage stage = new Stage();
 		        stage.setTitle("Export au format CSV");
 		        stage.setScene(new Scene(root1));
@@ -338,8 +344,8 @@ public class Controleur {
 		        if(IHM.histoSPresent()) {
 					CheckBox ch1 = new CheckBox();
 					CheckBox ch2 = new CheckBox();
-					ch1.setId("statistiques");
-					ch1.setText("Statistiques");
+					ch1.setId("histogrammeSurfaceCumulatif");
+					ch1.setText("Histogramme de Surface Cumulatif");
 					ch2.setId("histogrammeSurface");
 					ch2.setText("Histogramme de Surface");
 					vbox.getChildren().addAll(ch1, ch2);
@@ -349,8 +355,8 @@ public class Controleur {
 				if(IHM.histoDPresent()) {
 					CheckBox ch3 = new CheckBox();
 					CheckBox ch4 = new CheckBox();
-					ch3.setId("histogrammeSurfaceCumulatif");
-					ch3.setText("Histogramme de Surface Cumulatif");
+					ch3.setId("histogrammeDiametreEquivalentCumulatif");
+					ch3.setText("Histogramme de Diametre Equivalent Cumulatif");
 					ch4.setId("histogrammeDiametreEquivalent");
 					ch4.setText("Histogramme de Diametre Equivalent");
 					vbox.getChildren().addAll(ch3, ch4);
@@ -359,8 +365,8 @@ public class Controleur {
 				}
 				if(IHM.tabPresent()) {
 					CheckBox ch5 = new CheckBox();
-					ch5.setId("histogrammeDiametreEquivalentCumulatif");
-					ch5.setText("Histogramme de Diametre Equivalent Cumulatif");
+					ch5.setId("statistiques");
+					ch5.setText("Statistiques");
 					vbox.getChildren().add(ch5);
 					listCh.add(ch5);
 				}

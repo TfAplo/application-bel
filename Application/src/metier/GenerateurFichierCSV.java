@@ -1,10 +1,18 @@
 package metier;
 
+import java.awt.FileDialog;
+import java.awt.Frame;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import javafx.stage.FileChooser;
 
 /**
  * La classe GenerateurFichier est responsable de la génération des fichiers PNG à partir des données d'histogrammes
@@ -14,26 +22,37 @@ public class GenerateurFichierCSV {
 			"ratio de surface couverte", "moyenne des aires px",  "moyenne diametres equivalents px",
 			"ecart-type des aires px", "ecart-type des diametres equivalents px", "moyenne des aires", 
 			"moyenne diametres equivalents", "ecart-type des aires", "ecart-type des diametres equivalents"};
-	private int compteur;
 	/**
      * Constructeur du générateur de fichiers
      */
     public GenerateurFichierCSV() {
-    	this.compteur = 0;
     }
 
+    
+    
+    public File choisirDossierDeDestination() {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir un dossier de destination");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialFileName("donnees");
+        return fileChooser.showSaveDialog(null); 
+    }
+    
+    
+    
     /**
      * Crée le fichier CSV à partir des données d'histogrammes
      */
+    /**
     public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier, String nom, String colonne) {
     	String[] Intervalles = intervalles.toArray(new String[0]);
         int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
-    	
+    	        
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nom))) {
             // En-têtes du fichier CSV
     		writer.write("intervalles;" + colonne + "\n");
-            writer.write("\n");
-            
+        
             // Écrire les données dans le fichier CSV
             for (int i = 0; i < Intervalles.length; i++) {
                 writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
@@ -42,8 +61,71 @@ public class GenerateurFichierCSV {
             e.printStackTrace();
         }
     	System.out.println("Fichier CSV créé avec succès: " + nom + "");
-    	this.compteur++;
     }
+    **/
+    
+    /**
+    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier, String nomFichier, String colonne) {
+        // Utilisation de FileDialog pour choisir l'emplacement du fichier
+        Frame frame = new Frame();
+        FileDialog fileDialog = new FileDialog(frame, "Choisir l'emplacement du fichier", FileDialog.SAVE);
+        fileDialog.setFile(nomFichier);
+        fileDialog.setVisible(true);
+
+        String fichierChoisi = fileDialog.getFile();
+        if (fichierChoisi == null) {
+            System.out.println("Opération annulée par l'utilisateur.");
+            return;
+        }
+
+        String repertoireChoisi = fileDialog.getDirectory();
+        nomFichier = repertoireChoisi + fichierChoisi;
+
+        String[] Intervalles = intervalles.toArray(new String[0]);
+        int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomFichier + ".csv"))) {
+            // En-têtes du fichier CSV
+            writer.write("intervalles;" + colonne + "\n");
+
+            // Écrire les données dans le fichier CSV
+            for (int i = 0; i < Intervalles.length; i++) {
+                writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
+            }
+            System.out.println("Fichier CSV créé avec succès : " + nomFichier + ".csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+**/
+    
+    public void creerFichierHistoCSV(ArrayList<String> intervalles, ArrayList<Integer> numberEntier, String nom, String colonne) {
+        String[] Intervalles = intervalles.toArray(new String[0]);
+        int[] NumberEntier = numberEntier.stream().mapToInt(Integer::intValue).toArray();
+
+        File selectedDirectory = choisirDossierDeDestination();
+
+        if (selectedDirectory != null) {
+            String nomFichier = selectedDirectory.getAbsolutePath() + nom;
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomFichier))) {
+                // En-têtes du fichier CSV
+                writer.write("intervalles;" + colonne + "\n");
+
+                // Écrire les données dans le fichier CSV
+                for (int i = 0; i < Intervalles.length; i++) {
+                    writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
+                }
+
+                System.out.println("Fichier CSV créé avec succès : donnees" + nom);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    
+    
     
     public void creerFichierStatistiquesCSV(ArrayList<String> nomImage,
     								ArrayList<Double> grossissement,
@@ -57,6 +139,7 @@ public class GenerateurFichierCSV {
     								ArrayList<Double> moyenneDiametresEquivalents,
     								ArrayList<Double> ecartTypeAires,
     								ArrayList<Double> ecartTypeDiametreEquivalent) {
+    	String nom = "Images.csv";
     	String[] NomImage = nomImage.toArray(new String[0]);
     	double[] Grossissement = grossissement.stream().mapToDouble(Double::doubleValue).toArray();
     	int[] NbParticuleTrouve = nbParticuleTrouve.stream().mapToInt(Integer::intValue).toArray();
@@ -70,22 +153,28 @@ public class GenerateurFichierCSV {
     	double[] EcartTypeAires = ecartTypeAires.stream().mapToDouble(Double::doubleValue).toArray();
     	double[] EcartTypeDiametreEquivalent = ecartTypeDiametreEquivalent.stream().mapToDouble(Double::doubleValue).toArray();
     	
-    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistiquesImages.csv"))) {
-            for(int i = 0; i < this.nomColonnesStatistiques.length; i++) {
-            	writer.write(this.nomColonnesStatistiques[i] + ";");
+    	
+    	File selectedDirectory = choisirDossierDeDestination();
+
+        if (selectedDirectory != null) {
+            String nomFichier = selectedDirectory.getAbsolutePath() + nom;
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomFichier))) {
+            	for(int i = 0; i < this.nomColonnesStatistiques.length; i++) {
+            		writer.write(this.nomColonnesStatistiques[i] + ";");
+            	}
+            	writer.write("\n");
+            	for (int i = 0; i < NomImage.length; i++) {
+            		writer.write(NomImage[i] + ";" + Grossissement[i] + ";" + NbParticuleTrouve[i] 
+                				+ ";" + RatioSurfaceCouverte[i] + ";" + MoyenneAiresPx[i] + ";" +
+                				MoyenneDiametresEquivalentsPx[i] + ";" + EcartTypeAiresPx[i] + ";" +
+                				EcartTypeDiametreEquivalentPx[i] + ";" + MoyenneAires[i] + ";" +
+                				MoyenneDiametresEquivalents[i] + ";" + EcartTypeAires[i] +  
+                				";" + EcartTypeDiametreEquivalent[i] + "\n");
+            	}
+            } catch (IOException e) {
+            	e.printStackTrace();
             }
-            writer.write("\n");
-    		for (int i = 0; i < NomImage.length; i++) {
-                writer.write(NomImage[i] + ";" + Grossissement[i] + ";" + NbParticuleTrouve[i] 
-                			+ ";" + RatioSurfaceCouverte[i] + ";" + MoyenneAiresPx[i] + ";" +
-                			MoyenneDiametresEquivalentsPx[i] + ";" + EcartTypeAiresPx[i] + ";" +
-                			EcartTypeDiametreEquivalentPx[i] + ";" + MoyenneAires[i] + ";" +
-                			MoyenneDiametresEquivalents[i] + ";" + EcartTypeAires[i] +  
-                			";" + EcartTypeDiametreEquivalent[i] + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Fichier CSV créé avec succès: donneesImages.csv");
         }
-    	System.out.println("Fichier CSV créé avec succès: statistiquesImages.csv");
     }
 }
