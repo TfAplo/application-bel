@@ -1,34 +1,77 @@
-#AnchorPaneTop {
-	-fx-background-color:  #6c757d;
+/* couleur des boutons #2b2d42 */
+
+/* config par default */
+.label{
+	-fx-padding: 2px 10px 2px 10px;
+	-fx-font-size: 15px;
 }
-#AnchorPaneLeft {
-	 -fx-background-color: #e9ecef;
+TextField{
+	-fx-font-size: 15px;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 250px;
 }
-#mainContainer{
-	-fx-background-color: #ced4da;
+.button{
+	-fx-background-color: #2b2d42; 
+	-fx-font-size: 13px;
+	-fx-text-fill: #f8f9fa;
+	-fx-border-width: 1px; 
+    -fx-border-radius: 8px; 
+    -fx-background-radius: 8px; 
+    -fx-min-width: 200px;
+    -fx-min-height: 35px
 }
-#afficherResultatContainer{
-	 -fx-spacing: 2px; 
+.button:hover{
+	-fx-background-color: #0077b6; 
+}
+.tab{
+	-fx-background-color: #2b2d42;
+	-fx-padding: 5px 20px;
+}
+.tab-label{
+	-fx-font-size: 13px;
+    -fx-text-fill: #f8f9fa;
+}
+.tab:selected{
+	-fx-background-color: #0077b6; 
 }
 
+/* SplitPane left */
+#leftContainer{
+	-fx-min-width: 250px;
+}
+#afficherResultatContainer{
+	-fx-padding: 10px 0 0 0;
+	-fx-spacing: 2px; 
+}
+/* element creer par la recherche (HBox label checkbox) */
 #hContainer {
     -fx-padding: 5px; 
-    -fx-spacing: 50px; 
-    -fx-border-color: #343a40; 
+    -fx-border-color: #2b2d42; 
     -fx-border-width: 1px; 
     -fx-border-radius: 5px; 
+    -fx-background-radius: 5px;
+    -fx-background-color: #6d6875;
 }
 #hContainer:hover {
-    -fx-background-color: #6c757d; 
+    -fx-background-color: #0077b6; 
 }
-/* check box */
+#hContainer .label{
+	-fx-label-padding: 0 100px 0 0;
+	-fx-font-size: 13px;
+}
 #hContainer .check-box{
 	-fx-font-size: 18px;
 }
 
+
+/* mainContainer */
+#btnSelectionImage{
+	-fx-margin: 0 0 0 50px;
+}
+
 #glisserDeposer{
-	-fx-pref-width: 300px;
-	-fx-pref-height: 300px;
+	-fx-pref-width: 350px;
+	-fx-pref-height: 350px;
 	-fx-border-color: #495057;
 	-fx-alignment: center;
 }

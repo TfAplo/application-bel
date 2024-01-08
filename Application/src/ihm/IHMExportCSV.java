@@ -1,11 +1,15 @@
 package ihm;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
@@ -14,12 +18,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import metier.GenerateurFichierCSV;
 import metier.TabElement;
 
 public class IHMExportCSV {
 	@FXML
-	 private Button export;
+	private Button export;
+	@FXML
+	private Button retour;
 	@FXML
 	private AnchorPane anchorMain;
 
@@ -46,12 +54,17 @@ public class IHMExportCSV {
 	
 	@FXML
 	 public void initialize() {
-		 //Changer l'affichage du mainContainer quand on appuis sur les boutons
-		 
-		 //envoyer la recherche d'image au controleur
 		 export.setOnAction(e -> export());
-		 //statistiques.setOnAction(e -> coche());
+		 retour.setOnAction(e -> boutonRetour());
 	 }
+	
+	
+	
+	@FXML
+	  public void boutonRetour() {
+		  Stage stage = (Stage) retour.getScene().getWindow();
+		  stage.close();
+	  }
 	
 	
 	
@@ -149,6 +162,42 @@ public class IHMExportCSV {
 	
 	
 	
+	/**
+     * methode ouvrant une nouvelle fenetre validant l'exportation
+     */
+    @FXML
+    public void FenetreValideExport() {
+    	openFXMLWindow("../application/IHMValideExport.fxml");  
+    }
+    
+    /**
+     * methode permettant d'ouvrir une nouvelle fenetre en fonction du chemin passé en paramètre
+     * @param fxmlFilePath : chemin du fichier fxml
+     */
+    public void openFXMLWindow(String fxmlFilePath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+    
+    
+    public File choisirDossierDeDestination() {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir un dossier de destination");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        return fileChooser.showSaveDialog(null); 
+    }
+    
+    
+    
 	public void export() {
 		if(isValideHistogrammeDiametreEquivalent()) {
 			exportHistogramme(this.histoDiamBarChart, "donneesHistoDiamEq.csv", "pourcentage de particule");
@@ -165,6 +214,7 @@ public class IHMExportCSV {
 		if(isValideStatistiques()) {
 			exportStatistiques(this.statistiques);
 		}
+		FenetreValideExport();
 	}
 	
 	public void exportHistogramme(BarChart<String,Number> histo, String nom, String colonne) {

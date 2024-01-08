@@ -274,6 +274,8 @@ public class Controleur {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
 			fxmlLoader.setController(CtrlAnalyse.getIhm());
 			Parent root1 = (Parent) fxmlLoader.load();
+			//charger le fichier css
+            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Stage stage = new Stage();
 			stage.setTitle("Sélection des affichages souhaités");
 			stage.setScene(new Scene(root1));
@@ -299,7 +301,6 @@ public class Controleur {
 		public void boutonExport(){
 			    
 			try {
-
 		        FXMLLoader loader = new FXMLLoader(getClass().getResource("../application/IHMExport.fxml"));
 		        Parent nouvelleSceneParent = loader.load();
 		        ControleExport controleur = loader.getController();	   	         
@@ -322,6 +323,8 @@ public class Controleur {
 	         fxmlLoader.setController(CtrlExportCSV.getIHM());
 			try {
 				Parent root1 = (Parent) fxmlLoader.load();
+				//charger le fichier css
+	           // root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				Stage stage = new Stage();
 		        stage.setTitle("Export au format CSV");
 		        stage.setScene(new Scene(root1));
@@ -331,8 +334,8 @@ public class Controleur {
 		        if(IHM.histoSPresent()) {
 					CheckBox ch1 = new CheckBox();
 					CheckBox ch2 = new CheckBox();
-					ch1.setId("statistiques");
-					ch1.setText("Statistiques");
+					ch1.setId("histogrammeSurfaceCumulatif");
+					ch1.setText("Histogramme de Surface Cumulatif");
 					ch2.setId("histogrammeSurface");
 					ch2.setText("Histogramme de Surface");
 					vbox.getChildren().addAll(ch1, ch2);
@@ -342,8 +345,8 @@ public class Controleur {
 				if(IHM.histoDPresent()) {
 					CheckBox ch3 = new CheckBox();
 					CheckBox ch4 = new CheckBox();
-					ch3.setId("histogrammeSurfaceCumulatif");
-					ch3.setText("Histogramme de Surface Cumulatif");
+					ch3.setId("histogrammeDiametreEquivalentCumulatif");
+					ch3.setText("Histogramme de Diametre Equivalent Cumulatif");
 					ch4.setId("histogrammeDiametreEquivalent");
 					ch4.setText("Histogramme de Diametre Equivalent");
 					vbox.getChildren().addAll(ch3, ch4);
@@ -352,8 +355,8 @@ public class Controleur {
 				}
 				if(IHM.tabPresent()) {
 					CheckBox ch5 = new CheckBox();
-					ch5.setId("histogrammeDiametreEquivalentCumulatif");
-					ch5.setText("Histogramme de Diametre Equivalent Cumulatif");
+					ch5.setId("statistiques");
+					ch5.setText("Statistiques");
 					vbox.getChildren().add(ch5);
 					listCh.add(ch5);
 				}

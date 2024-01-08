@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleurs.ControleExport">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleurs.ControleExport">
    <children>
-      <Text layoutX="122.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Export au format PNG" />
-      <Button fx:id="boutonValider" layoutX="232.0" layoutY="117.0" mnemonicParsing="false" onAction="#boutonValide" prefHeight="25.0" prefWidth="68.0" text="export" />
-      <Button fx:id="retour" layoutX="88.0" layoutY="117.0" mnemonicParsing="false" onAction="#boutonRetour" prefHeight="25.0" prefWidth="68.0" text="retour" />
-      <Line endX="373.0" layoutY="35.0" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="100.0" layoutY="47.0" prefHeight="62.0" prefWidth="173.0" style="-fx-border-width: 0px; -fx-background-color: #F4F4F4; -fx-border-color: #F4F4F4;">
+      <Text layoutX="192.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Export au format PNG" />
+      <Button fx:id="boutonValider" layoutX="286.0" layoutY="194.0" mnemonicParsing="false" onAction="#boutonValide" prefHeight="25.0" prefWidth="68.0" text="export" />
+      <Button fx:id="retour" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" onAction="#boutonRetour" prefHeight="25.0" prefWidth="68.0" text="retour" />
+      <Line endX="500.0" layoutY="35.0" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="164.0" layoutY="52.0" prefHeight="133.0" prefWidth="173.0" style="-fx-border-width: 0px; -fx-background-color: #F4F4F4; -fx-border-color: #F4F4F4;">
          <content>
-            <VBox fx:id="checkBoxContainer" prefHeight="64.0" prefWidth="172.0" />
+            <VBox fx:id="checkBoxContainer" prefHeight="124.0" prefWidth="172.0" />
          </content>
       </ScrollPane>
    </children>
