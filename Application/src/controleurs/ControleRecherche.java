@@ -6,6 +6,7 @@ import java.util.Iterator;
 import dao.ImageDAO;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import metier.Image;
@@ -30,13 +31,13 @@ public class ControleRecherche {
 	 * @param2 afficherResultatContainer, VBox ,section d'affichage des resultats de la recherche
 	 * @param3 imageSelectionner, VBox ,section d'affichage des resultats de la selection
 	 */
-	public void recherche(String recherche, VBox afficherResultatContainer, VBox imageSelectionner) {
+	public void recherche(String recherche, VBox afficherResultatContainer, VBox imageSelectionner,SplitPane splitPane) {
 		// recuperer une liste d'image qui correspondent dans la bdd
 		listeImage= imageDao.lire(recherche);
 		
 		//Si la liste n'est pas vide alors on affiche les resultats, sinon la liste est vide donc on vide le container
 		if(!listeImage.isEmpty()){
-			affichageRecherche(listeImage, afficherResultatContainer,imageSelectionner);
+			affichageRecherche(listeImage, afficherResultatContainer,imageSelectionner,splitPane);
 		} else {
 			afficherResultatContainer.getChildren().clear();
 		}
@@ -47,12 +48,12 @@ public class ControleRecherche {
 	 * @param2 container, afficherResultatRecherche
 	 * @param3 container2, imageSelected
 	 */
-	public void affichageRecherche(ArrayList<Image> listeImage, VBox container, VBox container2){
+	public void affichageRecherche(ArrayList<Image> listeImage, VBox container, VBox container2,SplitPane splitPane){
 		container.getChildren().clear();
 		//parcourir les elements
 		for (Image image: listeImage){
 			// creer l'element hbox contenant le nom et une checkbox pour le selection
-			HBox elementImage = creerElement(image, container,container2);
+			HBox elementImage = creerElement(image, container,container2,splitPane);
 			//ajouter l'element au container 
 			container.getChildren().add(elementImage);
 		}
@@ -64,12 +65,12 @@ public class ControleRecherche {
 	 *@param2 container, afficherResultatRecherche
 	 *@param3 container2, imageSelected
 	 */
-	public void affichageSelection(ArrayList<Image> listeImage, VBox container, VBox container2){
+	public void affichageSelection(ArrayList<Image> listeImage, VBox container, VBox container2,SplitPane splitPane){
 		container2.getChildren().clear();
 		//parcourir les elements
 		for (Image image: listeImage){
 			// creer l'element hbox contenant le nom et une checkbox pour le selection
-			HBox elementImage = creerElement(image, container,container2);
+			HBox elementImage = creerElement(image, container,container2,splitPane);
 			//ajouter l'element au container 
 			container2.getChildren().add(elementImage);
 		}
@@ -79,14 +80,14 @@ public class ControleRecherche {
 	 * @param image, objet Image
 	 * @return HBox
 	 */
-	public HBox creerElement(Image image, VBox container,VBox container2){
+	public HBox creerElement(Image image, VBox container,VBox container2,SplitPane splitPane){
 		HBox elementImage = new HBox();
 		//creer un Label fxml pour l'afficher le nom de l'image
 		Label nomImage = new Label(image.getNomImage());
 		// Creer une checkbox pour pouvoir effectuer une selection d'image
 		CheckBox CheckBox = new CheckBox();
 		
-		CheckBox.setOnAction(e -> actualiserSelection(image, container, container2));
+		CheckBox.setOnAction(e -> actualiserSelection(image, container, container2,splitPane));
 		
 		//check si l'image est deja dans la liste (et si on doit "check" la box)
 		for (Image imageSelectionner: listeImageSelectionner){
@@ -109,7 +110,7 @@ public class ControleRecherche {
 	 * @param2 container, afficherResultatRecherche
 	 * @param3 container2, imageSelected
 	 */
-	public void actualiserSelection(Image image, VBox container, VBox container2){
+	public void actualiserSelection(Image image, VBox container, VBox container2,SplitPane splitPane){
 		boolean isRemoved = false;
     	Iterator<Image> iterator = listeImageSelectionner.iterator();
     	
@@ -125,9 +126,15 @@ public class ControleRecherche {
     	if(!isRemoved) {
     		listeImageSelectionner.add(image);
     	}
+    	// afficher ou cacher la section analyser
+    	if(!getListeImageSelectionner().isEmpty()) {
+    		splitPane.setDividerPositions(0.6);
+    	} else {
+    		splitPane.setDividerPositions(1);
+    	}
    		// Mettre à jour les deux containers après la suppression ou l'ajout
-        affichageSelection(listeImageSelectionner, container, container2);
-        affichageRecherche(listeImage, container, container2);
+        affichageSelection(listeImageSelectionner, container, container2,splitPane);
+        affichageRecherche(listeImage, container, container2,splitPane);
 	}
 	
     /*
