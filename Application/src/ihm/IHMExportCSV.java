@@ -188,28 +188,22 @@ public class IHMExportCSV {
 	
     
     
-    public File choisirDossierDeDestination() {
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choisir un dossier de destination");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        return fileChooser.showSaveDialog(null); 
-    }
+    
     
     
     
 	public void export() {
 		if(isValideHistogrammeDiametreEquivalent()) {
-			exportHistogramme(this.histoDiamBarChart, "donneesHistoDiamEq.csv", "pourcentage de particule");
+			exportHistogramme(this.histoDiamBarChart, "HistoDiamEq.csv", "pourcentage de particule");
 		}
 		if (isValideHistogrammeDiametreEquivalentCumulatif()){
-			exportHistogramme(this.histoDiamCumBarChar, "donneesHistoDiamEqCumulatif.csv", "pourcentage cumulatif de particule");
+			exportHistogramme(this.histoDiamCumBarChar, "HistoDiamEqCumulatif.csv", "pourcentage cumulatif de particule");
 		}
 		if(isValideHistogrammeSurface()) {
-			exportHistogramme(this.histoSurfaceBarChar, "donneesHistoDiamSur.csv", "pourcentage de particule");
+			exportHistogramme(this.histoSurfaceBarChar, "HistoSur.csv", "pourcentage de particule");
 		}
 		if(isValideHistogrammeSurfaceCumulatif()) {
-			exportHistogramme(this.histoSurfaceCumBarChar, "donneesHistoDiamSurCumulatif.csv", "pourcentage cumulatif de particule");
+			exportHistogramme(this.histoSurfaceCumBarChar, "HistoSurCumulatif.csv", "pourcentage cumulatif de particule");
 		}
 		if(isValideStatistiques()) {
 			exportStatistiques(this.statistiques);
