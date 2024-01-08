@@ -78,3 +78,7 @@ TextField{
 #glisserDeposer .label {
 	-fx-alignment: center;
 }
+
+#checkBoxContainer {
+	-fx-padding-top: 10px;
+}

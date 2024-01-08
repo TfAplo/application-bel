@@ -116,6 +116,14 @@ public class ControleExport extends Application{
 	  }
 	  
 	  /**
+	   * methode permettant de vider la liste d'histogramme lors de la fermeture de la fenetre
+	   */
+	  public void fermetureFenetre() {
+		  listeHistogrammes.clear();
+
+	  }
+	  
+	  /**
 	   * methode permettant d'exporter des histogrammes en PNG appelant une methode créant ces même fichier
 	   * @param histogramme : liste des histogrammes
 	   * @param cheminFichier : chemin du dossier de destination des images à exporter

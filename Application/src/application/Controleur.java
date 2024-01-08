@@ -312,6 +312,8 @@ public class Controleur {
 			    controleur.initialiser(CtrlAnalyse.getIhm().getGraphiques(),popupStage);
 			   	CtrlExport = CtrlAnalyse.getIhm().getControleurExport();  	   		
 			   	CtrlExport.getIhmExport().setControleurExport(CtrlExport);
+			   	popupStage.setOnCloseRequest(event -> {
+		            CtrlExport.fermetureFenetre();});
 			    popupStage.showAndWait();
 		     } catch (Exception e) {
 		       e.printStackTrace();
