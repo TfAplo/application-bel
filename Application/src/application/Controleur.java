@@ -16,6 +16,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -23,7 +26,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -34,6 +37,9 @@ import metier.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -59,6 +65,8 @@ public class Controleur {
 	 private ControleRecherche CtrlRecherche;
 	 private ControleExportCSV CtrlExportCSV;
 	 
+	 @FXML
+	 private TabPane tabPane;
 	 @FXML
 	 private HBox conteneurExports;
 	 @FXML
@@ -97,6 +105,10 @@ public class Controleur {
 	 private static Stage popupStage;
 	 @FXML 
 	 private Scene nouvelleScene;
+	 @FXML
+	 private SplitPane splitPane;
+	 @FXML
+	 private Tab tabAfficherStats;
 	 
 	// Variable servant a plusieurs methodes
 	private String nomImage;
@@ -118,8 +130,8 @@ public class Controleur {
 		 idAnalyser.setOnAction(e -> afficherFormulaireAnalyse());
 		 
 		 //envoyer la recherche d'image au controleur
-		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
-		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
+		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected,splitPane);
+		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected,splitPane));
 		  
 		 glisserDeposer.setOnDragOver(e -> gestionnaireDragOver(e));
 		 glisserDeposer.setOnDragDropped(e -> selectionImageParDrag(e));
@@ -147,7 +159,7 @@ public class Controleur {
 
         timer.schedule(task, 5000); // Programme la tâche pour s'exécuter après 5000 millisecondes (5 secondes)
         alert.show();
-        CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
+        CtrlRecherche.recherche("",afficherResultatContainer,imageSelected,splitPane);
 	 }
 	 
 	 private void validerDepot() {
@@ -165,6 +177,15 @@ public class Controleur {
 				 CtrlDepot.deposerImage(nomOperateur, nomImage, url,
 						 largeurPx, hauteurPx, grossissementDouble, 
 						 largeurReelleDouble, nomProduit);
+				 
+				 // copier coller l'image dans le repertoire scriptsImages
+				 try {
+		            // Copie du fichier source vers le répertoire de destination
+					String urlFinal = System.getProperty("user.dir") + "\\scriptsImages\\" + nomImage;
+		            Files.copy(Paths.get(url), Paths.get(urlFinal), StandardCopyOption.REPLACE_EXISTING);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
 				 
 				 // on remet tout de l'image selectionnee a zero
 				 nomImage = null;
@@ -268,35 +289,40 @@ public class Controleur {
 	 }
 	 
 	 private void afficherFormulaireAnalyse() {
-		 //affiche la popup
-		try {
-			CtrlAnalyse.setIhm(new IHMStatistiques());
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
-			fxmlLoader.setController(CtrlAnalyse.getIhm());
-			Parent root1 = (Parent) fxmlLoader.load();
-			//charger le fichier css
-            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			Stage stage = new Stage();
-			stage.setTitle("Sélection des affichages souhaités");
-			stage.setScene(new Scene(root1));
-			stage.show();
-			stage.setOnCloseRequest(e-> {
-				if (CtrlAnalyse.getIhm().isAfficher()) {
-					CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
-					mainContainer.getChildren().clear();
-					ObservableList<Node> container = mainContainer.getChildren();
-					CtrlAnalyse.getIhm().afficherDiagrammes(container);
-					conteneurExports.setVisible(true);
+		 if(!(CtrlRecherche.getListeImageSelectionner().isEmpty())) {
+			//affiche la popup
+				try {
+					CtrlAnalyse.setIhm(new IHMStatistiques());
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
+					fxmlLoader.setController(CtrlAnalyse.getIhm());
+					Parent root1 = (Parent) fxmlLoader.load();
+					//charger le fichier css
+		            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					Stage stage = new Stage();
+					stage.setTitle("Sélection des affichages souhaités");
+					stage.setScene(new Scene(root1));
+					stage.show();
+					stage.setOnCloseRequest(e-> {
+						if (CtrlAnalyse.getIhm().isAfficher()) {
+							CtrlAnalyse.afficher(CtrlRecherche.getListeImageSelectionner());
+							mainContainer.getChildren().clear();
+							ObservableList<Node> container = mainContainer.getChildren();
+							CtrlAnalyse.getIhm().afficherDiagrammes(container);
+							conteneurExports.setVisible(true);
+							tabAfficherStats.setDisable(false);
+							tabPane.getSelectionModel().select(1);
+						}
+					});
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			});
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 }
+		 
 	}
 	 
 	 /**
-		 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
+		 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup 
 		 */
 		public void boutonExport(){
 			    
@@ -312,6 +338,8 @@ public class Controleur {
 			    controleur.initialiser(CtrlAnalyse.getIhm().getGraphiques(),popupStage);
 			   	CtrlExport = CtrlAnalyse.getIhm().getControleurExport();  	   		
 			   	CtrlExport.getIhmExport().setControleurExport(CtrlExport);
+			   	popupStage.setOnCloseRequest(event -> {
+		            CtrlExport.fermetureFenetre();});
 			    popupStage.showAndWait();
 		     } catch (Exception e) {
 		       e.printStackTrace();
