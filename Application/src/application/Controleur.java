@@ -325,9 +325,9 @@ public class Controleur {
 		 
 	}
 	 
-	 /**
-		 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup 
-		 */
+	 	/**
+		* Methode gerant l'action du clique sur le bouton exportPNG ouvrant une fenetre popup 
+		*/
 		public void boutonExport(){
 			    
 			try {
@@ -350,13 +350,16 @@ public class Controleur {
 		     }
 		  }
 		
+		/**
+		 * Methode gerant l'action du clique sur le bouton exportCSV ouvrant une fenetre popup 
+		 */
 		public void afficherFormulaireCSV() {
 			 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PopUpExportCSV.fxml"));
 	         fxmlLoader.setController(CtrlExportCSV.getIHM());
 			try {
 				Parent root1 = (Parent) fxmlLoader.load();
 				//charger le fichier css
-	           // root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				Stage stage = new Stage();
 		        stage.setTitle("Export au format CSV");
 		        stage.setScene(new Scene(root1));
