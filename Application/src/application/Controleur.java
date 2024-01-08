@@ -26,7 +26,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -37,6 +37,9 @@ import metier.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -174,6 +177,15 @@ public class Controleur {
 				 CtrlDepot.deposerImage(nomOperateur, nomImage, url,
 						 largeurPx, hauteurPx, grossissementDouble, 
 						 largeurReelleDouble, nomProduit);
+				 
+				 // copier coller l'image dans le repertoire scriptsImages
+				 try {
+		            // Copie du fichier source vers le répertoire de destination
+					String urlFinal = System.getProperty("user.dir") + "\\scriptsImages\\" + nomImage;
+		            Files.copy(Paths.get(url), Paths.get(urlFinal), StandardCopyOption.REPLACE_EXISTING);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
 				 
 				 // on remet tout de l'image selectionnee a zero
 				 nomImage = null;
