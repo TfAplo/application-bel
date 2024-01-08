@@ -16,6 +16,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -97,6 +98,8 @@ public class Controleur {
 	 private static Stage popupStage;
 	 @FXML 
 	 private Scene nouvelleScene;
+	 @FXML
+	 private SplitPane splitPane;
 	 
 	// Variable servant a plusieurs methodes
 	private String nomImage;
@@ -118,8 +121,8 @@ public class Controleur {
 		 idAnalyser.setOnAction(e -> afficherFormulaireAnalyse());
 		 
 		 //envoyer la recherche d'image au controleur
-		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
-		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected));
+		 CtrlRecherche.recherche("",afficherResultatContainer,imageSelected,splitPane);
+		 rechercher.setOnAction(e -> CtrlRecherche.recherche(rechercher.getText(),afficherResultatContainer,imageSelected,splitPane));
 		  
 		 glisserDeposer.setOnDragOver(e -> gestionnaireDragOver(e));
 		 glisserDeposer.setOnDragDropped(e -> selectionImageParDrag(e));
@@ -147,7 +150,7 @@ public class Controleur {
 
         timer.schedule(task, 5000); // Programme la tâche pour s'exécuter après 5000 millisecondes (5 secondes)
         alert.show();
-        CtrlRecherche.recherche("",afficherResultatContainer,imageSelected);
+        CtrlRecherche.recherche("",afficherResultatContainer,imageSelected,splitPane);
 	 }
 	 
 	 private void validerDepot() {
