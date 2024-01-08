@@ -76,7 +76,7 @@
                                                             <AnchorPane fx:id="glisserDeposer" prefHeight="200.0" prefWidth="200.0">
                                                                <children>
                                                                   <Label fx:id="LabelGlisserImage" layoutX="86.0" layoutY="141.0" text="Glisser votre image" />
-                                                                  <Label fx:id="LabelNomImage" layoutX="97.0" layoutY="199.0" text="Nom de l'image" />
+                                                                  <Label fx:id="LabelNomImage" layoutX="95.0" layoutY="141.0" text="Nom de l'image" />
                                                                </children></AnchorPane>
                                                             <VBox prefHeight="323.0" prefWidth="721.0">
                                                                <children>
