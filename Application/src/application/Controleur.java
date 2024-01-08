@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
@@ -103,6 +104,8 @@ public class Controleur {
 	 private Scene nouvelleScene;
 	 @FXML
 	 private SplitPane splitPane;
+	 @FXML
+	 private Tab tabAfficherStats;
 	 
 	// Variable servant a plusieurs methodes
 	private String nomImage;
@@ -294,6 +297,7 @@ public class Controleur {
 							ObservableList<Node> container = mainContainer.getChildren();
 							CtrlAnalyse.getIhm().afficherDiagrammes(container);
 							conteneurExports.setVisible(true);
+							tabAfficherStats.setDisable(false);
 							tabPane.getSelectionModel().select(1);
 						}
 					});
