@@ -37,7 +37,7 @@ public class ControleRecherche {
 	 */
 	public void recherche(String recherche) {
 		// recuperer une liste d'image qui correspondent dans la bdd
-		listeImage= imageDao.lire(recherche);
+		listeImage = imageDao.lire(recherche);
 		
 		//Si la liste n'est pas vide alors on affiche les resultats, sinon la liste est vide donc on vide le container
 		if(!listeImage.isEmpty()){
