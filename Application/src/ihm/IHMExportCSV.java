@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
@@ -272,8 +273,26 @@ public class IHMExportCSV {
 		if(isValideStatistiques()) {
 			exportStatistiques(this.statistiques);
 		}
-		FenetreValideExport();
+		if(isValideHistogrammeDiametreEquivalent() || isValideHistogrammeDiametreEquivalentCumulatif()
+			|| isValideHistogrammeSurface() || isValideHistogrammeSurfaceCumulatif() || isValideStatistiques()) {
+			FenetreValideExport();
+		}else {
+			afficherMessageAucuneSelection();
+		}
 	}
+	
+	
+	/**
+     * methode affichant une alert dans le cas où aucune checkbox n'est selectionnée
+     */
+    public void afficherMessageAucuneSelection() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Aucune sélection");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez sélectionner au moins un histogramme à exporter.");
+        alert.showAndWait();
+    }
+	
 	
 	/**
 	 * methode qui sert a exporter les differents hisotgrammes
