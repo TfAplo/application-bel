@@ -2,6 +2,8 @@ package testUnitaire;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import dao.ImageDAO;
@@ -9,45 +11,75 @@ import metier.Image;
 
 class TestImageDAO {
 
-	private ImageDAO imageDao;
+	ImageDAO imageDao = new ImageDAO();
+	Image ref = imageDao.lire(1);
+	
 	@Test
-	void test() {
-		
-		ImageDAO imageDao = new ImageDAO();
-		Image ref = imageDao.lire(1);
+	void testImageLireId() {
 		Image test = new Image("113.tif","C:UsersvalenDownloadsArchive113.tif",2048.0,2048.0,10.0,10.0,1,1);
 		test.setIdImage(1);
-		System.out.println(ref);
-		System.out.println(test);
 		
 		assert isEqual(ref, test);
-		
-		
 	}
-	
-	
+	@Test
+	void testImageLireString() {
+		ArrayList<Image> test2 = imageDao.lire("113.tif");
+		
+		assert isEqual(ref,test2.get(0));
+	}
+	@Test
+	void testImageCreer() {
+		String nomImage = "imageTest";
+		String url = "urlTest";
+		double largeurPx = 2048.0;
+	    double hauteurPx = 2048.0;
+	    double grossissement = 10.0;
+	    double largeurReelle = 15.0;
+	    int idOperateur = 1;
+	    int idProduit = 1;
+	    
+	    //creer une nouvelle image dans la base de donnée
+	    Image imagetest = new Image(nomImage,url,largeurPx,hauteurPx,grossissement,largeurReelle,idOperateur,idProduit);
+	    Image imageCreer = imageDao.creer(imagetest);
+        // recuperer son id et lire dans la bdd si l'image qui a cette id correspond a notre image qu'on a inserer
+        Image imageInsere = imageDao.lire(imageCreer.getIdImage());
+        
+        assert isEqual(imageInsere, imagetest);
+	}
+	@Test
+	void testImageSupp() {
+		String nomImage = "imageTestSupprimer";
+		String url = "urlTestSupprimer";
+		double largeurPx = 2048.0;
+	    double hauteurPx = 2048.0;
+	    double grossissement = 10.0;
+	    double largeurReelle = 15.0;
+	    int idOperateur = 1;
+	    int idProduit = 1;
+	    
+	    //creer une nouvelle image dans la base de donnée
+	    Image imagetest = new Image(nomImage,url,largeurPx,hauteurPx,grossissement,largeurReelle,idOperateur,idProduit);
+	    Image imageCreer = imageDao.creer(imagetest);
+		//supprimer l'image qui a etait inserer plus tot
+		imageDao.supprimer(imageCreer);
+		//essayer de recuperer cette image
+		Image recup = imageDao.lire(imageCreer.getIdImage());
+		
+		assert recup == null;
+	}
     /*
      * Compare si deux image sont eguale (avec leurs id qui est unique)
      */
     public static boolean isEqual(Image image1, Image image2) {
         if (image1.getIdImage() == image2.getIdImage()) {
-        	System.out.println("ok");
-            if (image1.getNomImage() == image2.getNomImage()) {
-            	System.out.println("ok");
-            	if (image1.getUrl() == image2.getUrl()) {
-            		System.out.println("ok");
+            if (image1.getNomImage().equals(image2.getNomImage())) {
+            	if (image1.getUrl().equals(image2.getUrl())) {
             		if (image1.getLargeurPx() == image2.getLargeurPx()) {
-            			System.out.println("ok");
             			if (image1.getHauteurPx() == image2.getLargeurPx()) {
-            				System.out.println("ok");
             				if (image1.getGrossissement() == image2.getGrossissement()) {
-            					System.out.println("ok");
             					if (image1.getLargeurReelle() == image2.getLargeurReelle()) {
-            						System.out.println("ok");
             						if (image1.getIdOperateur() == image2.getIdOperateur()) {
-            							System.out.println("ok");
             							if (image1.getIdProduit() == image2.getIdProduit()) {
-            								System.out.println("ok");
             	                        	return true;
             	                        }
                                     }
