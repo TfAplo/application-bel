@@ -117,7 +117,7 @@ public class GenerateurFichierCSV {
                     writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
                 }
 
-                System.out.println("Fichier CSV créé avec succès : " + nomFichier);
+                System.out.println("Fichier CSV créé avec succès : donnees" + nom);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -139,6 +139,7 @@ public class GenerateurFichierCSV {
     								ArrayList<Double> moyenneDiametresEquivalents,
     								ArrayList<Double> ecartTypeAires,
     								ArrayList<Double> ecartTypeDiametreEquivalent) {
+    	String nom = "Images.csv";
     	String[] NomImage = nomImage.toArray(new String[0]);
     	double[] Grossissement = grossissement.stream().mapToDouble(Double::doubleValue).toArray();
     	int[] NbParticuleTrouve = nbParticuleTrouve.stream().mapToInt(Integer::intValue).toArray();
@@ -152,22 +153,28 @@ public class GenerateurFichierCSV {
     	double[] EcartTypeAires = ecartTypeAires.stream().mapToDouble(Double::doubleValue).toArray();
     	double[] EcartTypeDiametreEquivalent = ecartTypeDiametreEquivalent.stream().mapToDouble(Double::doubleValue).toArray();
     	
-    	try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistiquesImages.csv"))) {
-            for(int i = 0; i < this.nomColonnesStatistiques.length; i++) {
-            	writer.write(this.nomColonnesStatistiques[i] + ";");
+    	
+    	File selectedDirectory = choisirDossierDeDestination();
+
+        if (selectedDirectory != null) {
+            String nomFichier = selectedDirectory.getAbsolutePath() + nom;
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomFichier))) {
+            	for(int i = 0; i < this.nomColonnesStatistiques.length; i++) {
+            		writer.write(this.nomColonnesStatistiques[i] + ";");
+            	}
+            	writer.write("\n");
+            	for (int i = 0; i < NomImage.length; i++) {
+            		writer.write(NomImage[i] + ";" + Grossissement[i] + ";" + NbParticuleTrouve[i] 
+                				+ ";" + RatioSurfaceCouverte[i] + ";" + MoyenneAiresPx[i] + ";" +
+                				MoyenneDiametresEquivalentsPx[i] + ";" + EcartTypeAiresPx[i] + ";" +
+                				EcartTypeDiametreEquivalentPx[i] + ";" + MoyenneAires[i] + ";" +
+                				MoyenneDiametresEquivalents[i] + ";" + EcartTypeAires[i] +  
+                				";" + EcartTypeDiametreEquivalent[i] + "\n");
+            	}
+            } catch (IOException e) {
+            	e.printStackTrace();
             }
-            writer.write("\n");
-    		for (int i = 0; i < NomImage.length; i++) {
-                writer.write(NomImage[i] + ";" + Grossissement[i] + ";" + NbParticuleTrouve[i] 
-                			+ ";" + RatioSurfaceCouverte[i] + ";" + MoyenneAiresPx[i] + ";" +
-                			MoyenneDiametresEquivalentsPx[i] + ";" + EcartTypeAiresPx[i] + ";" +
-                			EcartTypeDiametreEquivalentPx[i] + ";" + MoyenneAires[i] + ";" +
-                			MoyenneDiametresEquivalents[i] + ";" + EcartTypeAires[i] +  
-                			";" + EcartTypeDiametreEquivalent[i] + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Fichier CSV créé avec succès: donneesImages.csv");
         }
-    	System.out.println("Fichier CSV créé avec succès: statistiquesImages.csv");
     }
 }
