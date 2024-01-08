@@ -306,7 +306,7 @@ public class Controleur {
 	}
 	 
 	 /**
-		 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup
+		 * Methode gerant l'action du clique sur le bouton export ouvrant une fenetre popup 
 		 */
 		public void boutonExport(){
 			    

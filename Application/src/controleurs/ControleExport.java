@@ -186,6 +186,7 @@ public class ControleExport extends Application{
 		return generateurFichier;
 	}
 	
+	//getter nouvelleScene
 	public Scene getNouvelleScene() {
 		return nouvelleScene;
 	}
