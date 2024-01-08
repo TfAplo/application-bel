@@ -32,8 +32,7 @@ public class GenerateurFichierCSV {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nom))) {
             // En-têtes du fichier CSV
     		writer.write("intervalles;" + colonne + "\n");
-            writer.write("\n");
-            
+        
             // Écrire les données dans le fichier CSV
             for (int i = 0; i < Intervalles.length; i++) {
                 writer.write(Intervalles[i] + ";" + NumberEntier[i] + "\n");
