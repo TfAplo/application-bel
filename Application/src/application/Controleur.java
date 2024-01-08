@@ -274,6 +274,8 @@ public class Controleur {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUpAfficherStats.fxml"));
 			fxmlLoader.setController(CtrlAnalyse.getIhm());
 			Parent root1 = (Parent) fxmlLoader.load();
+			//charger le fichier css
+            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Stage stage = new Stage();
 			stage.setTitle("Sélection des affichages souhaités");
 			stage.setScene(new Scene(root1));
@@ -322,6 +324,8 @@ public class Controleur {
 	         fxmlLoader.setController(CtrlExportCSV.getIHM());
 			try {
 				Parent root1 = (Parent) fxmlLoader.load();
+				//charger le fichier css
+	            root1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				Stage stage = new Stage();
 		        stage.setTitle("Export au format CSV");
 		        stage.setScene(new Scene(root1));
