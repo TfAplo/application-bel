@@ -68,7 +68,7 @@ class TestImageDAO {
 		assert recup == null;
 	}
     /*
-     * Compare si deux image sont eguale (avec leurs id qui est unique)
+     * Compare si deux image sont eguale
      */
     public static boolean isEqual(Image image1, Image image2) {
         if (image1.getIdImage() == image2.getIdImage()) {
