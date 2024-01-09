@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import metier.EnsembleParticules;
 import metier.Particule;
 
-class testEnsembleParticules {
+class TestEnsembleParticules {
 	public EnsembleParticules ens;
 	public EnsembleParticules ens2;
 
