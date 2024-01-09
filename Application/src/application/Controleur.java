@@ -139,6 +139,12 @@ public class Controleur {
 		 LabelNomImage.setVisible(false);
 	 }
 	 
+	 /**
+	  * Methode d'affichage de l'objet Alert de type Information affichant le resultat du depot de l'image dans la base de donnees.
+	  * @param titre Titre de l'Alert
+	  * @param haut Texte se situant en haut de l'Alert
+	  * @param bas Texte se situant en bas de l'Alert
+	  */
 	 public void afficherEtDisparaitreStatutDepot(String titre, String haut, String bas) {
 		Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(titre);
@@ -158,6 +164,9 @@ public class Controleur {
         CtrlRecherche.recherche("");
 	 }
 	 
+	 /**
+	  * Methode appelee par le bouton "Valider le depot". Elle sert a valider son depot d'image dans la base de donnees. Elle verifie si tout est en regle dans les differents champs a renseigner et dans l'image puis affiche une pop-up informant l'operateur du statut de son depot d'image. 
+	  */
 	 private void validerDepot() {
 		 String nomOperateur = champOperateur.getText();
 		 String grossissement = champGrossissement.getText();
@@ -211,6 +220,9 @@ public class Controleur {
 		 }
 	 }
 	 
+	 /**
+	  * Methode appelee par le bouton "Selectionner une image". Elle sert a selectionner un fichier .tif a deposer dans la base de donnees. Elle ouvre l'explorateur de fichier, restreint le choix au fichier avec l'extension .tif, et finit par afficher le nom de l'image selectionnee.
+	  */
 	 private void selectionImageParBouton() {
 		 FileChooser fileChooser = new FileChooser();
          fileChooser.setTitle("Sélectionner un fichier");
@@ -234,6 +246,10 @@ public class Controleur {
          }
 	 }
 	 
+	 /**
+	  * Methode appelee lors d'un drag au dessus de la zone predefinie. C'est la methode de gestion de l'evenement de Drag Over, au dessus de la zone de Drag And Drop. Elle indique a l'utilisateur si sont fichier est accepte ou non.
+	  * @param event
+	  */
  	 private void gestionnaireDragOver(DragEvent event) {
         if (event.getGestureSource() != glisserDeposer && event.getDragboard().hasFiles()) {
         	List<File> files = event.getDragboard().getFiles();
@@ -243,8 +259,11 @@ public class Controleur {
             }
         }
         event.consume();
-    }
+ 	 }
 	 
+ 	 /**
+	  * Methode appelee lors du drop au dessus de la zone predefinie. C'est la methode de gestion de l'evenement de Drag Dropped, au dessus de la zone de Drag And Drop. Elle sert a selectionner une image en Drag And Drop, a restreindre le choix du fichier avec l'extension .tif. Elle affiche le nom de l'image selectionnee dans la zone.
+	  */
 	 private void selectionImageParDrag(DragEvent event) {
 		 Dragboard db = event.getDragboard();
          boolean success = false;
@@ -272,6 +291,10 @@ public class Controleur {
          event.consume();
 	 }
 
+	 /**
+	  * Methode servant a recuperer la largeur et la hauteur d'une image en utilisant BufferedImage pour lire le fichier.
+	  * @param url Chemin d'acces a l'image
+	  */
 	 private void calculerDimensionImage(String url) {
 		 File fichierImage = new File(url);
 		 try {
