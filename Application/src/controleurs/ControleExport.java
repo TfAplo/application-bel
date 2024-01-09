@@ -73,7 +73,7 @@ public class ControleExport extends Application{
 	 * Constructeur sans paramètre de la classe ControleExport
 	 */
 	public ControleExport() {
-		this.generateurFichier = new GenerateurFichier(this);
+		this.generateurFichier = new GenerateurFichier();
 	
 	}
     

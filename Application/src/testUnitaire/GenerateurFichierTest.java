@@ -19,7 +19,6 @@ class GenerateurFichierTest {
     private GenerateurFichier generateur;
     private BarChart<String, Number> histogramme;
 
-    
     @BeforeEach
     void setUp() throws InterruptedException {
         new JFXPanel();
