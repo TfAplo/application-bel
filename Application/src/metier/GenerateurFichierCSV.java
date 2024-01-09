@@ -67,8 +67,6 @@ public class GenerateurFichierCSV {
                 for (int i = 0; i < Intervalles.length; i++) {
                     writer.write(Intervalles[i] + ";" + PourcentParticule[i] + "\n");
                 }
-
-                System.out.println("Fichier CSV créé avec succès : donnees" + nom);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -139,7 +137,6 @@ public class GenerateurFichierCSV {
             } catch (IOException e) {
             	e.printStackTrace();
             }
-            System.out.println("Fichier CSV créé avec succès: donneesImages.csv");
         }
     }
 }
