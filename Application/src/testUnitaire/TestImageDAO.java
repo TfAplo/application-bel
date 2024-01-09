@@ -1,7 +1,5 @@
 package testUnitaire;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ class TestImageDAO {
 	
 	@Test
 	void testImageLireId() {
-		Image test = new Image("113.tif","C:UsersvalenDownloadsArchive113.tif",2048.0,2048.0,10.0,10.0,1,1);
+		Image test = new Image("113.tif",2048.0,2048.0,10.0,10.0,1,1);
 		test.setIdImage(1);
 		
 		assert isEqual(ref, test);
@@ -39,7 +37,7 @@ class TestImageDAO {
 	    int idProduit = 1;
 	    
 	    //creer une nouvelle image dans la base de donnée
-	    Image imagetest = new Image(nomImage,url,largeurPx,hauteurPx,grossissement,largeurReelle,idOperateur,idProduit);
+	    Image imagetest = new Image(nomImage,largeurPx,hauteurPx,grossissement,largeurReelle,idOperateur,idProduit);
 	    Image imageCreer = imageDao.creer(imagetest);
         // recuperer son id et lire dans la bdd si l'image qui a cette id correspond a notre image qu'on a inserer
         Image imageInsere = imageDao.lire(imageCreer.getIdImage());
@@ -58,7 +56,7 @@ class TestImageDAO {
 	    int idProduit = 1;
 	    
 	    //creer une nouvelle image dans la base de donnée
-	    Image imagetest = new Image(nomImage,url,largeurPx,hauteurPx,grossissement,largeurReelle,idOperateur,idProduit);
+	    Image imagetest = new Image(nomImage,largeurPx,hauteurPx,grossissement,largeurReelle,idOperateur,idProduit);
 	    Image imageCreer = imageDao.creer(imagetest);
 		//supprimer l'image qui a etait inserer plus tot
 		imageDao.supprimer(imageCreer);
@@ -73,16 +71,14 @@ class TestImageDAO {
     public static boolean isEqual(Image image1, Image image2) {
         if (image1.getIdImage() == image2.getIdImage()) {
             if (image1.getNomImage().equals(image2.getNomImage())) {
-            	if (image1.getUrl().equals(image2.getUrl())) {
-            		if (image1.getLargeurPx() == image2.getLargeurPx()) {
-            			if (image1.getHauteurPx() == image2.getLargeurPx()) {
-            				if (image1.getGrossissement() == image2.getGrossissement()) {
-            					if (image1.getLargeurReelle() == image2.getLargeurReelle()) {
-            						if (image1.getIdOperateur() == image2.getIdOperateur()) {
-            							if (image1.getIdProduit() == image2.getIdProduit()) {
-            	                        	return true;
-            	                        }
-                                    }
+        		if (image1.getLargeurPx() == image2.getLargeurPx()) {
+        			if (image1.getHauteurPx() == image2.getLargeurPx()) {
+        				if (image1.getGrossissement() == image2.getGrossissement()) {
+        					if (image1.getLargeurReelle() == image2.getLargeurReelle()) {
+        						if (image1.getIdOperateur() == image2.getIdOperateur()) {
+        							if (image1.getIdProduit() == image2.getIdProduit()) {
+        	                        	return true;
+        	                        }
                                 }
                             }
                         }

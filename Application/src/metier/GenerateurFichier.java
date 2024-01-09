@@ -29,10 +29,8 @@ public class GenerateurFichier
 	/**
 	 * Constructeur du générateur de fichiers
 	 */
-	public GenerateurFichier(ControleExport controle) {
-	
-		this.controleExport=controle;
-		
+	public GenerateurFichier() {
+
 	}
 	
 	

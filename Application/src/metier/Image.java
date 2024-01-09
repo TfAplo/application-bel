@@ -14,12 +14,7 @@ public class Image {
     /**
      * Nom du fichier de l'image.
      */
-    private String nomImage;
-    
-    /*
-     * emplacement de stockage de l'image
-     */
-    private String url;
+    private String nomImage;  
 
     /**
      * Largeur de l'image en pixel.
@@ -54,9 +49,8 @@ public class Image {
 	/**
      * Default constructor
      */
-    public Image(String nomImage, String url, double largeurPx, double hauteurPx, double grossissement, double largeurReelle, int idOperateur, int idProduit) {
+    public Image(String nomImage, double largeurPx, double hauteurPx, double grossissement, double largeurReelle, int idOperateur, int idProduit) {
     	this.nomImage = nomImage;
-    	this.url = url;
     	this.largeurPx = largeurPx;
     	this.hauteurPx = hauteurPx;
     	this.grossissement = grossissement;
@@ -68,7 +62,7 @@ public class Image {
 
 	@Override
 	public String toString() {
-		return "Image [idImage=" + idImage + ", nomImage=" + nomImage + ", url=" + url + ", largeurPx=" + largeurPx
+		return "Image [idImage=" + idImage + ", nomImage=" + nomImage +  ", largeurPx=" + largeurPx
 				+ ", hauteurPx=" + hauteurPx + ", grossissement=" + grossissement + ", largeurReelle=" + largeurReelle
 				+ ", idOperateur=" + idOperateur + ", idProduit=" + idProduit + "]";
 	}
@@ -88,15 +82,6 @@ public class Image {
 	public void setNomImage(String nomImage) {
 		this.nomImage = nomImage;
 	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public double getLargeurPx() {
 		return largeurPx;
 	}
@@ -144,9 +129,5 @@ public class Image {
 	public void setIdProduit(int idProduit) {
 		this.idProduit = idProduit;
 	}
-    
-   
-
-
 
 }
