@@ -31,7 +31,7 @@ public class GenerateurFichierCSV {
 
     
     /**
-	 * methode permettant de choisir le dossier de destination des histogrammes ou des statistiques à exporter
+	 * Methode permettant de choisir le dossier de destination des histogrammes ou des statistiques à exporter
 	 * @return retourne le chemin du dossier de destination
 	 */
     public File choisirDossierDeDestination() {
@@ -44,7 +44,7 @@ public class GenerateurFichierCSV {
     }
 
     /**
-     * methode permettant de creer un fichier csv qui represente un histogramme
+     * Methode permettant de creer un fichier csv qui represente un histogramme
      * @param intervalles parametre qui represente les intervalles d'un histogramme
      * @param pourcentParticule parametre qui represente les pourcentage de particule
      * @param nom parametre qui represente le nom du fichier CSV obtenu a la fin de la methode
@@ -76,7 +76,7 @@ public class GenerateurFichierCSV {
     
     
     /**
-     * methode permettant de creer un fichier csv qui represente les statistiques d'une image
+     * Methode permettant de creer un fichier csv qui represente les statistiques d'une image
      * @param nomImage parametre de type ArrayList<String> qui represente les noms des images selectionnees
      * @param grossissement parametre de type ArrayList<Double> qui represente le grossissement
      * @param nbParticuleTrouve parametre de type ArrayList<Integer> qui represente le nombre de particules
