@@ -19,21 +19,19 @@ public class ControleRecherche {
 	private VBox afficherResultatContainer;
 	private VBox imageSelectionner;
 	
-	/*
+	/**
 	 * liste d'image qui contiendra les images qui correspondent a la recherche
 	 */
 	private ArrayList<Image> listeImage = new ArrayList<>();
 	
-	/*
+	/**
 	 * Liste d'image Selectionner
 	 */
 	private ArrayList<Image> listeImageSelectionner = new ArrayList<>();
 	
-	/*
+	/**
 	 * Fonction de recherche 
-	 * @param recherche, String : valeur de la barre de recherche
-	 * @param2 afficherResultatContainer, VBox ,section d'affichage des resultats de la recherche
-	 * @param3 imageSelectionner, VBox ,section d'affichage des resultats de la selection
+	 * @param recherche, string
 	 */
 	public void recherche(String recherche) {
 		// recuperer une liste d'image qui correspondent dans la bdd
@@ -46,11 +44,9 @@ public class ControleRecherche {
 			afficherResultatContainer.getChildren().clear();
 		}
 	}
-	/*
+	/**
 	 * Gere l'affichage de la section de Recherche des images
-	 * @param image, Objet image
-	 * @param2 container, afficherResultatRecherche
-	 * @param3 container2, imageSelected
+	 * @param listeImage, liste objet image
 	 */
 	public void affichageRecherche(ArrayList<Image> listeImage){
 		afficherResultatContainer.getChildren().clear();
@@ -63,11 +59,9 @@ public class ControleRecherche {
 		}
 		
 	}
-	/*
+	/**
 	 * Gere l'affichage de la section de Selection des images
-	 *@param image, Objet image
-	 *@param2 container, afficherResultatRecherche
-	 *@param3 container2, imageSelected
+	 * @param listeImage, liste objet image
 	 */
 	public void affichageSelection(ArrayList<Image> listeImage){
 		imageSelectionner.getChildren().clear();
@@ -80,9 +74,10 @@ public class ControleRecherche {
 		}
 		
 	}
-	/* creer l'element hbox contenant le nom et une checkbox pour une image
-	 * @param image, objet Image
-	 * @return HBox
+	/**
+	 * creer l'element hbox contenant le nom et une checkbox pour une image
+	 * @param image
+	 * @return HBox 
 	 */
 	public HBox creerElement(Image image){
 		HBox elementImage = new HBox();
@@ -108,11 +103,10 @@ public class ControleRecherche {
 		
 		return elementImage;
 	}
-	/*
+
+	/**
 	 * Actualise l'affichage des section de recherche et de selection des images
-	 * @param image, Objet image
-	 * @param2 container, afficherResultatRecherche
-	 * @param3 container2, imageSelected
+	 * @param image
 	 */
 	public void actualiserSelection(Image image){
 		boolean isRemoved = false;
@@ -141,9 +135,12 @@ public class ControleRecherche {
         affichageRecherche(listeImage);
 	}
 	
-    /*
-     * Compare si deux image sont eguale (avec leurs id qui est unique)
-     */
+  /**
+   * compare deux objets images
+   * @param image1
+   * @param image2
+   * @return boolean
+   */
     public static boolean isEqual(Image image1, Image image2) {
         if (image1 == image2) {
             return true;
@@ -154,9 +151,7 @@ public class ControleRecherche {
         return false;
     }
 	
-	/*
-     * retourne la liste d'image selectionner
-     */
+
     public ArrayList<Image> getListeImageSelectionner() {
 		return listeImageSelectionner;
 	}

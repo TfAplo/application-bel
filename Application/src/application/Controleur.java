@@ -170,7 +170,7 @@ public class Controleur {
 				 Double grossissementDouble = Double.parseDouble(grossissement);
 				 Double largeurReelleDouble = Double.parseDouble(largeurReelle);
 				 
-				 CtrlDepot.deposerImage(nomOperateur, nomImage, url,
+				 CtrlDepot.deposerImage(nomOperateur, nomImage,
 						 largeurPx, hauteurPx, grossissementDouble, 
 						 largeurReelleDouble, nomProduit);
 				 
