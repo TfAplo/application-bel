@@ -22,14 +22,12 @@ SET time_zone = "+00:00";
 --
 
 --
--- Déchargement des données de la table `image`
+-- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `image` (`idImage`, `nomImage`, `largeurPx`, `hauteurPx`, `grossissement`, `largeurReelle`, `idOperateur`, `idProduit`) VALUES
-(1, '113.tif', '2048.00', '2048.00', '10.00', '10.00', 1, 1),
-(6, '751.tif', '2048.00', '2048.00', '12.00', '15.00', 1, 1),
-(7, 'M2020.tif', '2048.00', '2048.00', '13.00', '20.00', 2, 2),
-(8, '851.tif', '2048.00', '2048.00', '18.00', '23.00', 2, 1);
+INSERT INTO `produit` (`idProduit`, `nomProduit`) VALUES
+(1, 'fromage'),
+(2, 'Camembert');
 
 --
 -- Déchargement des données de la table `operateur`
@@ -38,6 +36,16 @@ INSERT INTO `image` (`idImage`, `nomImage`, `largeurPx`, `hauteurPx`, `grossisse
 INSERT INTO `operateur` (`idOperateur`, `nomOperateur`) VALUES
 (1, 'OpTest'),
 (2, 'Bastien');
+
+--
+-- Déchargement des données de la table `image`
+--
+
+INSERT INTO `image` (`idImage`, `nomImage`, `largeurPx`, `hauteurPx`, `grossissement`, `largeurReelle`, `idOperateur`, `idProduit`) VALUES
+(1, '113.tif', '2048.00', '2048.00', '10.00', '10.00', 1, 1),
+(6, '751.tif', '2048.00', '2048.00', '12.00', '15.00', 1, 1),
+(7, 'M2020.tif', '2048.00', '2048.00', '13.00', '20.00', 2, 2),
+(8, '851.tif', '2048.00', '2048.00', '18.00', '23.00', 2, 1);
 
 --
 -- Déchargement des données de la table `particule`
@@ -4605,14 +4613,6 @@ INSERT INTO `particule` (`idParticule`, `surfaceParticulePx`, `coCoinHautGaucheX
 (4546, 2, 2047, 1104, 2048, 1106, 2047, 1104.5, 1.5707963267948966, 2, 0, 1.5957691216057308, 1),
 (4547, 1, 2047, 1620, 2048, 1621, 2047, 1620, -0.7853981633974483, 0, 0, 1.1283791670955126, 1),
 (4548, 3, 2047, 1742, 2048, 1745, 2047, 1743, 1.5707963267948966, 3.265986323710904, 0, 1.9544100476116797, 1);
-
---
--- Déchargement des données de la table `produit`
---
-
-INSERT INTO `produit` (`idProduit`, `nomProduit`) VALUES
-(1, 'fromage'),
-(2, 'Camembert');
 
 --
 -- Déchargement des données de la table `statistique`
