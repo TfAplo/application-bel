@@ -132,7 +132,7 @@ public class EnsembleParticules {
     
     /**
      * permet de trouver le minimum des surfaces
-     * @return 
+     * @return Double.POSITIVE_INFINITY si vide
      */
     public double getMinSurface() {
     	double min = Double.POSITIVE_INFINITY;
@@ -144,7 +144,7 @@ public class EnsembleParticules {
     
     /**
      * permet de trouver le minimum des diamètres
-     * @return 
+     * @return Double.POSITIVE_INFINITY si vide
      */
     public double getMinDiametre() {
     	double min = Double.POSITIVE_INFINITY;
@@ -156,7 +156,7 @@ public class EnsembleParticules {
     
     /**
      * permet de trouver le maximum des surfaces
-     * @return 
+     * @return Double.NEGATIVE_INFINITY si vide
      */
     public double getMaxSurface() {
     	double max = Double.NEGATIVE_INFINITY;
@@ -168,7 +168,7 @@ public class EnsembleParticules {
     
     /**
      * permet de trouver le maximum des diamètres
-     * @return 
+     * @return Double.NEGATIVE_INFINITY si vide
      */
     public double getMaxDiametre() {
     	double max = Double.NEGATIVE_INFINITY;
