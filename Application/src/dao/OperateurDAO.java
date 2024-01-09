@@ -110,7 +110,7 @@ public class OperateurDAO extends DAO<Operateur> {
     	int idOperateur = operateur.getIdOperateur();
     	
     	//creation de la requete SQL
-    	String sql = "DELETE FROM operateur WHERE idOperateur =" + idOperateur;
+    	String sql = "DELETE FROM operateur WHERE idOperateur = " + idOperateur;
     	
     	//Execution de la requete
         try {

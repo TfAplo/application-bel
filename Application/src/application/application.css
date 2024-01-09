@@ -51,11 +51,9 @@ TextField{
 /* element creer par la recherche (HBox label checkbox) */
 #hContainer {
     -fx-padding: 5px; 
-    -fx-border-color: #2b2d42; 
-    -fx-border-width: 1px; 
     -fx-border-radius: 5px; 
     -fx-background-radius: 5px;
-    -fx-background-color: #6d6875;
+    -fx-background-color: #e4e4e7;
 }
 
 #hContainer:hover {

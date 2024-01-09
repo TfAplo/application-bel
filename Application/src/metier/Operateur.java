@@ -40,4 +40,10 @@ public class Operateur {
 		this.nomOperateur = nomOperateur;
 	}
 
+	// A SUPP
+	@Override
+	public String toString() {
+		return "Operateur [idOperateur=" + idOperateur + ", nomOperateur=" + nomOperateur + "]";
+	}
+	// A SUPP
 }
