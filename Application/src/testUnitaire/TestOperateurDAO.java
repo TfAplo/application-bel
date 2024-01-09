@@ -33,7 +33,7 @@ class TestOperateurDAO {
 		// dans la base de donnees avec les bons attributs
 		assertEquals(op1.getIdOperateur(), opAttendu.getIdOperateur());
 		assertEquals(op1.getNomOperateur(), opAttendu.getNomOperateur());
-		// Maintenant on verifie que les attributs soient les memes partout et mis a jour lorsqu'on demande de creer
+		// Maintenant on vérifie que les attributs soient les memes partout et mis a jour lorsqu'on demande de creer
 		// a nouveau un operateur deja dans la base de donnees,
 		// On remet d'abord l'idOperateur de op1 a 0
 		op1.setIdOperateur(0);
