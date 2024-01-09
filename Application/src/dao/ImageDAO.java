@@ -35,7 +35,7 @@ public class ImageDAO extends DAO<Image>{
                 
         //creation de la requete SQL
         String sql = "INSERT INTO image (nomImage, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit) "
-        		+ "VALUES ('"+ nomImage +"', '" + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReelle +", "+idOperateur + ", " + idProduit + ");";
+        		+ "VALUES ('"+ nomImage +"'," + largeurPx+", " + hauteurPx +", " + grossissement + "," + largeurReelle +", "+idOperateur + ", " + idProduit + ");";
         
         // Execution de la requete
  		try {
