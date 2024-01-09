@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import metier.Image;
 import metier.Operateur;
 
 /**
@@ -56,7 +57,24 @@ public class OperateurDAO extends DAO<Operateur> {
      * @return Instance de la classe Operateur contenant les donnees lues dans la base de donnees par rapport a l'ID.
      */
     public Operateur lire(int idOperateur) {
-        // TODO implement here
+    	//creation de la requete SQL
+    	String sql = "SELECT * FROM operateur WHERE idOperateur = " + idOperateur;
+    	
+ 		ResultSet rs = null;
+ 		try {
+ 			rs = stmt.executeQuery(sql);
+
+ 			if (rs.next()) { 		        
+		        //Creation de l'objet Operateur
+		        Operateur operateur = new Operateur(rs.getString("nomOperateur"));
+		        operateur.setIdOperateur(idOperateur);
+		        return operateur;
+ 			}
+ 		}
+ 		catch(SQLException e) {
+ 			System.err.println("Erreur requete SQL");
+ 			e.printStackTrace();
+ 		}
         return null;
     }
 
@@ -66,8 +84,21 @@ public class OperateurDAO extends DAO<Operateur> {
      * @return Instance de la classe Operateur ayant ete mise a jour dans la base de donnees.
      */
     public Operateur mettreAJour(Operateur operateur) {
-        // TODO implement here
-        return null;
+    	
+    	//recuperation des attributs
+    	int idOperateur = operateur.getIdOperateur();
+        String nomOperateur = operateur.getNomOperateur();
+         
+        //creation de la requete SQL
+        String sql = "UPDATE operateur SET nomOperateur = '" + nomOperateur + "' WHERE idOperateur = " + idOperateur;
+         
+        //Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
+        return operateur;
     }
 
     /**
@@ -75,13 +106,49 @@ public class OperateurDAO extends DAO<Operateur> {
      * @param operateur Instance de la classe Operateur devant etre supprimee dans la base de donnees.
      */
     public void supprimer(Operateur operateur) {
-        // TODO implement here
+    	//recuperation des attributs
+    	int idOperateur = operateur.getIdOperateur();
+    	
+    	//creation de la requete SQL
+    	String sql = "DELETE FROM operateur WHERE idOperateur =" + idOperateur;
+    	
+    	//Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
     }
 
 	@Override
 	public ArrayList<Operateur> lire() {
-		// TODO Auto-generated method stub
-		return null;
+    	ArrayList<Operateur> listeOperateur = new ArrayList<>();
+    	
+   	 	//creation de la requete SQL
+    	String sql = "SELECT * FROM operateur";
+   	  	
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()) {
+				
+				int idOperateur = rs.getInt("idOperateur");
+		        String nomOperateur = rs.getString("nomOperateur");
+		        
+			    //Creation de l'objet operateur
+				Operateur operateur = new Operateur(nomOperateur);
+				operateur.setIdOperateur(idOperateur);
+				//ajout a la liste
+				listeOperateur.add(operateur);
+			}
+		}
+		catch(SQLException e) {
+			System.err.println("Erreur requete SQL");
+			e.printStackTrace();
+		}
+    	
+        return listeOperateur;
 	}
 
 }

@@ -82,7 +82,7 @@ public class ImageDAO extends DAO<Image>{
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
  		        
- 		     //Creation de l'objet image
+ 		     //Creation de l'objet Image
  		      Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
  		      newImage.setIdImage(idImage);
 			return newImage;
@@ -157,7 +157,7 @@ public class ImageDAO extends DAO<Image>{
     /**
      *  Recuperer les images dans la base de donnée en fonction de leur nom
      * @param nomImage
-     * @return , une liste contenant des objets image qui sont retournées d'apres la recherche. 
+     * @return Une liste contenant des objets image qui sont retournées d'apres la recherche. 
      */
     public ArrayList<Image> lire(String recherche) {
     	
@@ -200,7 +200,6 @@ public class ImageDAO extends DAO<Image>{
 
 	@Override
 	public ArrayList<Image> lire() {
-		//Liste<Image>
     	ArrayList<Image> listeImage = new ArrayList<>();
     	
    	 	//creation de la requete SQL
@@ -222,11 +221,11 @@ public class ImageDAO extends DAO<Image>{
 		        int idOperateur = rs.getInt("idOperateur");
 		        int idProduit = rs.getInt("idProduit");
 		        		 
-		     //Creation de l'objet image
-			Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
-			newImage.setIdImage(idImage);
-			//ajout a la liste
-			listeImage.add(newImage);
+			     //Creation de l'objet image
+				Image newImage = new Image(nomImage, url, largeurPx, hauteurPx, grossissement, largeurReelle, idOperateur, idProduit);
+				newImage.setIdImage(idImage);
+				//ajout a la liste
+				listeImage.add(newImage);
 			}
 		}
 		catch(SQLException e) {

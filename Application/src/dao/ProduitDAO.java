@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import metier.Operateur;
 import metier.Produit;
 
 /**
@@ -56,6 +57,24 @@ public class ProduitDAO extends DAO<Produit>{
      * @return Instance de la classe Produit contenant les donnees lues dans la base de donnees par rapport a l'ID.
      */
     public Produit lire(int idProduit) {
+    	//creation de la requete SQL
+    	String sql = "SELECT * FROM produit WHERE idProduit = " + idProduit;
+    	
+ 		ResultSet rs = null;
+ 		try {
+ 			rs = stmt.executeQuery(sql);
+
+ 			if (rs.next()) {
+ 				//Creation de l'objet Produit
+		        Produit produit = new Produit(rs.getString("nomProduit"));
+		        produit.setIdProduit(idProduit);
+		        return produit;
+ 			}
+ 		}
+ 		catch(SQLException e) {
+ 			System.err.println("Erreur requete SQL");
+ 			e.printStackTrace();
+ 		}
         return null;
     }
 
@@ -65,7 +84,20 @@ public class ProduitDAO extends DAO<Produit>{
      * @return Instance de la classe Produit ayant ete mise a jour dans la base de donnees.
      */
     public Produit mettreAJour(Produit produit) {
-        return null;
+    	//recuperation des attributs
+    	int idProduit = produit.getIdProduit();
+        String nomProduit = produit.getNomProduit();
+         
+        //creation de la requete SQL
+        String sql = "UPDATE produit SET nomProduit = '" + nomProduit + "' WHERE idProduit = " + idProduit;
+         
+        //Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
+        return produit;
     }
 
     /**
@@ -73,11 +105,49 @@ public class ProduitDAO extends DAO<Produit>{
      * @param produit Instance de la classe Produit devant etre supprimee dans la base de donnees.
      */
     public void supprimer(Produit produit) {
+    	//recuperation des attributs
+    	int idProduit = produit.getIdProduit();
+    	
+    	//creation de la requete SQL
+    	String sql = "DELETE FROM produit WHERE idProduit =" + idProduit;
+    	
+    	//Execution de la requete
+        try {
+        	stmt.executeUpdate(sql);
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
     }
 
 	@Override
 	public ArrayList<Produit> lire() {
-		return null;
+    	ArrayList<Produit> listeProduit = new ArrayList<>();
+    	
+   	 	//creation de la requete SQL
+    	String sql = "SELECT * FROM produit";
+   	  	
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()) {
+				
+				int idProduit = rs.getInt("idProduit");
+		        String nomProduit = rs.getString("nomProduit");
+		        
+			    //Creation de l'objet operateur
+				Produit produit = new Produit(nomProduit);
+				produit.setIdProduit(idProduit);
+				//ajout a la liste
+				listeProduit.add(produit);
+			}
+		}
+		catch(SQLException e) {
+			System.err.println("Erreur requete SQL");
+			e.printStackTrace();
+		}
+    	
+        return listeProduit;
 	}
 
 }
