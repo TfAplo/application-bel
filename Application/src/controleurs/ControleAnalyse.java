@@ -67,6 +67,7 @@ public class ControleAnalyse {
 		}
         if (ihm.histoDPresent()) ihm.alimenterHistoD(ensemble);
         if (ihm.histoSPresent()) ihm.alimenterHistoS(ensemble);
+        ensemble.effacer();
     }
     
     /**
